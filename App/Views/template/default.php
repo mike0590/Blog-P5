@@ -104,7 +104,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="d-flex">
 				<div class="about1"> 
 					<h4>Mes derniers Articles</h4>
-					
+					<?php echo $content; ?>
 				</div>
 				<div class="about2">
 					
@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				<h3 class="w3l-titles">Contactez-moi</h3>
 				<form method="post" style="width: 60%;margin-right: auto;margin-left: auto;">
-				
+					<?php echo $formulaire; ?>
 				</form>
 				
 			</div>
