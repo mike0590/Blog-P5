@@ -51,3 +51,12 @@ elseif ($p == 'commentAccepted'){
 	$controller = new App\Controller\AdminController();
 	$controller -> accept();
 }
+elseif ($p == 'commentDenied'){
+	$controller = new App\Controller\AdminController();
+	$controller -> denied();
+}
+
+
+
+
+
