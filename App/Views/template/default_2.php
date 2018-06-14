@@ -59,6 +59,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			echo '<h3 class="w3l-titles">Edition de l\'Article</h3>';
 			echo $edit;
 		}
+		elseif ($p == 'post.add') {
+			echo '<h3 class="w3l-titles">Ajouter un Article</h3>';
+			echo $add;
+		}
 		
 		?>
 		<div class="container">
