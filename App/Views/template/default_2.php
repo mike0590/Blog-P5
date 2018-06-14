@@ -48,6 +48,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			echo '<h3 class="w3l-titles">Login</h3>';
 			echo $userLogin;
 		}
+		elseif ($p == 'login'){
+			echo '<h3 class="w3l-titles">Login</h3>';
+			echo $login; 
+		}
 		
 		?>
 		<div class="container">
