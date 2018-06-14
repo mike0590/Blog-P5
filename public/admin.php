@@ -47,3 +47,7 @@ elseif ($p == 'singleComment'){
 	$controller = new App\Controller\AdminController();
 	$controller -> viewComment();
 }
+elseif ($p == 'commentAccepted'){
+	$controller = new App\Controller\AdminController();
+	$controller -> accept();
+}
