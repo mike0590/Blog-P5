@@ -40,6 +40,10 @@ elseif ($p == 'categories') {
 	$controller = new App\Controller\PostsController();
 	$controller -> categories();
 }
+elseif ($p == 'userDestroy') {
+	$controller = new App\Controller\UsersController();
+	$controller -> destroy();
+}
 
 
 
