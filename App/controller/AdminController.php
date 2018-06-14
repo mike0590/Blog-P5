@@ -135,6 +135,13 @@ class AdminController extends Controller
 
 	}
 
+	public function accept()
+	{
+		$comments = \App\App::getInstance() -> getTable('comments');
+		$comment = $comments -> CommentAccepted([$_GET['id']]);
+		header('Location: admin.php?p=comments');
+	}
+
 	}
 
 
