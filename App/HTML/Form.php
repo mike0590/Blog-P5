@@ -61,6 +61,21 @@ class Form
 		echo '<button class="btn btn-primary" type="submit">' .$options. '</button></br>';
 	}
 
+	public function select($name, $label = null, $options = [], $categoryPostId = null, $categoryPost = null)
+	{
+		$label = '<label>' .$label. '</label></br>';
+		$input = '<select class="form-control" name="' .$name. '">';
+		foreach ($options as $k => $v) {
+			$input.= "<option value='$k'>$v</option>";
+		}
+		if (isset($categoryPostId) AND isset($categoryPost)) {
+			$input.= '<option value="' .$categoryPostId. '" selected>' .$categoryPost. '</option>';
+		}
+		$input.= '</select></br>';
+		return $this -> surround($label . $input);
+	}
+
+
 	
 	
 }
