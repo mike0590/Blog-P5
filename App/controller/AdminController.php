@@ -125,6 +125,16 @@ class AdminController extends Controller
 		$this -> page('admin/posts/comments', compact('commentsWait', 'p'));
 	}
 
+	public function viewComment()
+	{
+		$comments = \App\App::getInstance() -> getTable('comments');
+		$comment = $comments -> showComment([$_GET['id']]);
+		$p = 'singleComment';
+
+		$this -> page('admin/posts/singleComment', compact('comment', 'p'));
+
+	}
+
 	}
 
 
