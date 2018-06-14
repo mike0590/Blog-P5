@@ -142,6 +142,13 @@ class AdminController extends Controller
 		header('Location: admin.php?p=comments');
 	}
 
+	public function denied()
+	{
+		$comments = \App\App::getInstance() -> getTable('comments');
+		$comment = $comments -> CommentDenied([$_GET['id']]);
+		header('Location: admin.php?p=comments');
+	}
+
 	}
 
 
