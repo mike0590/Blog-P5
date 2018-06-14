@@ -67,6 +67,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			echo '<h3 class="w3l-titles">Commentaires en Attente</h3>';
 			echo $comments;
 		}
+		elseif ($p == 'singleComment') {
+			echo '<h3 class="w3l-titles">Inspection du Commentaire</h3>';
+			echo $singleComment;
+		}
 		
 		?>
 		<div class="container">
