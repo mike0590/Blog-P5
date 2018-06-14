@@ -86,6 +86,27 @@ class AdminController extends Controller
 		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost'));
 	}
 
+	public function add()
+	{
+		$post = \App\App::getInstance() -> getTable('posts');
+		if (!empty($_POST)) {
+		 	$new = $post -> create([
+				'title' => $_POST['title'],
+		 		'content' => $_POST['content'],
+		 		'category_id' => $_POST['category_id'],
+		 		'author' => $_POST['author'],
+		 		'date' => 'NOW()'
+				]);
+		 	if ($new) { ?>
+				<div class="lol align alert alert-success" role="alert">Article Enregistré</div>
+			<?php }
+		 } 
+		$form = new \App\Html\Form();
+		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
+		$p = 'post.add';
+		$this -> page('admin/posts/add', compact('form', 'categories', 'p'));
+	}
+
 	}
 
 
