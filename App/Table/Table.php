@@ -41,4 +41,16 @@ class Table
     	return App::getDb() -> prepare("UPDATE {$this -> table} SET $sql_parts WHERE id = ?", $attributes, null, true);
 	}
 
+	public function create($options)
+    {
+    		
+    	foreach ($options as $key => $value) {
+    		$parts[] = "$key = ?";
+    		$attributes [] = $value;
+    	}
+    		$sql_parts = (implode(', ', $parts));
+    	return App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts", $attributes, null);
+	}
+
+
 }
