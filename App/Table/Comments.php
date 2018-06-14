@@ -61,5 +61,30 @@ public function addComment($options)
       return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts", $attributes, null);
 }
 
+public function showComments()
+{
+  $comments = \App\App::getDb() -> query("SELECT * FROM {$this -> table} WHERE waiting = 1", __CLASS__, $one = false);
+    return $comments;
+  }
+
+public function showComment($id)
+{
+  $comment = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id =?", $id, __CLASS__);
+  return $comment;
+}
+
+public function commentAccepted($id)
+{
+  $comment = \App\App::getDb() -> prepare("UPDATE {$this -> table} SET waiting = 0 WHERE id =?", $id);
+  return $comment;
+}
+
+public function commentDenied($id)
+{
+  $comment = \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE id =?", $id);
+  return $comment;
+}
+
+
 
 }
