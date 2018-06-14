@@ -27,3 +27,7 @@ if ($p == 'admin') {
 	$controller = new App\Controller\AdminController();
 	$controller -> index();
 }
+elseif ($p == 'post.edit'){
+	$controller = new App\Controller\AdminController();
+	$controller -> edit();
+}
