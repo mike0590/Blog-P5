@@ -22,4 +22,18 @@ class PostsController extends Controller
 		$this -> page('posts/index', compact('posts', 'form'));
 
 	}
+
+	public function posts()
+	{
+		$this -> template = 'default_1';
+		
+		$posts = \App\App::getInstance() -> getTable('posts');
+		$posts = $posts -> getPosts();
+
+		$categories = \App\App::getInstance() -> getTable('categories');
+		$categories = $categories -> getCategories();
+
+		$this -> page('posts/posts', compact('posts', 'categories'));
+	}
+
 }
