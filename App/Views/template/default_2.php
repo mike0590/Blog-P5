@@ -52,6 +52,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			echo '<h3 class="w3l-titles">Login</h3>';
 			echo $login; 
 		}
+		elseif ($p == 'admin'){
+			echo $admin;
+		}
 		
 		?>
 		<div class="container">
