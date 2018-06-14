@@ -26,10 +26,9 @@ elseif ($p == 'posts') {
 	$controller = new App\Controller\PostsController();
 	$controller -> posts();
 }
-elseif ($p == 'single') {
-	session_start();
-	$controller = new App\Controller\PostsController();
-	$controller -> single();
+elseif ($p == 'login') {
+	$controller = new App\Controller\AdminController();
+	$controller -> login();
 }
 
 
