@@ -75,6 +75,18 @@ class PostsController extends Controller
 
 	}
 
+	public function categories()
+	{
+		$this -> template = 'default_1';
+
+		$postsPerCat = \App\App::getInstance() -> getTable('posts');
+		$category = \App\App::getInstance() -> getTable('categories');
+		$cat = $category -> getCategory([$_GET['id']]); 
+		$posts = $postsPerCat -> getPostsPerCat([$_GET['id']]);
+		$this -> page('posts/categories', compact('cat', 'posts'));
+
+	}
+
 }
 
 
