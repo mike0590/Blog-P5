@@ -39,3 +39,7 @@ elseif ($p == 'post.delete'){
 	$controller = new App\Controller\AdminController();
 	$controller -> delete();
 }
+elseif ($p == 'comments'){
+	$controller = new App\Controller\AdminController();
+	$controller -> comments();
+}
