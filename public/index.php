@@ -35,6 +35,11 @@ elseif ($p == 'single') {
 	$controller = new App\Controller\PostsController();
 	$controller -> single();
 }
+elseif ($p == 'categories') {
+	session_start();
+	$controller = new App\Controller\PostsController();
+	$controller -> categories();
+}
 
 
 
