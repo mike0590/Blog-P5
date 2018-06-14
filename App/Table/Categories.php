@@ -25,3 +25,5 @@ class Categories extends Table
 	{
 		return \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", get_called_class(), $one = false);
 	}
+
+}
