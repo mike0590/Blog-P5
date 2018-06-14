@@ -47,6 +47,32 @@ class AdminController extends Controller
 		$auth = new \App\Auth\DbAuth();
 		if (!$auth -> logged()) {
 		$app -> forbidden();
-		}
+	}
+
+	public function index()
+	{
+		if (isset($_GET['sup'])) {  ?>
+		<div class="align alert alert-success" role="alert">Article Effacé</div>
+		<?php }
+
+		$posts = \App\App::getInstance() -> getTable('posts') -> getAll();
+		$p = 'admin';
+		$this -> page('admin/posts/index', compact('posts', 'p'));
+	}
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
