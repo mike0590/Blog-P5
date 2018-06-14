@@ -35,3 +35,7 @@ elseif ($p == 'post.add'){
 	$controller = new App\Controller\AdminController();
 	$controller -> add();
 }
+elseif ($p == 'post.delete'){
+	$controller = new App\Controller\AdminController();
+	$controller -> delete();
+}
