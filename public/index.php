@@ -44,8 +44,14 @@ elseif ($p == 'userDestroy') {
 	$controller = new App\Controller\UsersController();
 	$controller -> destroy();
 }
-
-
+elseif ($p == 'login') {
+	$controller = new App\Controller\AdminController();
+	$controller -> login();
+}
+elseif ($p == 'destroy'){
+	$controller = new App\Controller\AdminController();
+	$controller -> destroy();
+}	
 
 
 
