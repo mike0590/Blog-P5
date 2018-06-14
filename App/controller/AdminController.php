@@ -47,6 +47,7 @@ class AdminController extends Controller
 		$auth = new \App\Auth\DbAuth();
 		if (!$auth -> logged()) {
 		$app -> forbidden();
+		}
 	}
 
 	public function index()
@@ -75,4 +76,4 @@ class AdminController extends Controller
 
 
 
-	
+
