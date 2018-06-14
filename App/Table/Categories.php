@@ -26,4 +26,16 @@ class Categories extends Table
 		return \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", get_called_class(), $one = false);
 	}
 
+	
+    public function selectCategories($key, $value)
+    {
+        $categories = $this -> getCategories();
+        $return = [];
+        foreach($categories as $k => $v){
+            $return[$v -> $key] = $v -> $value;
+        }
+        return $return;
+    }
+
+
 }
