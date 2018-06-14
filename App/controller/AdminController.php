@@ -39,3 +39,14 @@ class AdminController extends Controller
 		session_destroy();
 		header('Location: index.php?p=login');
 	}
+
+	public function dashbord()
+	{
+
+		$app = \App\App::getInstance();
+		$auth = new \App\Auth\DbAuth();
+		if (!$auth -> logged()) {
+		$app -> forbidden();
+		}
+
+	}
