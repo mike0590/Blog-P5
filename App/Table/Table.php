@@ -27,4 +27,18 @@ class Table
 									 , get_called_class(), $one = false);
 	}
 
+	public function update($id, $modifs)
+    {
+    		
+    	foreach ($modifs as $key => $value) {
+    		$parts[] = "$key = ?";
+    		$attributes [] = $value;
+    	}
+    	    $parts[] = "date = ?";
+    		$attributes[] = 'NOW()';
+    		$attributes[] = $id;
+    		$sql_parts = (implode(',', $parts));
+    	return App::getDb() -> prepare("UPDATE {$this -> table} SET $sql_parts WHERE id = ?", $attributes, null, true);
+	}
+
 }
