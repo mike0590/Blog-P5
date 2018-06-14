@@ -119,7 +119,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  }
 						 elseif ($_GET['p'] == 'single'){
 							echo $content;
-						} 
+						  } 
+						   elseif ($_GET['p'] == 'categories')  {
+						  	echo $showCats; 
+						  } 
 						 ?>
 					</div>
 				</div>
