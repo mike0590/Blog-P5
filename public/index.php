@@ -26,6 +26,10 @@ elseif ($p == 'posts') {
 	$controller = new App\Controller\PostsController();
 	$controller -> posts();
 }
+elseif ($p == 'userLogin') {
+	$controller = new App\Controller\UsersController();
+	$controller -> login();
+}
 
 
 
