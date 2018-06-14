@@ -30,6 +30,11 @@ elseif ($p == 'userLogin') {
 	$controller = new App\Controller\UsersController();
 	$controller -> login();
 }
+elseif ($p == 'single') {
+	session_start();
+	$controller = new App\Controller\PostsController();
+	$controller -> single();
+}
 
 
 
