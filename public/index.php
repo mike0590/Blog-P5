@@ -21,7 +21,11 @@ if ($p == 'home') {
 	$controller = new App\Controller\PostsController();
 	$controller -> home();
 }
-
+elseif ($p == 'posts') {
+	session_start();
+	$controller = new App\Controller\PostsController();
+	$controller -> posts();
+}
 
 
 
