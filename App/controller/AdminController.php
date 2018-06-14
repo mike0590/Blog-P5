@@ -107,6 +107,24 @@ class AdminController extends Controller
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p'));
 	}
 
+	public function delete()
+	{
+		$post = \App\App::getInstance() -> getTable('posts');
+		$delete = $post -> delete([$_GET['id']]);
+		if ($delete) {
+			header('Location: admin.php?p=admin&sup=1');
+		}
+	}
+
+	public function comments()
+	{
+		$comments = \App\App::getInstance() -> getTable('comments');
+		$commentsWait = $comments -> showComments();
+		$p = 'comments';
+
+		$this -> page('admin/posts/comments', compact('commentsWait', 'p'));
+	}
+
 	}
 
 
