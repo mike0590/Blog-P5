@@ -52,6 +52,10 @@ elseif ($p == 'destroy'){
 	$controller = new App\Controller\AdminController();
 	$controller -> destroy();
 }	
+elseif ($p == 'inscription'){
+	$controller = new App\Controller\UsersController();
+	$controller -> inscription();
+}	
 
 
 
