@@ -38,6 +38,33 @@ class UsersController extends Controller
 		header('Location: index.php');
 	}
 
+	
+	public function inscription()
+	{
+		$this -> template = 'default_2';
+		$auth = new \App\Auth\DbAuth();
+
+		if (!empty($_POST))
+		{
+			if($auth -> userExists($_POST['username'], $_POST['password']))
+			{
+				?><div class=" lol alert alert-danger align" role="alert">Vous êtes déjà inscrit.</div><?php
+			}
+			elseif($auth -> userNameExists($_POST['username']))
+			{
+				?><div class=" lol alert alert-danger align" role="alert">Username Indisponible.</div><?php
+			}
+			else{
+					$user = $auth -> inscription($_POST['username'], $_POST['password']);
+					?><div class=" lol alert alert-success align" role="alert">Compte validé.</div><?php
+			}
+		}
+
+		$form = new \App\Html\Form();
+		$p = 'inscription';
+		$this -> page('posts/inscription', compact('form', 'p'));
+	}
+
 
 
 }
