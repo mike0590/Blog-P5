@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<?php
 								$visitor = new App\Auth\DbAuth();
 								if ($visitor -> userLogged()) { ?>
-								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
+								<li style="position: relative;right:350px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 								} ?>
 								<li><a href="index.php" class="active">Accueil</a></li>
 								<li><a href="index.php?p=posts">Articles</a></li>
