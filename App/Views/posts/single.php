@@ -2,11 +2,23 @@
 
 ob_start();
 
+echo '<p>' .$post -> chapo. '</p></br>';
 echo '<h1>' .$post -> title. '</h1></br>';
 echo $post -> content. '</br></br>';
 echo '<p style="float: right;">' .$post -> dateT. '</p></br>';
 echo '<p style="float: right; position: relative; left: 75px;">' .$post -> author. '</p></br></br></br>';
 ?>
+
+<div class="row">
+  <div class="col-sm-6">
+   <?php echo '<p style="float: left">Dernière Modification : ' .$post -> dateUpdate. '</p></br></br></br>'; ?>
+  </div>
+  <div class="col-sm-6"> <?php
+    echo '<p style="float: right;">' .$post -> dateT. '</p></br>';
+    echo '<p style="float: right; position: relative; left: 80px;">' .$post -> author. '</p></br></br></br>';
+    ?>
+  </div>
+</div>
 
  <div class="media mb-4" style="width: 60%;">
         <?php

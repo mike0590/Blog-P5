@@ -9,7 +9,8 @@ $i = 0;
 	foreach ($posts as $post) {
 		if ($i < 3) {
 			echo "<h3>" .$post -> title. "</h3>";
-			echo "<p>" .$post -> getExtrait(). "<p/>";
+			echo "<p>" .$post -> chapo. "<p/>";
+			echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br>';
 			$i++;
 		}
 		else{
