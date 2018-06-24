@@ -16,38 +16,6 @@ class Comments extends Table
 
 	
 
-	public function returnCommentBox()
-	{
-		return '<div class="card my-4">
-            <h5 class="card-header">Laissez un Commentaire:</h5>
-            <div class="card-body">
-              <form method="post">
-                <div class="form-group">
-                  <textarea name="content" class="form-control" rows="3"></textarea></br>
-                </div>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-              </form>
-          </div>
-     </div>';
-	}
-
-  public function returnLogin()
-  {
-    return '<div class="card my-2" style="width:300px;">
-            <h5 class="card-header">Votre Pseudo</h5></br>
-            <div class="card-body">
-              <form method="post">
-                <div class="form-group">
-                  <input type="text" name="pseudo" class="form-control"></input></br>
-                  <h5 class="card-header">Votre mot de pass:</h5><br>
-                  <input type="password" name="pass" class="form-control"></input>
-                </div>
-                <button type="submit" class="btn btn-primary">Valider</button>
-              </form>
-          </div>
-     </div>';
-  }
-
 
 public function addComment($options)
 {
