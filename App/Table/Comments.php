@@ -10,7 +10,7 @@ class Comments extends Table
 
 	public function getComments($id)
 	{
-		$comments = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE waiting = 0 AND posts_id = ?", $id, __CLASS__, $one = false);
+		$comments = \App\App::getDb() -> prepare("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT FROM {$this -> table} WHERE waiting = 0 AND posts_id = ?", $id, __CLASS__, $one = false);
 		return $comments;
 	}
 
@@ -26,18 +26,22 @@ public function addComment($options)
         $sql_parts = (implode(', ', $parts));
         $sql_parts.= ', waiting = 1';
 
-      return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts", $attributes, null);
+      return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
 }
 
 public function showComments()
 {
-  $comments = \App\App::getDb() -> query("SELECT * FROM {$this -> table} WHERE waiting = 1", __CLASS__, $one = false);
+  $comments = \App\App::getDb() -> query("SELECT comments.id, comments.visitor_username AS user, comments.content AS content, posts.title AS title FROM {$this -> table} 
+    JOIN posts ON posts.id = comments.posts_id
+    WHERE waiting = 1", __CLASS__, $one = false);
     return $comments;
   }
 
 public function showComment($id)
 {
-  $comment = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id =?", $id, __CLASS__);
+  $comment = \App\App::getDb() -> prepare("SELECT comments.id, comments.visitor_username AS user, comments.content AS content, posts.title AS title FROM {$this -> table} 
+    JOIN posts ON posts.id = comments.posts_id
+    WHERE comments.id =?", $id, __CLASS__);
   return $comment;
 }
 

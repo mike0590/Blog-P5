@@ -13,12 +13,15 @@ ob_start();
 	<tbody>
 		<?php  foreach($commentsWait as $comment): ?>
 		<tr>
-			<td><?= $comment -> visitor_username; ?></td>
+			<td><?= $comment -> user; ?></td>
 			<td><?= substr($comment -> content, 0, 70). '..'; ?></td>
-			
+			<td><?= $comment -> title; ?></td>
+		</tr>
+		<tr>
 			<td><a class="btn btn-primary" href="admin.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a></td>
 			<td><a class="btn btn-primary" href="admin.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a></td>
 			<td><a class="btn btn-danger" href="admin.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a></td>
+
 
 
 
