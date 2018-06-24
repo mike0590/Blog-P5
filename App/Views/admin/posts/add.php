@@ -1,6 +1,11 @@
 <?php
 
 ob_start();
+
+if (isset($message) AND $message == 0) {
+	?> <div class="lol align alert alert-success" role="alert">Article Enregistré</div> <?php
+}
+
 ?>
 
 <form method="post">

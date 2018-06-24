@@ -4,6 +4,10 @@ ob_start();
 
 session_start();
 
+if (isset($message) AND $message == 0) {
+	?> <div class="align alert alert-danger" role="alert">Identifiants Incorrects</div> <?php
+}
+
 ?>
 
 <form method="post" style="width: 30%; text-align: center; margin-left: auto; margin-right: auto;">

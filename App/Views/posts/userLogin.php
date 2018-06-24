@@ -6,6 +6,9 @@ ob_start();
 
 session_start();
 
+if (isset($message) AND $message == 0) {
+	?> <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div> <?php
+}
 
 ?>
 

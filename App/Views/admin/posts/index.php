@@ -1,5 +1,11 @@
 <?php
 ob_start();
+
+
+if (isset($message) AND $message == 0) {
+	?> <div class="align alert alert-danger" role="alert">Article Effacé</div> <?php
+}
+
 ?>
 
 <h1 style="text-align: center;">Mon Administration</h1></br>

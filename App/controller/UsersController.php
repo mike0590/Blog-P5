@@ -16,18 +16,17 @@ class UsersController extends Controller
 
 		if (!empty($_POST))
 		{
-			if($auth -> userLogin($_POST['username'], $_POST['password']))
+			if($auth -> userLogin(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
 			{
 				header('Location: index.php');
 			}
 			else
-				?>
-			<div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
-			<?php
+				$message = 0;
 		}
+
 		$form = new \App\Html\Form();
 		$p = 'userLogin';
-		$this -> page('posts/userLogin', compact('form', 'p'));
+		$this -> page('posts/userLogin', compact('form', 'p', 'message'));
 
 	}
 
@@ -47,23 +46,23 @@ class UsersController extends Controller
 
 		if (!empty($_POST))
 		{
-			if($auth -> userExists($_POST['username'], $_POST['password']))
+			if($auth -> userExists(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
 			{
-				?><div class=" lol alert alert-danger align" role="alert">Vous êtes déjà inscrit.</div><?php
+				$message = 0;
 			}
-			elseif($auth -> userNameExists($_POST['username']))
+			elseif($auth -> userNameExists(htmlspecialchars($_POST['username'])))
 			{
-				?><div class=" lol alert alert-danger align" role="alert">Username Indisponible.</div><?php
+				$message = 1;
 			}
 			else{
-					$user = $auth -> inscription($_POST['username'], $_POST['password']);
-					?><div class=" lol alert alert-success align" role="alert">Compte validé.</div><?php
+					$user = $auth -> inscription(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']));
+					$message = 2;
 			}
 		}
 
 		$form = new \App\Html\Form();
 		$p = 'inscription';
-		$this -> page('posts/inscription', compact('form', 'p'));
+		$this -> page('posts/inscription', compact('form', 'p', 'message'));
 	}
 
 

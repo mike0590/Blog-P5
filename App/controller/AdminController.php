@@ -19,18 +19,17 @@ class AdminController extends Controller
 		}
 		if (!empty($_POST))
 		{
-			if($auth -> login($_POST['username'], $_POST['password']))
+			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
 			{
 				header('Location: admin.php');
 			}
 			else
-				?>
-			<div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
-			<?php
+				$message = 0;
 		}
+
 		$form = new \App\Html\Form();
 		$p = 'login';
-		$this -> page('admin/users/login', compact('form', 'p'));
+		$this -> page('admin/users/login', compact('form', 'p', 'message'));
 	}
 
 	public function destroy()
@@ -52,13 +51,13 @@ class AdminController extends Controller
 
 	public function index()
 	{
-		if (isset($_GET['sup'])) {  ?>
-		<div class="align alert alert-success" role="alert">Article Effacé</div>
-		<?php }
+		if (isset($_GET['sup'])) { 
+			$message = 0;
+		 }
 
 		$posts = \App\App::getInstance() -> getTable('posts') -> getAll();
 		$p = 'admin';
-		$this -> page('admin/posts/index', compact('posts', 'p'));
+		$this -> page('admin/posts/index', compact('posts', 'p', 'message'));
 	}
 
 	public function edit()
@@ -71,9 +70,8 @@ class AdminController extends Controller
 				'category_id' => $_POST['category_id']
 				]
 			);
-			if ($new) { ?>
-				<div class="lol align alert alert-success" role="alert">Article Enregistré</div>
-			<?php 
+			if ($new) { 
+				$message = 0;
 			}
 		}
 
@@ -83,7 +81,7 @@ class AdminController extends Controller
 
 		$form = new \App\Html\Form($post);
 		$p = 'post.edit';
-		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost'));
+		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
 	}
 
 	public function add()
@@ -97,14 +95,14 @@ class AdminController extends Controller
 		 		'author' => $_POST['author'],
 		 		'date' => 'NOW()'
 				]);
-		 	if ($new) { ?>
-				<div class="lol align alert alert-success" role="alert">Article Enregistré</div>
-			<?php }
+		 	if ($new) { 
+		 		$message = 0;
+		 	}
 		 } 
 		$form = new \App\Html\Form();
 		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
 		$p = 'post.add';
-		$this -> page('admin/posts/add', compact('form', 'categories', 'p'));
+		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));
 	}
 
 	public function delete()

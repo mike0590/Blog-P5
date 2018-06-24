@@ -51,9 +51,8 @@ class PostsController extends Controller
 		      header('Location: index.php?p=single&id= '.$id.' ');
 		    }
 		    else
-		      ?>
-		    <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
-		    <?php }
+		     	$message = 0;
+		      }
 
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
@@ -64,6 +63,7 @@ class PostsController extends Controller
 		    'date' => 'NOW()'
 
 		  ]);
+		  $message = 1;
 		}
 
 		$comments = \App\App::getInstance() -> getTable('Comments');
@@ -71,7 +71,7 @@ class PostsController extends Controller
 		$post = $posts -> getPost([$_GET['id']]);
 		$comment = $comments -> getComments([$_GET['id']]);
 
-		$this -> page('posts/single', compact('post', 'visitor', 'comments', 'comment'));
+		$this -> page('posts/single', compact('post', 'visitor', 'comments', 'comment', 'message'));
 
 	}
 
