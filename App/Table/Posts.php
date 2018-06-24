@@ -33,7 +33,7 @@ class Posts extends Table
 
 	public function getPosts()
 	{
-		return \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT  FROM {$this -> table} ORDER BY date DESC", get_called_class(), $one = false);
+		return \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT  FROM {$this -> table} ORDER BY dateT DESC", get_called_class(), $one = false);
 	}
 
 	 public function categoryPost($postId)
