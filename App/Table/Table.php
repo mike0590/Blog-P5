@@ -21,7 +21,7 @@ class Table
 	public function getAll()
 	{
 		return App::getDb() -> query("SELECT posts.id AS post, posts.title, posts.content, posts.author, 
-									 posts.date, posts.category_id, categories.id, categories.name
+									 posts.dateT, posts.category_id, categories.id, categories.name
 									 FROM {$this -> table}
 									 JOIN categories ON categories.id = posts.category_id"
 									 , get_called_class(), $one = false);
