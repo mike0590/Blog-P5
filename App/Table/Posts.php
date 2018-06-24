@@ -6,12 +6,6 @@ class Posts extends Table
 {
 	protected $table;
 
-	public function getExtrait()
-	{
-		$html = '<p>' .substr($this -> content, 0, 108). '...</p>';
-		$html .= '<p><a href="' .$this -> getUrl(). '">Voir la Suite</a></p>';
-		return $html;
-	}
 
 	public function getUrl()
 	{
@@ -25,7 +19,7 @@ class Posts extends Table
 
 	public function getPostsPerCat($id)
 	{
-		$post = \App\App::getDb() -> prepare("SELECT posts.id, posts.title, posts.content, posts.category_id, categories.id AS category FROM {$this -> table}
+		$post = \App\App::getDb() -> prepare("SELECT posts.id, posts.title, posts.chapo, posts.content, posts.category_id, categories.id AS category FROM {$this -> table}
 			 JOIN categories ON categories.id = posts.category_id
 			 WHERE posts.category_id = ?", $id, __CLASS__, $one = false);
 		return $post;
