@@ -46,7 +46,7 @@ class PostsController extends Controller
 
 
 		if (!empty($_POST) AND isset($_POST['pseudo']) AND isset($_POST['pass'])) {
-		    if($visitor -> userLogin($_POST['pseudo'], $_POST['pass']))
+		    if($visitor -> userLogin(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass'])))
 		    {
 		      header('Location: index.php?p=single&id= '.$id.' ');
 		    }
@@ -57,11 +57,10 @@ class PostsController extends Controller
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
 		    'visitor_username' => $_SESSION['nameVisitor'],
-		    'content' => $_POST['content'],
+		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
-		    'visitor_id' => $_SESSION['visitor'],
-		    'date' => 'NOW()'
-
+		    'visitor_id' => $_SESSION['visitor']
+		    
 		  ]);
 		  $message = 1;
 		}
