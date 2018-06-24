@@ -5,8 +5,6 @@ ob_start();
 echo '<p>' .$post -> chapo. '</p></br>';
 echo '<h1>' .$post -> title. '</h1></br>';
 echo $post -> content. '</br></br>';
-echo '<p style="float: right;">' .$post -> dateT. '</p></br>';
-echo '<p style="float: right; position: relative; left: 75px;">' .$post -> author. '</p></br></br></br>';
 ?>
 
 <div class="row">
@@ -70,8 +68,14 @@ echo '<p style="float: right; position: relative; left: 75px;">' .$post -> autho
       		foreach ($comment as $comment) { ?>
       			
       			  <h5 class="mt-0"><?php echo $comment -> visitor_username; ?></h5>
-              <p><?php echo $comment -> content; ?></p>
-              <p style="float: right;"><?php echo $comment -> date; ?></p></br></br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p><?php echo $comment -> content; ?></p>
+                </div>
+                <div class="col-sm-6">
+                  <p><?php echo $comment -> dateT; ?></p>
+                </div>
+              </div></br></br>
            
       		<?php
       	}
