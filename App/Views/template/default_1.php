@@ -62,6 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="index.php" class="active">Accueil</a></li>
 								<li><a href="index.php?p=posts">Articles</a></li>
 								<li><a href="index.php?p=categories">Catégories</a></li>
+								<li><a href="index.php?p=inscription">Inscription</a></li>
 								<?php
 								if ($visitor -> userLogged()) { ?>
 									<li style="position: relative;left: 100px;"><a href="index.php?p=userDestroy">Deconnexion</a></li> <?php
