@@ -20,7 +20,7 @@ class Posts extends Table
 
 	public function getPost($id)
 	{
-		return \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id = ?", $id, __CLASS__);
+		return \App\App::getDb() -> prepare("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate  FROM {$this -> table} WHERE id = ?", $id, __CLASS__);
 	}
 
 	public function getPostsPerCat($id)
@@ -33,7 +33,7 @@ class Posts extends Table
 
 	public function getPosts()
 	{
-		return \App\App::getDb() -> query ("SELECT * FROM {$this -> table} ORDER BY date DESC", get_called_class(), $one = false);
+		return \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT  FROM {$this -> table} ORDER BY date DESC", get_called_class(), $one = false);
 	}
 
 	 public function categoryPost($postId)
