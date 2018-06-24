@@ -31,7 +31,7 @@ if (isset($message) AND $message == 0) {
 			<td><?= $post -> post; ?></td>
 			<td><?= $post -> title; ?></td>
 			<td><?= $post -> name; ?></td>
-			<td><?= $post -> date; ?></td>
+			<td><?= $post -> dateT; ?></td>
 			<td><?= $post -> author; ?></td>
 			<td><a class="btn btn-primary" href="admin.php?p=post.edit&id=<?= $post -> post; ?>">Editer</a></td>
 			<td><a class="btn btn-danger" style="position: relative; right: 20px;" href="admin.php?p=post.delete&id=<?= $post -> post; ?>">Supprimer</a></td>
