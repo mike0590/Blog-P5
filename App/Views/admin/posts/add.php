@@ -13,6 +13,7 @@ if (isset($message) AND $message == 0) {
 <?php 
 echo '</br>';
 echo $form -> input('title', "Titre de l'article");
+echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textarea']);
 echo $form -> select('category_id', 'Catégorie', $categories);
 echo $form -> input('author', "Auteur de l'Article");
