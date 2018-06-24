@@ -11,7 +11,7 @@ class DbAuth
 	 $db = \App\App::getDb();
 	 $user = $db -> prepare('SELECT * FROM visitor WHERE username = ?', [$username], null, True);
 	 if ($user) {
-	 	if ($user -> password === $password){
+	 	if ($user -> password === sha1($password)){
 	 		session_start();
 	 		$_SESSION['visitor'] = $user -> id;
 	 		$_SESSION['nameVisitor'] = $user -> username;
