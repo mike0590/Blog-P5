@@ -34,11 +34,9 @@ class Table
     		$parts[] = "$key = ?";
     		$attributes [] = $value;
     	}
-    	    $parts[] = "date = ?";
-    		$attributes[] = 'NOW()';
     		$attributes[] = $id;
     		$sql_parts = (implode(',', $parts));
-    	return App::getDb() -> prepare("UPDATE {$this -> table} SET $sql_parts WHERE id = ?", $attributes, null, true);
+    	return App::getDb() -> prepare("UPDATE {$this -> table} SET $sql_parts, dateUpdate = NOW() WHERE id = ?", $attributes, null, true);
 	}
 
 	public function create($options)
@@ -49,7 +47,7 @@ class Table
     		$attributes [] = $value;
     	}
     		$sql_parts = (implode(', ', $parts));
-    	return App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts", $attributes, null);
+    	return App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
 	}
 
 
