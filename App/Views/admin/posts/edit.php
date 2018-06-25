@@ -14,7 +14,7 @@ if (isset($message) AND $message == 0) {
 
 echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
-echo $form -> input('content', 'Contenu', ['type' => 'textarea']);
+echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);
 echo $form -> select('category_id', 'Catégorie', $categories, $categoryPost -> idCat, $categoryPost -> name);
 echo $form -> submit('Enregistrer');
 ?>

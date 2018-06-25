@@ -29,6 +29,9 @@ class Form
 		if ($type === 'textarea') {
 			$input = '<textarea  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
 		}
+		elseif ($type === 'textareaB') {
+			$input = '<textarea style="height:300px;"  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
+		}
 		else{
 			$input = '<input type="' .$type. '" name="' .$name. '" class="form-control" value="' .$this -> getValue($name). '"</input></br>';
 		}
@@ -67,7 +70,7 @@ class Form
 		$input = '<select class="form-control" name="' .$name. '">';
 		foreach ($options as $k => $v) {
 			if($k == $categoryPostId){
-				$input.= '<option value="$categoryPostId" selected>' .$categoryPost. '</option>';
+				$input.= "<option value='$categoryPostId' selected>" .$categoryPost. "</option>";
 			}
 			else{
 				$input.= "<option value='$k'>$v</option>";
