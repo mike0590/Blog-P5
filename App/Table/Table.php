@@ -50,5 +50,11 @@ class Table
     	return App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
 	}
 
+	public function delete($id)
+    {
+    		
+    	return App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE id = ?", $id, null, true);
+	}
+
 
 }
