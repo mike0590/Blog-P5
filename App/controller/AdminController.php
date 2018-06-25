@@ -66,6 +66,7 @@ class AdminController extends Controller
 		if (!empty($_POST)) {
 			$new = $posts -> update($_GET['id'],[
 				'title' => $_POST['title'],
+				'chapo' => $_POST['chapo'],
 				'content' => $_POST['content'],
 				'category_id' => $_POST['category_id']
 				]
@@ -90,11 +91,12 @@ class AdminController extends Controller
 		if (!empty($_POST)) {
 		 	$new = $post -> create([
 				'title' => $_POST['title'],
+				'chapo' => $_POST['chapo'],
 		 		'content' => $_POST['content'],
 		 		'category_id' => $_POST['category_id'],
-		 		'author' => $_POST['author'],
-		 		'date' => 'NOW()'
+		 		'author' => $_POST['author']
 				]);
+
 		 	if ($new) { 
 		 		$message = 0;
 		 	}
