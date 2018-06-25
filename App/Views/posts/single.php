@@ -9,7 +9,11 @@ echo $post -> content. '</br></br>';
 
 <div class="row">
   <div class="col-sm-6">
-   <?php echo '<p style="float: left">Dernière Modification : ' .$post -> dateUpdate. '</p></br></br></br>'; ?>
+   <?php 
+   if ($post -> dateUpdate !== '00/00/0000 - 00h00') {
+     echo '<p style="float: left">Dernière Modification : ' .$post -> dateUpdate. '</p></br></br></br>';
+   }
+   ?>
   </div>
   <div class="col-sm-6"> <?php
     echo '<p style="float: right;">' .$post -> dateT. '</p></br>';
