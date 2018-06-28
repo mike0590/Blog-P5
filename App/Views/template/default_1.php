@@ -88,9 +88,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="w3_banner_info_grid">
 										<h2>Mike Gil </h2>
 										<p>Le web developpeur qu'il vous faut.</p>
-										<ul>
-											<li><a href="#" class="w3ls_more" data-toggle="modal" data-target="#myModal1">Learn More</a></li>
-										</ul>
 									</div>
 									</li>
 									

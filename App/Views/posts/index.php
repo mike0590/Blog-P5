@@ -28,10 +28,19 @@ ob_start();
 echo $form -> input('nom', 'Nom');
 echo $form -> input('prenom', 'Prénom');
 echo $form -> input('mail', 'E-Mail');
-echo $form -> input('message', 'Votre Message', ['type' => 'textarea']). '</br>';
-echo $form -> submit('Envoyer'). '</br>';
+echo $form -> input('message', 'Votre Message', ['type' => 'textarea']). '</br>'; ?>
+<div class="row">
+	<div class="col-sm-6">
+		<?php echo $form -> submit('Envoyer'); ?>
+	</div>
+	<div class="col-sm-6">
+		<a style="float: right;" href="cv.pdf">Mike Filipe - CV</a>
+	</div>
+</div></br>
 
 
+
+<?php
 $formulaire = ob_get_clean();
 
 
