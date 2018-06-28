@@ -11,9 +11,11 @@ private $db;
 
 private function getPdo()
 {
-	$pdo = new PDO('mysql:dbname=blog;host=localhost', 'root', 'root');
-	$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-	return $pdo;
+	if ($this -> db == null) {
+		$this -> db = new PDO('mysql:dbname=blog;host=localhost', 'root', 'root');
+		$this -> db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	}
+	return $this -> db;
 }
 
 
