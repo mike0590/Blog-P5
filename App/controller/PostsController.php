@@ -10,7 +10,7 @@ class PostsController extends Controller
 
 	public function __construct()
 	{
-		$this -> viewPath = ROOT . '/App/Views/';
+		parent::__construct();
 	}
 
 	public function home()

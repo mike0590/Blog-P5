@@ -6,7 +6,7 @@ class UsersController extends Controller
 {
 	public function __construct()
 	{
-		$this -> viewPath = ROOT . '/App/Views/';
+		parent::__construct();
 	}
 
 	public function login()

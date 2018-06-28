@@ -9,6 +9,11 @@ class Controller
 	protected $template;
 
 
+	public function __construct()
+	{
+		$this -> viewPath = ROOT . '/App/Views/';
+	}
+
 	public function page($view, $variables=[])
 	{
 		extract($variables);
