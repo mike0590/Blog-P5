@@ -3,7 +3,7 @@
 namespace App;
 use \PDO;
 
-class DataBase
+class Database
 {
 
 
