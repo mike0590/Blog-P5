@@ -49,7 +49,7 @@ switch ($p) {
 		$controller -> viewComment();
 	break;
 
-	case 'commentsAccepted':
+	case 'commentAccepted':
 		$controller = new App\Controller\AdminController();
 		$controller -> accept();
 	break;
