@@ -7,7 +7,7 @@ class AdminController extends Controller
 
 	public function __construct()
 	{
-		$this -> viewPath = ROOT . '/App/Views/';
+		parent::__construct();
 		$this -> template = 'default_2';
 	}
 

@@ -18,43 +18,49 @@ $controller = new App\Controller\AdminController();
 $controller -> dashbord();
 
 
+switch ($p) {
+	case 'admin':
+		$controller = new App\Controller\AdminController();
+		$controller -> index();
+	break;
 
+	case 'post.edit':
+		$controller = new App\Controller\AdminController();
+		$controller -> edit();
+	break;
 
+	case 'post.add':
+		$controller = new App\Controller\AdminController();
+		$controller -> add();
+	break;
 
+	case 'post.delete':
+		$controller = new App\Controller\AdminController();
+		$controller -> delete();
+	break;
 
+	case 'comments':
+		$controller = new App\Controller\AdminController();
+		$controller -> comments();
+	break;
 
-if ($p == 'admin') {
-	$controller = new App\Controller\AdminController();
-	$controller -> index();
+	case 'singleComment':
+		$controller = new App\Controller\AdminController();
+		$controller -> viewComment();
+	break;
+
+	case 'commentsAccepted':
+		$controller = new App\Controller\AdminController();
+		$controller -> accept();
+	break;
+
+	case 'commentDenied':
+		$controller = new App\Controller\AdminController();
+		$controller -> denied();
+	break;
+
 }
-elseif ($p == 'post.edit'){
-	$controller = new App\Controller\AdminController();
-	$controller -> edit();
-}
-elseif ($p == 'post.add'){
-	$controller = new App\Controller\AdminController();
-	$controller -> add();
-}
-elseif ($p == 'post.delete'){
-	$controller = new App\Controller\AdminController();
-	$controller -> delete();
-}
-elseif ($p == 'comments'){
-	$controller = new App\Controller\AdminController();
-	$controller -> comments();
-}
-elseif ($p == 'singleComment'){
-	$controller = new App\Controller\AdminController();
-	$controller -> viewComment();
-}
-elseif ($p == 'commentAccepted'){
-	$controller = new App\Controller\AdminController();
-	$controller -> accept();
-}
-elseif ($p == 'commentDenied'){
-	$controller = new App\Controller\AdminController();
-	$controller -> denied();
-}
+
 
 
 

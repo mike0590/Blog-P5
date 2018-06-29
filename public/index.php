@@ -16,48 +16,56 @@ else{
 
 
 
-if ($p == 'home') {
-	session_start();
-	$controller = new App\Controller\PostsController();
-	$controller -> home();
-}
-elseif ($p == 'posts') {
-	session_start();
-	$controller = new App\Controller\PostsController();
-	$controller -> posts();
-}
-elseif ($p == 'userLogin') {
-	$controller = new App\Controller\UsersController();
-	$controller -> login();
-}
-elseif ($p == 'single') {
-	session_start();
-	$controller = new App\Controller\PostsController();
-	$controller -> single();
-}
-elseif ($p == 'categories') {
-	session_start();
-	$controller = new App\Controller\PostsController();
-	$controller -> categories();
-}
-elseif ($p == 'userDestroy') {
-	$controller = new App\Controller\UsersController();
-	$controller -> destroy();
-}
-elseif ($p == 'login') {
-	$controller = new App\Controller\AdminController();
-	$controller -> login();
-}
-elseif ($p == 'destroy'){
-	$controller = new App\Controller\AdminController();
-	$controller -> destroy();
-}	
-elseif ($p == 'inscription'){
+switch ($p) {
+	case 'home':
+		session_start();
+		$controller = new App\Controller\PostsController();
+		$controller -> home();
+	break;
+
+	case 'posts':
+	 	session_start();
+		$controller = new App\Controller\PostsController();
+		$controller -> posts();
+	break;
+
+	case 'userLogin':
+		$controller = new App\Controller\UsersController();
+		$controller -> login();
+	break;
+
+	case 'single':
+		session_start();
+		$controller = new App\Controller\PostsController();
+		$controller -> single();
+	break;
+
+	case 'categories':
+		session_start();
+		$controller = new App\Controller\PostsController();
+		$controller -> categories();
+	break;
+
+	case 'userDestroy':
+		$controller = new App\Controller\UsersController();
+		$controller -> destroy();
+	break;
+
+	case 'login':
+		$controller = new App\Controller\AdminController();
+		$controller -> login();
+	break;
+
+	case 'destroy':
+		$controller = new App\Controller\AdminController();
+		$controller -> destroy();
+	break;
+
+	case 'inscription':
 	$controller = new App\Controller\UsersController();
 	$controller -> inscription();
-}	
+	break;
 
-
-
+}
 
 
