@@ -33,16 +33,20 @@ public function addComment($options)
 
 public function showComments()
 {
-  $comments = \App\App::getDb() -> query("SELECT comments.id, comments.visitor_username AS user, comments.content AS content, posts.title AS title FROM {$this -> table} 
+  $comments = \App\App::getDb() -> query("SELECT comments.id, comments.content AS content, posts.title AS title, users.username AS username
+    FROM {$this -> table} 
     JOIN posts ON posts.id = comments.posts_id
+    Join users ON users.id = comments.users_id
     WHERE waiting = 1", __CLASS__, $one = false);
     return $comments;
   }
 
 public function showComment($id)
 {
-  $comment = \App\App::getDb() -> prepare("SELECT comments.id, comments.visitor_username AS user, comments.content AS content, posts.title AS title FROM {$this -> table} 
+  $comment = \App\App::getDb() -> prepare("SELECT comments.id, comments.content AS content, posts.title AS title, users.username AS username
+    FROM {$this -> table} 
     JOIN posts ON posts.id = comments.posts_id
+    Join users ON users.id = comments.users_id
     WHERE comments.id =?", $id, __CLASS__);
   return $comment;
 }

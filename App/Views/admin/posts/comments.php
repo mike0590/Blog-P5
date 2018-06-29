@@ -8,12 +8,13 @@ ob_start();
 		<tr>
 			<td><strong>Visiteur</strong></td>
 			<td><strong>Commentaire</strong></td>
+			<td><strong>Article</strong></td>
 		</tr>
 	</thead>
 	<tbody>
 		<?php  foreach($commentsWait as $comment): ?>
 		<tr>
-			<td><?= $comment -> user; ?></td>
+			<td><?= $comment -> username; ?></td>
 			<td><?= substr($comment -> content, 0, 70). '..'; ?></td>
 			<td><?= $comment -> title; ?></td>
 		</tr>

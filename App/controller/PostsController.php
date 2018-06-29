@@ -58,7 +58,7 @@ class PostsController extends Controller
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
-		    'visitor_id' => $_SESSION['visitor']
+		    'users_id' => $_SESSION['visitor']
 		    
 		  ]);
 		  $message = 1;

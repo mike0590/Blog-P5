@@ -2,7 +2,7 @@
 ob_start();
 ?>
 
-<h3>Visiteur: <?= $comment -> user; ?></h3></br></br>
+<h3>Visiteur: <?= $comment -> username; ?></h3></br></br>
 <h3>Article:</h3>
 <?= $comment -> title; ?></br></br></br>
 
