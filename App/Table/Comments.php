@@ -10,7 +10,9 @@ class Comments extends Table
 
 	public function getComments($id)
 	{
-		$comments = \App\App::getDb() -> prepare("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT FROM {$this -> table} WHERE waiting = 0 AND posts_id = ?", $id, __CLASS__, $one = false);
+		$comments = \App\App::getDb() -> prepare("SELECT comments.content, DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT, users.username AS username FROM {$this -> table} 
+      JOIN users ON users.id = comments.users_id
+      WHERE waiting = 0 AND posts_id = ?", $id, __CLASS__, $one = false);
 		return $comments;
 	}
 

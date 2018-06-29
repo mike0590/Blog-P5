@@ -56,7 +56,6 @@ class PostsController extends Controller
 
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
-		    'visitor_username' => $_SESSION['nameVisitor'],
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
 		    'visitor_id' => $_SESSION['visitor']

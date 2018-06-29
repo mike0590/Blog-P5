@@ -71,7 +71,7 @@ echo $post -> content. '</br></br>';
 
       		foreach ($comment as $comment) { ?>
       			
-      			  <h5 class="mt-0"><?php echo $comment -> visitor_username; ?></h5>
+      			  <h5 class="mt-0"><?php echo $comment -> username; ?></h5>
               <div class="row">
                 <div class="col-sm-6">
                   <p><?php echo $comment -> content; ?></p>
