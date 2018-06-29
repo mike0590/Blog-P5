@@ -6,7 +6,7 @@ class DbAuth
 {
 
 
-	 public function userlogin($username, $password)
+	 public function userLogin($username, $password)
 {
 	 $db = \App\App::getDb();
 	 $user = $db -> prepare('SELECT * FROM users WHERE is_admin = 1 AND username = ?', [$username], null, True);
