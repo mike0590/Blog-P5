@@ -87,4 +87,3 @@ class PostsController extends Controller
 
 }
 
-
