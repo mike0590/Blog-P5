@@ -20,10 +20,12 @@ class Table
 
 	public function getAll()
 	{
-		return App::getDb() -> query("SELECT posts.id AS post, posts.title, posts.content, posts.author, 
-									 posts.dateT, posts.category_id, categories.id, categories.name
+		return App::getDb() -> query("SELECT posts.id AS post, posts.title, posts.content, 
+									 posts.dateT, posts.category_id, categories.id, categories.name, 
+									 users.username AS author
 									 FROM {$this -> table}
-									 JOIN categories ON categories.id = posts.category_id"
+									 JOIN categories ON categories.id = posts.category_id
+									 JOIN users ON users.id = posts.user_id"
 									 , get_called_class(), $one = false);
 	}
 
@@ -49,6 +51,7 @@ class Table
     		$sql_parts = (implode(', ', $parts));
     	return App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
 	}
+
 
 	public function delete($id)
     {

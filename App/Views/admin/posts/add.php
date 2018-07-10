@@ -16,7 +16,7 @@ echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);
 echo $form -> select('category_id', 'Catégorie', $categories);
-echo $form -> input('author', "Auteur de l'Article");
+echo $form -> input('author', "Identifiant de l'Auteur");
 echo $form -> submit('Enregistrer');
 ?>
 
