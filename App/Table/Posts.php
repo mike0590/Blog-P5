@@ -14,7 +14,10 @@ class Posts extends Table
 
 	public function getPost($id)
 	{
-		return \App\App::getDb() -> prepare("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate  FROM {$this -> table} WHERE id = ?", $id, __CLASS__);
+		return \App\App::getDb() -> prepare("SELECT posts.id, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username AS author 
+			FROM {$this -> table} 
+			JOIN users ON users.id = posts.user_id 
+			WHERE posts.id = ?", $id);
 	}
 
 	public function getPostsPerCat($id)
