@@ -3,7 +3,7 @@ ob_start();
 ?>
 
 
-<table class="table">
+<table class="table visible-md visible-lg">
 	<thead>
 		<tr>
 			<td><strong>Visiteur</strong></td>
@@ -31,7 +31,31 @@ ob_start();
 	</tbody>
 </table>
 
-<a style="position: relative; bottom: 30px; left: 80%;" href="admin.php">Administration</a>
+<div class="visible-xs visible-sm">
+	<br/><br/>
+	<?php  
+
+	if ($commentsWait == null) {
+		echo "Sans Commentaires en attente !";
+	}
+	foreach($commentsWait as $comment): ?>
+	<div>
+			<p><?= '<strong style="color:black;">Visiteur: </strong>' .$comment -> username; ?></p>
+			<p><?= '<strong style="color:black;">Commentaire: </strong>' .substr($comment -> content, 0, 70). '..'; ?></p>
+			<p><?= '<strong style="color:black;">Article: </strong>' .$comment -> title; ?></p><br/>
+		 	<div style="display: flex;">
+			  <a class="btn btn-primary" href="admin.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a>
+			  <a class="btn btn-primary" href="admin.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a>
+			  <a class="btn btn-danger" href="admin.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a>
+			</div>
+	</div>
+			<br/><br/>
+	
+<?php endforeach; ?>
+</div>
+
+<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="admin.php">Administration</a>
+<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="admin.php">Administration</a>
 
 
 <?php
