@@ -20,6 +20,7 @@ echo $form -> input('author', "Identifiant de l'Auteur");
 echo $form -> submit('Enregistrer');
 ?>
 
+
 </form>
 <a style="position: relative; bottom: 50px; left: 80%;" href="admin.php">Administration</a>
 
