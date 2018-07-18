@@ -27,7 +27,7 @@ class AdminController extends Controller
 				$message = 0;
 		}
 
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$p = 'login';
 		$this -> page('admin/users/login', compact('form', 'p', 'message'));
 	}
@@ -80,7 +80,7 @@ class AdminController extends Controller
 		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
 
-		$form = new \App\Html\Form($post);
+		$form = new \App\HTML\Form($post);
 		$p = 'post.edit';
 		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
 	}
@@ -101,7 +101,7 @@ class AdminController extends Controller
 		 		$message = 0;
 		 	}
 		 } 
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
 		$p = 'post.add';
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));

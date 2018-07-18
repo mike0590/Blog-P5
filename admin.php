@@ -1,8 +1,8 @@
 <?php
 
-define('ROOT', dirname(__DIR__));
 
-require ROOT. '/App/Autoloader.php';
+
+require 'App/Autoloader.php';
 App\Autoloader::register();
 
 session_start();

@@ -11,7 +11,7 @@ class Controller
 
 	public function __construct()
 	{
-		$this -> viewPath = ROOT . '/App/Views/';
+		$this -> viewPath = 'App/Views/';
 	}
 
 	public function page($view, $variables=[])

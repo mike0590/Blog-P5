@@ -10,7 +10,7 @@ if (isset($message) AND $message == 0) {
 
 <h1 style="text-align: center;">Mon Administration</h1></br>
 <h3 class="hidden-xs hidden-sm" style="text-align: center;">Articles</h3>
-<div class="visible-xs visible-sm" style="display: flex !important;">
+<div class="hidden-md hidden-lg" style="display: flex;">
 	<h3 >Articles</h3>
 	<a style="position: relative; left: 20%;" href="index.php?p=destroy">Deconnexion</a>
 </div>

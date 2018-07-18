@@ -12,7 +12,7 @@ private $db;
 private function getPdo()
 {
 	if ($this -> db == null) {
-		$this -> db = new PDO('mysql:dbname=blog;host=localhost', 'root', 'root');
+		$this -> db = new PDO('mysql:dbname=db684174461;host=db684174461.db.1and1.com', 'dbo684174461', 'Castanha_26');
 		$this -> db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 	return $this -> db;

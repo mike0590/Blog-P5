@@ -17,9 +17,61 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default';
 
+		if (!empty($_POST['mail']) AND !empty($_POST['message']))
+			{
+
+			$destinataire = 'mike_gil@hotmail.fr'; 
+			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire)) 
+			{
+			    $passage_ligne = "\r\n";
+			}
+			else
+			{
+			    $passage_ligne = "\n";
+			}
+
+			$message_html = '<div style="width: 100%; font-weight: bold">' .$_POST['message']. '</div>';
+
+			 
+			$boundary = "-----=".md5(rand());
+
+			 
+			$sujet = $_POST['sujet'];
+
+
+			$expediteur = $_POST['mail'];
+			 
+
+			$header = "From:" .$expediteur .$passage_ligne;
+			$header.= "Reply-to:" .$expediteur .$passage_ligne;
+			$header.= "MIME-Version: 1.0".$passage_ligne;
+			$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+
+
+			$message.= $passage_ligne."--".$boundary.$passage_ligne;
+
+			$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
+			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+			$message.= $passage_ligne.$message_html.$passage_ligne;
+
+			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+
+			mail($destinataire, $sujet, $message, $header);
+			  
+			}
+
 		$posts =  \App\App::getInstance() -> getTable('posts') -> getPosts();
-		$form = new \App\Html\Form();
-		$this -> page('posts/index', compact('posts', 'form'));
+		$form = new \App\HTML\Form();
+		if (!empty($_POST)) {
+			if (!empty($_POST['mail']) AND !empty($_POST['message'])) {
+			$message = 0;
+		}
+		else {
+			$message = 1;
+		}
+		}
+
+		$this -> page('posts/index', compact('posts', 'form', 'message'));
 
 	}
 

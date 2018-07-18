@@ -23,9 +23,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 	</script>
 	<!-- //for-mobile-apps -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.css" rel="stylesheet">
+	<link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 	<!-- css files -->
 	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
