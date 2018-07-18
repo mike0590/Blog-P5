@@ -50,6 +50,7 @@ if (isset($message) AND $message == 0) {
 	</tbody>
 </table>
 <a href="admin.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
+<br/><br/><h3 style="float: right;"><a href="index.php?p=home">Page d'Accueil</a></h3>
 </div>
 
 <div class="visible-xs visible-sm">
@@ -72,6 +73,7 @@ if (isset($message) AND $message == 0) {
 <br/><br/>
 
 <a href="admin.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
+<br/><br/><h3"><a href="index.php?p=home">Page d'Accueil</a></h3>
 
 
 <?php

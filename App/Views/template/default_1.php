@@ -136,12 +136,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- footer -->
 	<div class="copyright">
 		<div class="container">
-			<p>© 2018 Improve. All Rights Reserved | Design by <a href="https://w3layouts.com/">W3layouts</a></p>
+			<p><a href="admin.php">Administartion</a></p>
 			<ul class="social-icons3">
-				<li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
-				<li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-				<li><a href="#" class="fa fa-google-plus icon-border googleplus"> </a></li>
-				<li><a href="#" class="fa fa-rss icon-border rss"> </a></li>
+				<li><a href="www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>
+				<li><a href="www.twitter.com" class="fa fa-twitter icon-border twitter"> </a></li>
+				<li><a style="background-color: blue;" href="www.linkedin.com" class="fa fa-linkedin icon-border linkedin"> </a></li>
 			</ul>
 		</div>
 	</div>

@@ -41,11 +41,9 @@ class AdminController extends Controller
 
 	public function dashbord()
 	{
-
-		$app = \App\App::getInstance();
 		$auth = new \App\Auth\DbAuth();
 		if (!$auth -> logged()) {
-		$app -> forbidden();
+			header('Location: index.php?p=login');
 		}
 	}
 

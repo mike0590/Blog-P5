@@ -4,6 +4,7 @@ ob_start();
 
 session_start();
 
+
 if (isset($message) AND $message == 0) {
 	?> <div class="align alert alert-danger" role="alert">Identifiants Incorrects</div> <?php
 }
