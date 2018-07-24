@@ -339,6 +339,7 @@ input[type="submit"],input[type="reset"],.w3l_team_grd,.agileits_w3layouts_featu
 }
 .banner{
 	background:url(../images/10.jpg) no-repeat 0px 0px;
+	background-position: 50%;
 	text-align: center;
 	background-size: cover;
     -webkit-background-size: cover;

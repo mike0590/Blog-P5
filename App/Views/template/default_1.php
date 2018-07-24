@@ -165,12 +165,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- //bootstrap-pop-up -->
 	<!-- js-scripts -->
 	<!-- js -->
-	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="public/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="public/js/bootstrap.js"></script>
 	<!-- Necessary-JavaScript-File-For-Bootstrap -->
 	<!-- //js -->
 	<!--Start-slider-script-->
-	<script defer src="js/jquery.flexslider.js"></script>
+	<script defer src="public/js/jquery.flexslider.js"></script>
 		<script type="text/javascript">
 		
 		$(window).load(function(){
