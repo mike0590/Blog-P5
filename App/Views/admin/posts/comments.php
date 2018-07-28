@@ -1,4 +1,7 @@
 <?php
+
+$title = 'Commentaires';
+
 ob_start();
 ?>
 

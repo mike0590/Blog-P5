@@ -1,5 +1,7 @@
 <?php
 
+$title = 'Ajout d\'un Article';
+
 ob_start();
 
 if (isset($message) AND $message == 0) {
@@ -16,7 +18,6 @@ echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);
 echo $form -> select('category_id', 'Catégorie', $categories);
-echo $form -> input('author', "Identifiant de l'Auteur");
 echo $form -> submit('Enregistrer');
 ?>
 

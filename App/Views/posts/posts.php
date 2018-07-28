@@ -1,5 +1,7 @@
 <?php
 
+$title = 'Articles';
+
 ob_start();
 ?>
 

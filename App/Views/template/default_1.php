@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title></title>
+	<title><?= $title ?></title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -55,20 +55,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								<?php
-								$visitor = new App\Auth\DbAuth();
-								if ($visitor -> userLogged()) { ?>
+								$user = new App\Auth\DbAuth();
+								if (isset($_SESSION['nameVisitor'])) { ?>
 								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 								} ?>
 								<li><a href="index.php" class="active">Accueil</a></li>
 								<li><a href="index.php?p=posts">Articles</a></li>
-								<li><a href="index.php?p=inscription">Inscription</a></li>
-								<?php
-								if ($visitor -> userLogged()) { ?>
-									<li style="position: relative;left: 100px;"><a href="index.php?p=userDestroy">Deconnexion</a></li> <?php
+								<?php if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
+									<li><a href="index.php?p=inscription">Inscription</a></li> <?php
+								} 
+								if ($user -> logged()) { ?>
+									<li style="position: relative;left: 100px;"><a href="index.php?p=destroy">Deconnexion</a></li> <?php
 								}
 								else{ ?>
 								<li style="position: relative;left: 100px;"><a href="index.php?p=userLogin">Connexion</a></li> <?php
-							} ?>
+								} ?>
 							
 							</ul>
 						</div>

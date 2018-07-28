@@ -1,6 +1,6 @@
 <?php
 
-
+$title = 'Connexion';
 
 ob_start();
 

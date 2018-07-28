@@ -1,5 +1,7 @@
 <?php
 
+$title = 'Catégories';
+
 ob_start();
 ?>
 

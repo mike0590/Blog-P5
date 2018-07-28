@@ -1,6 +1,6 @@
 <?php
 
-
+$title = 'Inscription';
 
 ob_start();
 

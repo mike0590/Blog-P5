@@ -1,5 +1,7 @@
 <?php
 
+$title = 'Edition d\'un Article';
+
 ob_start();
 
 if (isset($message) AND $message == 0) {

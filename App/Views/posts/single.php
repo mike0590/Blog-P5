@@ -1,5 +1,7 @@
 <?php
 
+$title = 'Article';
+
 ob_start();
 
 echo '<p>' .$post -> chapo. '</p></br>';

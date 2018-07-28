@@ -1,4 +1,7 @@
 <?php
+
+$title = 'Administration';
+
 ob_start();
 
 

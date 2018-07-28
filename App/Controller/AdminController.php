@@ -92,7 +92,7 @@ class AdminController extends Controller
 				'chapo' => $_POST['chapo'],
 		 		'content' => $_POST['content'],
 		 		'category_id' => $_POST['category_id'],
-		 		'user_id' => $_POST['author']
+		 		'user_id' => $_SESSION['auth']
 				]);
 
 		 	if ($new) { 
