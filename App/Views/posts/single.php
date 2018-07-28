@@ -4,6 +4,12 @@ $title = 'Article';
 
 ob_start();
 
+if (isset($message) AND $message == 2) { ?>
+  <h2>Cet Article n'existe pas !</h2>
+  <h3><a href="index.php?p=home">Page d'Accueil</a></h3> <?php
+  die();
+}
+
 echo '<p>' .$post -> chapo. '</p></br>';
 echo '<h1>' .$post -> title. '</h1></br>';
 echo $post -> content. '</br></br>';

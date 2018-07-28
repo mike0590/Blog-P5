@@ -21,6 +21,16 @@ class Categories extends Table
 		return $category;
 	}
 
+	public function catExist($id)
+	{
+		$category = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id =?", $id, get_called_class());
+		if ($category) {
+			return true;
+		}
+		else
+			return false;
+	}
+
 	public function getCategories()
 	{
 		return \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", get_called_class(), $one = false);

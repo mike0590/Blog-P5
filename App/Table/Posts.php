@@ -12,6 +12,16 @@ class Posts extends Table
 		return 'index.php?p=single&id=' .$this -> id;
 	}
 
+	public function postExist($id)
+	{
+		$post = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id =?", $id, get_called_class());
+		if ($post) {
+			return true;
+		}
+		else
+			return false;
+	}
+
 	public function getPost($id)
 	{
 		return \App\App::getDb() -> prepare("SELECT posts.id, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username AS author 

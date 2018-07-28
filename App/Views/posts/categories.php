@@ -3,6 +3,13 @@
 $title = 'Catégories';
 
 ob_start();
+
+if (isset($message) AND $message == 2) { ?>
+	<h2>Cette Categorie n'existe pas !</h2>
+    <h3><a href="index.php?p=home">Page d'Accueil</a></h3> <?php
+	die();
+}
+
 ?>
 
 
