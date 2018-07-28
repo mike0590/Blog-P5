@@ -20,6 +20,7 @@ ob_start();
 			<td><?= $comment -> username; ?></td>
 			<td><?= substr($comment -> content, 0, 70). '..'; ?></td>
 			<td><?= $comment -> title; ?></td>
+			<td><?= $comment -> id; ?></td>
 		</tr>
 		<tr>
 			<td><a class="btn btn-primary" href="admin.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a></td>

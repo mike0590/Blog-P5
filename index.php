@@ -44,18 +44,8 @@ switch ($p) {
 		$controller -> categories();
 	break;
 
-	case 'userDestroy':
-		$controller = new App\Controller\UsersController();
-		$controller -> destroy();
-	break;
-
-	case 'login':
-		$controller = new App\Controller\AdminController();
-		$controller -> login();
-	break;
-
 	case 'destroy':
-		$controller = new App\Controller\AdminController();
+		$controller = new App\Controller\UsersController();
 		$controller -> destroy();
 	break;
 

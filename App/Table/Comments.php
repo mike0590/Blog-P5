@@ -26,7 +26,12 @@ public function addComment($options)
         $attributes [] = $value;
       }
         $sql_parts = (implode(', ', $parts));
-        $sql_parts.= ', waiting = 1';
+        if (isset($_SESSION['auth'])) {
+          $sql_parts.= ', waiting = 0';
+        }
+        elseif (isset($_SESSION['visitor'])) {
+          $sql_parts.= ', waiting = 1';
+        }
 
       return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
 }

@@ -32,13 +32,6 @@ class AdminController extends Controller
 		$this -> page('admin/users/login', compact('form', 'p', 'message'));
 	}
 
-	public function destroy()
-	{
-		session_start();
-		session_destroy();
-		header('Location: index.php?p=login');
-	}
-
 	public function dashbord()
 	{
 		$auth = new \App\Auth\DbAuth();

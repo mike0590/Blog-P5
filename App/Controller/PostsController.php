@@ -108,10 +108,16 @@ class PostsController extends Controller
 		      }
 
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
+		  if (isset($_SESSION['visitor'])) {
+		  	$user = $_SESSION['visitor'];
+		  }
+		  elseif (isset($_SESSION['auth'])) {
+		  	$user = $_SESSION['auth'];
+		  }
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
-		    'users_id' => $_SESSION['visitor']
+		    'users_id' => $user
 		    
 		  ]);
 		  $message = 1;

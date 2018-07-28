@@ -49,7 +49,7 @@ echo $post -> content. '</br></br>';
          <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
        <?php }
 
-         if ($visitor -> userLogged()){ ?>
+         if ($visitor -> logged()){ ?>
 
           <div class="card my-4">
             <h5 class="card-header">Laissez un Commentaire:</h5>
@@ -94,7 +94,7 @@ echo $post -> content. '</br></br>';
          <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
        <?php }
 
-         if ($visitor -> userLogged()){ ?>
+         if ($visitor -> logged()){ ?>
 
           <div class="card my-4">
             <h5 class="card-header">Laissez un Commentaire:</h5>

@@ -6,15 +6,21 @@ class DbAuth
 {
 
 
-	 public function userLogin($username, $password)
+ public function login($username, $password)
 {
 	 $db = \App\App::getDb();
-	 $user = $db -> prepare('SELECT * FROM users WHERE is_admin = 1 AND username = ?', [$username], null, True);
+	 $user = $db -> prepare('SELECT * FROM users WHERE username = ?', [$username], null, True);
 	 if ($user) {
 	 	if ($user -> password === sha1($password)){
 	 		session_start();
-	 		$_SESSION['visitor'] = $user -> id;
-	 		$_SESSION['nameVisitor'] = $user -> username;
+	 		if ($user -> is_admin == 0) {
+	 			$_SESSION['auth'] = $user -> id;
+	 		}
+	 		elseif ($user -> is_admin == 1) {
+	 			$_SESSION['visitor'] = $user -> id;
+	 			$_SESSION['nameVisitor'] = $user -> username;
+	 		}
+	 		
 	 		return true;
 	    }
 	 }
@@ -23,38 +29,27 @@ class DbAuth
  }
 
  
-  public function userLogged()
+ public function verify($username)
  {
- 	if (isset($_SESSION['visitor'])){
- 		return true;
- 	}
- 	else
- 		return false;
- }
-
- public function login($username, $password)
-{
-	 $db = \App\App::getDb();
-	 $user = $db -> prepare('SELECT * FROM users WHERE is_admin = 0 AND username = ?', [$username], null, True);
-	 if ($user) {
-	 	if ($user -> password === sha1($password)){
-	 		session_start();
-	 		$_SESSION['auth'] = $user -> id;
-	 		return true;
-	    }
-	 }
-
-	 return false;
+ 	$db = \App\App::getDb();
+	$user = $db -> prepare('SELECT * FROM users WHERE username = ?', [$username], null, True);
+	if ($user -> is_admin == 0) {
+		return True;
+	}
+	elseif ($user -> is_admin == 1) {
+		return False;
+	}
  }
 
  public function logged()
  {
- 	if (isset($_SESSION['auth'])){
+ 	if (isset($_SESSION['auth']) OR isset($_SESSION['visitor'])){
  		return true;
  	}
  	else
  		return false;
  }
+
 
  
  public function userExists($username, $password)

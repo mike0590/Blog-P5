@@ -16,9 +16,14 @@ class UsersController extends Controller
 
 		if (!empty($_POST))
 		{
-			if($auth -> userLogin(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
+			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
 			{
-				header('Location: index.php');
+				if ($auth -> verify($_POST['username']) == True) {
+					header('Location: admin.php');
+				}
+				elseif ($auth -> verify($_POST['username']) == False) {
+					header('Location: index.php');
+				}
 			}
 			else
 				$message = 0;
