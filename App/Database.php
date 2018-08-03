@@ -9,10 +9,17 @@ class Database
 
 private $db;
 
+private $settings = [];
+
+public function __construct()
+{
+	$this -> settings = require 'Bdd/bdd.ini';
+}
+
 private function getPdo()
 {
 	if ($this -> db == null) {
-		$this -> db = new PDO('mysql:dbname=db684174461;host=db684174461.db.1and1.com', 'dbo684174461', 'Castanha_26');
+		$this -> db = new PDO('mysql:dbname=' .$this -> settings['dbName']. ';host=' .$this -> settings['host'].'', $this -> settings['user'], $this -> settings['pass']);
 		$this -> db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 	return $this -> db;
