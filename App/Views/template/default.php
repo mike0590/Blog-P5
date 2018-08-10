@@ -141,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="copyright">
 		<div class="container">
 			<?php if (isset($_SESSION['auth'])) { ?>
-				<p><a href="admin.php">Administration</a></p> <?php
+				<p><a href="index.php?p=admin">Administration</a></p> <?php
 			}  ?>
 			<ul class="social-icons3">
 				<li><a href="www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>

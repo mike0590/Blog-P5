@@ -18,12 +18,12 @@ if (isset($message) AND $message == 0) {
 	<a style="position: relative; left: 20%;" href="index.php?p=destroy">Deconnexion</a>
 </div>
 <div class="visible-xs visible-sm">
-	<br/><a class="btn btn-primary" href="admin.php?p=post.add">Ajouter</a>
+	<br/><a class="btn btn-primary" href="index.php?p=post.add">Ajouter</a>
 </div>
 <div class="hidden-xs hidden-sm">
 <a href="index.php?p=destroy" style="float: right; position: relative; bottom: 25px; right: 25px;">Deconnexion</a></br>
 
-<a style="position: relative; left: 20px;" class="btn btn-primary" href="admin.php?p=post.add">Ajouter</a>
+<a style="position: relative; left: 20px;" class="btn btn-primary" href="index.php?p=post.add">Ajouter</a>
 </br></br>
 <table class="table">
 	<thead>
@@ -43,8 +43,8 @@ if (isset($message) AND $message == 0) {
 			<td><?= $post -> name; ?></td>
 			<td><?= $post -> dateT; ?></td>
 			<td><?= $post -> author; ?></td>
-			<td><a class="btn btn-primary" href="admin.php?p=post.edit&id=<?= $post -> post; ?>">Editer</a></td>
-			<td><a class="btn btn-danger" style="position: relative; right: 20px" href="admin.php?p=post.delete&id=<?= $post -> post; ?>">Supprimer</a></td>
+			<td><a class="btn btn-primary" href="index.php?p=post.edit&id=<?= $post -> post; ?>">Editer</a></td>
+			<td><a class="btn btn-danger" style="position: relative; right: 20px" href="index.php?p=post.delete&id=<?= $post -> post; ?>">Supprimer</a></td>
 
 
 
@@ -52,7 +52,7 @@ if (isset($message) AND $message == 0) {
 	<?php endforeach; ?>
 	</tbody>
 </table>
-<a href="admin.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
+<a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
 <br/><br/><h3 style="float: right;"><a href="index.php?p=home">Page d'Accueil</a></h3>
 </div>
 
@@ -67,15 +67,15 @@ if (isset($message) AND $message == 0) {
 			<p><?= '<strong style="color:black;">Date: </strong>' .$post -> dateT; ?></p>
 			<p><?= '<strong style="color:black;">Auteur: </strong>' .$post -> author; ?></p><br/><br/>
 		 	<div style="display: flex;">
-			<a class="btn btn-primary" href="admin.php?p=post.edit&id=<?= $post -> post; ?>">Editer</a>
-			<a class="btn btn-danger" style="position: relative; left: 5%;" href="admin.php?p=post.delete&id=<?= $post -> post; ?>">Supprimer</a>
+			<a class="btn btn-primary" href="index.php?p=post.edit&id=<?= $post -> post; ?>">Editer</a>
+			<a class="btn btn-danger" style="position: relative; left: 5%;" href="index.php?p=post.delete&id=<?= $post -> post; ?>">Supprimer</a>
 	</div>
 			<br/><br/>
 	
 <?php endforeach; ?>
 <br/><br/>
 
-<a href="admin.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
+<a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
 <br/><br/><h3"><a href="index.php?p=home">Page d'Accueil</a></h3>
 
 

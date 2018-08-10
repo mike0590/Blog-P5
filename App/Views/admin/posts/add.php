@@ -23,7 +23,7 @@ echo $form -> submit('Enregistrer');
 
 
 </form>
-<a style="position: relative; bottom: 50px; left: 80%;" href="admin.php">Administration</a>
+<a style="position: relative; bottom: 50px; left: 80%;" href="index.php?p=admin">Administration</a>
 
 <?php
 $add = ob_get_clean();

@@ -23,9 +23,9 @@ ob_start();
 			<td><?= $comment -> id; ?></td>
 		</tr>
 		<tr>
-			<td><a class="btn btn-primary" href="admin.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a></td>
-			<td><a class="btn btn-primary" href="admin.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a></td>
-			<td><a class="btn btn-danger" href="admin.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a></td>
+			<td><a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a></td>
+			<td><a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a></td>
+			<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a></td>
 
 
 
@@ -48,9 +48,9 @@ ob_start();
 			<p><?= '<strong style="color:black;">Commentaire: </strong>' .substr($comment -> content, 0, 70). '..'; ?></p>
 			<p><?= '<strong style="color:black;">Article: </strong>' .$comment -> title; ?></p><br/>
 		 	<div style="display: flex;">
-			  <a class="btn btn-primary" href="admin.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a>
-			  <a class="btn btn-primary" href="admin.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a>
-			  <a class="btn btn-danger" href="admin.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a>
+			  <a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> id; ?>">Voir</a>
+			  <a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> id; ?>">Accepter</a>
+			  <a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> id; ?>">Supprimer</a>
 			</div>
 	</div>
 			<br/><br/>
@@ -58,8 +58,8 @@ ob_start();
 <?php endforeach; ?>
 </div>
 
-<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="admin.php">Administration</a>
-<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="admin.php">Administration</a>
+<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
+<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="index.php?p=admin">Administration</a>
 
 
 <?php
