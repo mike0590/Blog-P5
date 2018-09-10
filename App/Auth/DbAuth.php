@@ -5,91 +5,72 @@ namespace App\Auth;
 class DbAuth 
 {
 
+ private $idUsers;
+ private $username;
+ private $password;
+ private $is_admin;
+ 
 
- public function login($username, $password)
-{
-	 $db = \App\App::getDb();
-	 $user = $db -> prepare('SELECT * FROM users WHERE username = ?', [$username], null, True);
-	 if ($user) {
-	 	if ($user -> password === sha1($password)){
-	 		session_start();
-	 		if ($user -> is_admin == 0) {
-	 			$_SESSION['auth'] = $user -> id;
-	 		}
-	 		elseif ($user -> is_admin == 1) {
-	 			$_SESSION['visitor'] = $user -> id;
-	 			$_SESSION['nameVisitor'] = $user -> username;
-	 		}
-	 		
-	 		return true;
-	    }
-	 }
+ public function __construct(array $data)
+	{
+		return $this -> hydrate($data);
+	}
 
-	 return false;
+	public function hydrate(array $data)
+	{
+		foreach ($data as $key => $value) {
+			$method = 'set' .ucfirst($key);
+			if (method_exists($this, $method)) {
+				$this -> $method($value);
+			}
+		}
+	}
+
+
+
+ public function idUsers()
+ {
+ 	return $this -> idUsers;
+ }
+
+ public function username()
+ {
+ 	return $this -> username;
+ }
+
+ public function password()
+ {
+ 	return $this -> password;
+ }
+
+ public function is_admin()
+ {
+ 	return $this -> admin();
+ }
+
+ public function setIdUsers($data)
+ {
+ 	$this -> idUsers = $data;
+ }
+
+ public function setUsername($data)
+ {
+ 	$this -> username = $data;
+ }
+
+ public function setPassword($data)
+ {
+ 	$this -> password = $data;
+ }
+
+ public function setIs_admin($data)
+ {
+ 	$this -> is_admin = $data;
  }
 
  
- public function verify($username)
- {
- 	$db = \App\App::getDb();
-	$user = $db -> prepare('SELECT * FROM users WHERE username = ?', [$username], null, True);
-	if ($user -> is_admin == 0) {
-		return True;
-	}
-	elseif ($user -> is_admin == 1) {
-		return False;
-	}
- }
-
- public function logged()
- {
- 	if (isset($_SESSION['auth']) OR isset($_SESSION['visitor'])){
- 		return true;
- 	}
- 	else
- 		return false;
- }
 
 
- 
- public function userExists($username, $password)
- {
- 	 $db = \App\App::getDb();
-	 $user = $db -> prepare('SELECT * FROM users WHERE is_admin = 1 AND username = ?', [$username], null, True);
-	 if ($user) {
-	 	if ($user -> password === sha1($password)){
-	 		return true;
-	    }
-	 }
-
-	 return false;
- }
-
- public function inscription($username, $password)
- {
- 	$db = \App\App::getDb();
-
- 	$attributes[] = $username;
- 	$attributes[] = sha1($password);
-
- 	$new = $db -> prepare("INSERT INTO users SET is_admin = 1, username =?, password=?", $attributes, null, True);
- 	$user = $db -> prepare('SELECT * FROM users WHERE is_admin = 1 AND username = ?', [$username], null, True);
- 	session_start();
-	$_SESSION['visitor'] = $user -> id;
-	$_SESSION['nameVisitor'] = $user -> username;
- 	return $new;
- 	
- }
-
- public function userNameExists($username)
- {
- 	 $db = \App\App::getDb();
-	 $user = $db -> prepare('SELECT * FROM users WHERE is_admin = 1 AND username = ?', [$username], null, True);
-	 if ($user == true) {
-	 	return true;
-	 }
-	 return false;
- }
 
 
 

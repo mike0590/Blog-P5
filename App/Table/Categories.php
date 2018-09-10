@@ -4,48 +4,49 @@ namespace App\Table;
 
 
 
-class Categories extends Table
+class Categories extends Entity
 {
 
-	protected $table;
+
+	private $idCategories;
+	private $name;
+	
+
+	public function __construct(array $data)
+	{
+		parent::__construct($data);
+	}
+
+
+	public function idCategories()
+	{
+		return $this -> idCategories;
+	}
+
+	public function name()
+	{
+		return $this -> name;
+	}
+
+
+	public function setIdCategories($data)
+	{
+		
+		$this -> idCategories = $data;
+	
+	}
+
+	public function setName($data)
+	{
+		$this -> name = $data;
+	}
+
 
 	public function getUrl()
 	{
-		return 'index.php?p=categories&id=' .$this -> id;
+		return 'index.php?p=categories&id=' .$this -> idCategories();
 	}
 
-
-	public function getCategory($id)
-	{
-		$category = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id = ?", $id, get_called_class());
-		return $category;
-	}
-
-	public function catExist($id)
-	{
-		$category = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE id =?", $id, get_called_class());
-		if ($category) {
-			return true;
-		}
-		else
-			return false;
-	}
-
-	public function getCategories()
-	{
-		return \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", get_called_class(), $one = false);
-	}
-
-	
-    public function selectCategories($key, $value)
-    {
-        $categories = $this -> getCategories();
-        $return = [];
-        foreach($categories as $k => $v){
-            $return[$v -> $key] = $v -> $value;
-        }
-        return $return;
-    }
 
 
 }

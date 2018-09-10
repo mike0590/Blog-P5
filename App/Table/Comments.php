@@ -4,69 +4,113 @@ namespace App\Table;
 
 
 
-class Comments extends Table
+class Comments extends Entity
 {
-	protected $table;
-
-	public function getComments($id)
-	{
-		$comments = \App\App::getDb() -> prepare("SELECT comments.content, DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT, users.username AS username FROM {$this -> table} 
-      JOIN users ON users.id = comments.users_id
-      WHERE waiting = 0 AND posts_id = ?", $id, __CLASS__, $one = false);
-		return $comments;
-	}
-
-	
+  
+  private $idComments;
+  private $content;
+  private $dateT;
+  private $posts_id;
+  private $users_id;
+  private $waiting;
+  private $users;
+  private $posts;
 
 
-public function addComment($options)
-{
-  foreach ($options as $key => $value) {
-        $parts[] = "$key = ?";
-        $attributes [] = $value;
-      }
-        $sql_parts = (implode(', ', $parts));
-        if (isset($_SESSION['auth'])) {
-          $sql_parts.= ', waiting = 0';
-        }
-        elseif (isset($_SESSION['visitor'])) {
-          $sql_parts.= ', waiting = 1';
-        }
-
-      return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
-}
-
-public function showComments()
-{
-  $comments = \App\App::getDb() -> query("SELECT comments.id, comments.content AS content, posts.title AS title, users.username AS username
-    FROM {$this -> table} 
-    JOIN posts ON posts.id = comments.posts_id
-    Join users ON users.id = comments.users_id
-    WHERE waiting = 1", __CLASS__, $one = false);
-    return $comments;
+  public function __construct(array $data)
+  {
+    parent::__construct($data);
   }
 
-public function showComment($id)
-{
-  $comment = \App\App::getDb() -> prepare("SELECT comments.id, comments.content AS content, posts.title AS title, users.username AS username
-    FROM {$this -> table} 
-    JOIN posts ON posts.id = comments.posts_id
-    Join users ON users.id = comments.users_id
-    WHERE comments.id =?", $id, __CLASS__);
-  return $comment;
-}
 
-public function commentAccepted($id)
-{
-  $comment = \App\App::getDb() -> prepare("UPDATE {$this -> table} SET waiting = 0 WHERE id =?", $id);
-  return $comment;
-}
+  public function idComments()
+  {
+    return $this -> idComments;
+  }
 
-public function commentDenied($id)
-{
-  $comment = \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE id =?", $id);
-  return $comment;
-}
+  public function content()
+  {
+    return $this -> content;
+  }
+
+  public function dateT()
+  {
+    return $this -> dateT;
+  }
+
+  public function posts_id()
+  {
+    return $this -> posts_id;
+  }
+
+  public function users_id()
+  {
+    return $this -> users_id;
+  }
+
+  public function waiting()
+  {
+    return $this -> waiting;
+  }
+
+  public function users()
+  {
+    return $this -> users;
+  }
+
+  public function posts()
+  {
+    return $this -> posts;
+  }
+
+ 
+
+  public function setIdComments($data)
+  {
+    if (!is_int($data)) {
+      $this -> idComments = $data;
+    }
+    
+  }
+
+  public function setContent($data)
+  {
+    $this -> content = $data;
+  }
+
+  public function setDateT($data)
+  {
+    $this -> dateT = $data;
+  }
+
+  public function setPosts_id($data)
+  {
+    $this -> posts_id = $data;
+  }
+
+  public function setUsers_id($data)
+  {
+    $this -> users_id = $data;
+  }
+
+  public function setWaiting($data)
+  {
+    $this -> waiting = $data;
+  }
+
+  public function setUsers($data)
+  {
+    $this -> users = $data;
+  }
+
+  public function setPosts($data)
+  {
+    $this -> posts = $data;
+  }
+
+
+
+  
 
 
 
