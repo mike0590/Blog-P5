@@ -48,7 +48,7 @@ class Form
 	private function getvalue($index)
 	{
 		if(is_object($this -> data)){
-			return $this -> data -> $index;
+			return $this -> data -> $index();
 		}
 		if (isset($this -> data[$index])) {
 			return $this -> data[$index];
@@ -66,15 +66,19 @@ class Form
 
 	public function select($name, $label = null, $options = [], $categoryPostId = null, $categoryPost = null)
 	{
-		$label = '<label>' .$label. '</label></br>';
+				$label = '<label>' .$label. '</label></br>';
 		$input = '<select class="form-control" name="' .$name. '">';
-		foreach ($options as $k => $v) {
-			if($k == $categoryPostId){
+		foreach ($options as $option) {
+			foreach ($option as $key => $value) {
+				if($key == $categoryPostId){
 				$input.= "<option value='$categoryPostId' selected>" .$categoryPost. "</option>";
 			}
 			else{
-				$input.= "<option value='$k'>$v</option>";
+				$input.= "<option value='$key'>$value</option>";
 			}
+				
+			}
+			
 		}
 		$input.= '</select></br>';
 		return $this -> surround($label . $input);
