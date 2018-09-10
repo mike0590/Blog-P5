@@ -11,32 +11,20 @@ class AdminController extends Controller
 		$this -> template = 'default_2';
 	}
 
-	public function login()
-	{
-		$auth = new \App\Auth\DbAuth();
-		if ($auth -> logged()) {
-			header('Location: admin.php');
-		}
-		if (!empty($_POST))
-		{
-			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
-			{
-				header('Location: admin.php');
-			}
-			else
-				$message = 0;
-		}
 
-		$form = new \App\HTML\Form();
-		$p = 'login';
-		$this -> page('admin/users/login', compact('form', 'p', 'message'));
+	public function destroy()
+	{
+		session_start();
+		session_destroy();
+		header('Location: index.php?p=login');
 	}
 
 	public function dashbord()
 	{
-		$auth = new \App\Auth\DbAuth();
+
+		$auth = new \App\Auth\DbAuthMannager();
 		if (!$auth -> logged()) {
-			header('Location: index.php?p=login');
+			header('Location: index.php?p=userLogin');
 		}
 	}
 
@@ -46,14 +34,14 @@ class AdminController extends Controller
 			$message = 0;
 		 }
 
-		$posts = \App\App::getInstance() -> getTable('posts') -> getAll();
+		$posts = \App\App::getInstance() -> getTable('postsMannager') -> getAll();
 		$p = 'admin';
 		$this -> page('admin/posts/index', compact('posts', 'p', 'message'));
 	}
 
 	public function edit()
 	{
-		$posts = \App\App::getInstance() -> getTable('posts');
+		$posts = \App\App::getInstance() -> getTable('postsMannager');
 		if (!empty($_POST)) {
 			$new = $posts -> update($_GET['id'],[
 				'title' => $_POST['title'],
@@ -68,17 +56,20 @@ class AdminController extends Controller
 		}
 
 		$post = $posts -> getPost([$_GET['id']]);
-		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
 
-		$form = new \App\HTML\Form($post);
+		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
+		
+
+		$form = new \App\Html\Form($post);
+		
 		$p = 'post.edit';
 		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
 	}
 
 	public function add()
 	{
-		$post = \App\App::getInstance() -> getTable('posts');
+		$post = \App\App::getInstance() -> getTable('postsMannager');
 		if (!empty($_POST)) {
 		 	$new = $post -> create([
 				'title' => $_POST['title'],
@@ -92,24 +83,24 @@ class AdminController extends Controller
 		 		$message = 0;
 		 	}
 		 } 
-		$form = new \App\HTML\Form();
-		$categories = \App\App::getInstance() -> getTable('categories') -> selectCategories('id', 'name');
+		$form = new \App\Html\Form();
+		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
 		$p = 'post.add';
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));
 	}
 
 	public function delete()
 	{
-		$post = \App\App::getInstance() -> getTable('posts');
+		$post = \App\App::getInstance() -> getTable('postsMannager');
 		$delete = $post -> delete([$_GET['id']]);
 		if ($delete) {
-			header('Location: admin.php?p=admin&sup=1');
+			header('Location: index.php?p=admin&sup=1');
 		}
 	}
 
 	public function comments()
 	{
-		$comments = \App\App::getInstance() -> getTable('comments');
+		$comments = \App\App::getInstance() -> getTable('commentsMannager');
 		$commentsWait = $comments -> showComments();
 		$p = 'comments';
 
@@ -118,7 +109,8 @@ class AdminController extends Controller
 
 	public function viewComment()
 	{
-		$comments = \App\App::getInstance() -> getTable('comments');
+		$comments = \App\App::getInstance() -> getTable('commentsMannager');
+		$x = [$_GET['id']];
 		$comment = $comments -> showComment([$_GET['id']]);
 		$p = 'singleComment';
 
@@ -128,16 +120,16 @@ class AdminController extends Controller
 
 	public function accept()
 	{
-		$comments = \App\App::getInstance() -> getTable('comments');
+		$comments = \App\App::getInstance() -> getTable('commentsMannager');
 		$comment = $comments -> CommentAccepted([$_GET['id']]);
-		header('Location: admin.php?p=comments');
+		header('Location: index.php?p=comments');
 	}
 
 	public function denied()
 	{
-		$comments = \App\App::getInstance() -> getTable('comments');
+		$comments = \App\App::getInstance() -> getTable('commentsMannager');
 		$comment = $comments -> CommentDenied([$_GET['id']]);
-		header('Location: admin.php?p=comments');
+		header('Location: index.php?p=comments');
 	}
 
 	}

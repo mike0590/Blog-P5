@@ -12,7 +12,7 @@ class UsersController extends Controller
 	public function login()
 	{
 		$this -> template = 'default_2';
-		$auth = new \App\Auth\DbAuth();
+		$auth = new \App\Auth\DbAuthMannager();
 
 		if (!empty($_POST))
 		{
@@ -29,7 +29,7 @@ class UsersController extends Controller
 				$message = 0;
 		}
 
-		$form = new \App\HTML\Form();
+		$form = new \App\Html\Form();
 		$p = 'userLogin';
 		$this -> page('posts/userLogin', compact('form', 'p', 'message'));
 
@@ -47,7 +47,7 @@ class UsersController extends Controller
 	public function inscription()
 	{
 		$this -> template = 'default_2';
-		$auth = new \App\Auth\DbAuth();
+		$auth = new \App\Auth\DbAuthMannager();
 
 		if (!empty($_POST))
 		{
@@ -65,7 +65,7 @@ class UsersController extends Controller
 			}
 		}
 
-		$form = new \App\HTML\Form();
+		$form = new \App\Html\Form();
 		$p = 'inscription';
 		$this -> page('posts/inscription', compact('form', 'p', 'message'));
 	}

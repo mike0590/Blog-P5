@@ -17,61 +17,9 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default';
 
-		if (!empty($_POST['mail']) AND !empty($_POST['message']))
-			{
-
-			$destinataire = 'mike_gil@hotmail.fr'; 
-			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire)) 
-			{
-			    $passage_ligne = "\r\n";
-			}
-			else
-			{
-			    $passage_ligne = "\n";
-			}
-
-			$message_html = '<div style="width: 100%; font-weight: bold">' .$_POST['message']. '</div>';
-
-			 
-			$boundary = "-----=".md5(rand());
-
-			 
-			$sujet = $_POST['sujet'];
-
-
-			$expediteur = $_POST['mail'];
-			 
-
-			$header = "From:" .$expediteur .$passage_ligne;
-			$header.= "Reply-to:" .$expediteur .$passage_ligne;
-			$header.= "MIME-Version: 1.0".$passage_ligne;
-			$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
-
-
-			$message.= $passage_ligne."--".$boundary.$passage_ligne;
-
-			$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
-			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-			$message.= $passage_ligne.$message_html.$passage_ligne;
-
-			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-
-			mail($destinataire, $sujet, $message, $header);
-			  
-			}
-
-		$posts =  \App\App::getInstance() -> getTable('posts') -> getPosts();
-		$form = new \App\HTML\Form();
-		if (!empty($_POST)) {
-			if (!empty($_POST['mail']) AND !empty($_POST['message'])) {
-			$message = 0;
-		}
-		else {
-			$message = 1;
-		}
-		}
-
-		$this -> page('posts/index', compact('posts', 'form', 'message'));
+		$posts =  \App\App::getInstance() -> getTable('postsMannager') -> getPosts();
+		$form = new \App\Html\Form();
+		$this -> page('posts/index', compact('posts', 'form'));
 
 	}
 
@@ -79,11 +27,13 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default_1';
 		
-		$posts = \App\App::getInstance() -> getTable('posts');
+		$posts = \App\App::getInstance() -> getTable('postsMannager');
 		$posts = $posts -> getPosts();
 
-		$categories = \App\App::getInstance() -> getTable('categories');
+		$categories = \App\App::getInstance() -> getTable('categoriesMannager');
+		
 		$categories = $categories -> getCategories();
+
 
 		$this -> page('posts/posts', compact('posts', 'categories'));
 	}
@@ -93,8 +43,8 @@ class PostsController extends Controller
 		$this -> template = 'default_1';
 
 
-		$new = \App\App::getInstance() -> getTable('comments');
-		$visitor = new \App\Auth\DbAuth();
+		$new = \App\App::getInstance() -> getTable('commentsMannager');
+		$visitor = new \App\Auth\DbAuthMannager();
 		$id = $_GET['id'];
 
 
@@ -108,23 +58,17 @@ class PostsController extends Controller
 		      }
 
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
-		  if (isset($_SESSION['visitor'])) {
-		  	$user = $_SESSION['visitor'];
-		  }
-		  elseif (isset($_SESSION['auth'])) {
-		  	$user = $_SESSION['auth'];
-		  }
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
-		    'users_id' => $user
+		    'users_id' => $_SESSION['visitor']
 		    
 		  ]);
 		  $message = 1;
 		}
 
-		$comments = \App\App::getInstance() -> getTable('Comments');
-		$posts = \App\App::getInstance() -> getTable('posts');
+		$comments = \App\App::getInstance() -> getTable('CommentsMannager');
+		$posts = \App\App::getInstance() -> getTable('postsMannager');
 		if ($posts -> postExist([$_GET['id']]) == false) {
 			$message = 2;
 		}
@@ -139,8 +83,8 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default_1';
 
-		$postsPerCat = \App\App::getInstance() -> getTable('posts');
-		$category = \App\App::getInstance() -> getTable('categories');
+		$postsPerCat = \App\App::getInstance() -> getTable('postsMannager');
+		$category = \App\App::getInstance() -> getTable('categoriesMannager');
 		if ($category -> catExist([$_GET['id']]) == false) {
 			$message = 2;
 		}
