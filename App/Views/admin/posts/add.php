@@ -26,4 +26,4 @@ echo $form -> submit('Enregistrer');
 <a style="position: relative; bottom: 50px; left: 80%;" href="index.php?p=admin">Administration</a>
 
 <?php
-$add = ob_get_clean();
+$content = ob_get_clean();

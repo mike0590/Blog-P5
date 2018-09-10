@@ -56,7 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								<?php
-								$user = new App\Auth\DbAuth();
+								$user = new App\Auth\DbAuthMannager();
 								if (isset($_SESSION['nameVisitor'])) { ?>
 								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 								} ?>
@@ -145,9 +145,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}  ?>
 			<ul class="social-icons3">
 				<li><a href="www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>
-				<li><a href="www.twitter.com" class="fa fa-twitter icon-border twitter"> </a></li>
+				<li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
 				<li><a style="background-color: blue;" href="www.linkedin.com" class="fa fa-linkedin icon-border linkedin"> </a></li>
 			</ul>
+			<br/><p>Copyright &copy All Rights Reserved</p>
 		</div>
 	</div>
 	<!-- //footer -->

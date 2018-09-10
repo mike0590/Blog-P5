@@ -44,37 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- About us -->
 	<div class="about-3" style="width: 60%; margin-left: auto;margin-right: auto;">
 		<?php 
-		if ($p == 'userLogin'){
-			echo '<h3 class="w3l-titles">Login</h3>';
-			echo $userLogin;
-		}
-		elseif ($p == 'login'){
-			echo '<h3 class="w3l-titles">Login</h3>';
-			echo $login; 
-		}
-		elseif ($p == 'admin'){
-			echo $admin;
-		}
-		elseif ($p == 'post.edit'){
-			echo '<h3 class="w3l-titles">Edition de l\'Article</h3>';
-			echo $edit;
-		}
-		elseif ($p == 'post.add') {
-			echo '<h3 class="w3l-titles">Ajouter un Article</h3>';
-			echo $add;
-		}
-		elseif ($p == 'comments') {
-			echo '<h3 class="w3l-titles">Commentaires en Attente</h3>';
-			echo $comments;
-		}
-		elseif ($p == 'singleComment') {
-			echo '<h3 class="w3l-titles">Inspection du Commentaire</h3>';
-			echo $singleComment;
-		}
-		elseif ($p == 'inscription') {
-			echo '<h3 class="w3l-titles">Inscription</h3>';
-			echo $inscription;
-		}
+		echo $content;
 		
 		?>
 		<div class="container">

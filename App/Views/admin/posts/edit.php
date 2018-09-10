@@ -17,7 +17,7 @@ if (isset($message) AND $message == 0) {
 echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);
-echo $form -> select('category_id', 'Catégorie', $categories, $categoryPost -> idCat, $categoryPost -> name);
+echo $form -> select('category_id', 'Catégorie', $categories, $categoryPost -> categories() -> idCategories(), $categoryPost -> categories() -> name());
 echo $form -> submit('Enregistrer');
 ?>
 
@@ -26,4 +26,4 @@ echo $form -> submit('Enregistrer');
 
 
 <?php
-$edit = ob_get_clean();
+$content = ob_get_clean();

@@ -2,9 +2,8 @@
 
 $title = 'Connexion';
 
-ob_start();
 
-session_start();
+ob_start();
 
 if (isset($message) AND $message == 0) {
 	?> <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div> <?php
@@ -38,5 +37,5 @@ if (isset($message) AND $message == 0) {
 
 <?php
 
-$userLogin = ob_get_clean();
+$content = ob_get_clean();
 

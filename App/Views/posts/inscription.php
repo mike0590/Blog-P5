@@ -2,6 +2,7 @@
 
 $title = 'Inscription';
 
+
 ob_start();
 
 if (isset($message) AND $message == 0) {
@@ -43,6 +44,6 @@ elseif (((isset($message) AND $message == 2))) {
 
 <?php
 
-$inscription = ob_get_clean();
+$content = ob_get_clean();
 
 

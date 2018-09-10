@@ -55,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								<?php
-								$user = new App\Auth\DbAuth();
+								$user = new App\Auth\DbAuthMannager();
 								if (isset($_SESSION['nameVisitor'])) { ?>
 								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 								} ?>
@@ -112,15 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="about1"> 
 					<div style="width: 80%;margin-left: auto;margin-right: auto;">
 						<?php 
-						if ($_GET['p'] == 'posts')  {
-						  	echo $contentPosts; 
-						  }
-						 elseif ($_GET['p'] == 'single'){
-							echo $content;
-						  } 
-						   elseif ($_GET['p'] == 'categories')  {
-						  	echo $showCats; 
-						  } 
+						echo $content;
 						 ?>
 					</div>
 				</div>
@@ -141,10 +133,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p><a href="index.php?p=admin">Administration</a></p> <?php
 			}  ?>
 			<ul class="social-icons3">
-				<li><a href="www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>
-				<li><a href="www.twitter.com" class="fa fa-twitter icon-border twitter"> </a></li>
+				<li><a href="#" class="fa fa-facebook icon-border facebook"> </a></li>
+				<li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
 				<li><a style="background-color: blue;" href="www.linkedin.com" class="fa fa-linkedin icon-border linkedin"> </a></li>
 			</ul>
+			<br/><p>Copyright &copy All Rights Reserved</p>
 		</div>
 	</div>
 	<!-- //footer -->
