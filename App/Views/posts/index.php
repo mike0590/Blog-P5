@@ -28,16 +28,26 @@ ob_start();
 
 echo $form -> input('nom', 'Nom');
 echo $form -> input('prenom', 'Prénom');
-echo $form -> input('mail', 'E-Mail');
-echo $form -> input('message', 'Votre Message', ['type' => 'textarea']). '</br>'; ?>
+echo $form -> input('mail', 'E-Mail*');
+echo $form -> input('message', 'Votre Message*', ['type' => 'textarea']). '</br>'; ?>
+
 <div class="row">
 	<div class="col-sm-6">
 		<?php echo $form -> submit('Envoyer'); ?>
 	</div>
 	<div class="col-sm-6">
-		<a style="float: right;" href="cv.pdf">Mike Filipe - CV</a>
+		<a style="float: right;" href="public/cv.pdf">Mike Filipe - CV</a>
 	</div>
-</div></br>
+</div><br/>
+
+<?php
+if (isset($message) AND $message == 0) { ?>
+         <div class=" lol alert alert-success align" role="alert">Message envoyé</div>
+       <?php }
+       elseif (isset($message) AND $message == 1) { ?>
+         <div class=" lol alert alert-danger align" role="alert">Message non envoyé - Veuillez remplir les champs obligatoirs</div>
+       <?php }
+?>
 
 
 

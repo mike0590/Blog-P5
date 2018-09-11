@@ -15,11 +15,68 @@ class PostsController extends Controller
 
 	public function home()
 	{
+	
+    if (!empty($_POST['mail']) AND !empty($_POST['message']))
+		{
+
+			$destinataire = 'mike_gil@hotmail.fr'; // Déclaration de l'adresse de destination.
+			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire)) // On filtre les serveurs qui rencontrent des bogues.
+			{
+			    $passage_ligne = "\r\n";
+			}
+			else
+			{
+			    $passage_ligne = "\n";
+			}
+
+			$message_html = '<div style="width: 100%; font-weight: bold">' .htmlspecialchars($_POST['message']). '</div>';
+			//==========
+			 
+			//=====Création de la boundary
+			$boundary = "-----=".md5(rand());
+			//==========
+			 
+			 $nom = htmlspecialchars($_POST['nom']);
+			 $nom .= " " .htmlspecialchars($_POST['prenom']);
+
+			$expediteur = htmlspecialchars($_POST['mail']);
+			 
+			//=====Création du header de l'e-mail.
+			$header = "From:" .$expediteur .$passage_ligne;
+			$header.= "Reply-to:" .$expediteur .$passage_ligne;
+			$header.= "MIME-Version: 1.0".$passage_ligne;
+			$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+			//==========
+			 
+			//=====Création du message.
+
+			$message.= $passage_ligne."--".$boundary.$passage_ligne;
+			//=====Ajout du message au format HTML
+			$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
+			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+			$message.= $passage_ligne.$message_html.$passage_ligne;
+			//==========
+			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+
+			 mail($destinataire, $nom, $message, $header);
+			   
+		}
+
 		$this -> template = 'default';
 
 		$posts =  \App\App::getInstance() -> getTable('postsMannager') -> getPosts();
 		$form = new \App\HTML\Form();
-		$this -> page('posts/index', compact('posts', 'form'));
+
+		if (!empty($_POST)) {
+			if (!empty($_POST['mail']) AND !empty($_POST['message'])) {
+			$message = 0;
+		}
+		else {
+			$message = 1;
+		}
+		}
+
+		$this -> page('posts/index', compact('posts', 'form', 'message'));
 
 	}
 

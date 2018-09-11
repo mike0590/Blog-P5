@@ -144,9 +144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p><a href="index.php?p=admin">Administration</a></p> <?php
 			}  ?>
 			<ul class="social-icons3">
-				<li><a href="www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>
-				<li><a href="#" class="fa fa-twitter icon-border twitter"> </a></li>
-				<li><a style="background-color: blue;" href="www.linkedin.com" class="fa fa-linkedin icon-border linkedin"> </a></li>
+				<li><a href="https://www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>
+				<li><a href="https://www.twitter.com" class="fa fa-twitter icon-border twitter"> </a></li>
+				<li><a style="background-color: blue;" href="https://www.linkedin.com" class="fa fa-linkedin icon-border linkedin"> </a></li>
 			</ul>
 			<br/><p>Copyright &copy All Rights Reserved</p>
 		</div>
