@@ -12,7 +12,7 @@ class App
 	public static function getDb()
 	{
 		if (self::$db == null) {
-			self::$db = new \App\Database();
+			self::$db = new \App\Bdd\Database();
 		}
 		return self::$db;
 	}

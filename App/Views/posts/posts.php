@@ -14,6 +14,7 @@ foreach ($posts as $post) {
 
 	echo '<h2>' .$post -> title(). '</h2>';
 	echo "<p>" .$post -> chapo(). "<p/>"; ?>
+		
 	<div class="row hidden-xs hidden-sm">
 		<div class="col-md-6">
 		  <?php	echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br></br>'; ?>

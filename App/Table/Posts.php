@@ -67,10 +67,7 @@ class Posts extends Entity
 
 	public function setIdPosts($data)
 	{
-		if (!is_int($data)) {
 			$this -> idPosts = $data;
-		}
-		
 	}
 
 	public function setTitle($data)

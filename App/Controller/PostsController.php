@@ -18,7 +18,7 @@ class PostsController extends Controller
 		$this -> template = 'default';
 
 		$posts =  \App\App::getInstance() -> getTable('postsMannager') -> getPosts();
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$this -> page('posts/index', compact('posts', 'form'));
 
 	}

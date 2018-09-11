@@ -38,7 +38,6 @@ public function getPosts()
 			FROM {$this -> table} 
 			JOIN users ON users.idUsers = posts.user_id 
 			WHERE posts.idPosts = ?", $id);
-		
 		$user = new \App\Auth\DbAuth($data);
 		$post = new \App\Table\Posts($data);
 		$post -> setUsers($user);
