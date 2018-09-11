@@ -29,7 +29,7 @@ class UsersController extends Controller
 				$message = 0;
 		}
 
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$p = 'userLogin';
 		$this -> page('posts/userLogin', compact('form', 'p', 'message'));
 
@@ -65,7 +65,7 @@ class UsersController extends Controller
 			}
 		}
 
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$p = 'inscription';
 		$this -> page('posts/inscription', compact('form', 'p', 'message'));
 	}

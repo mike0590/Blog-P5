@@ -61,7 +61,7 @@ class AdminController extends Controller
 		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
 		
 
-		$form = new \App\Html\Form($post);
+		$form = new \App\HTML\Form($post);
 		
 		$p = 'post.edit';
 		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
@@ -83,7 +83,7 @@ class AdminController extends Controller
 		 		$message = 0;
 		 	}
 		 } 
-		$form = new \App\Html\Form();
+		$form = new \App\HTML\Form();
 		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
 		$p = 'post.add';
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));

@@ -96,7 +96,7 @@ public function getPosts()
 		foreach($datas as $data)
 		{
 			$categorie = new \App\Table\Categories($data);
-			$user = new \App\Auth\DbAUth($data);
+			$user = new \App\Auth\DbAuth($data);
 			$post = new \App\Table\Posts($data);
 			$post -> setCategories($categorie);
 			$post -> setUsers($user);
