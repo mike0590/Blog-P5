@@ -137,7 +137,7 @@ public function getPosts()
 	public function delete($id)
     {
     		
-    	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE id = ?", $id, null, true);
+    	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id);
 	}
 
 
