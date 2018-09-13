@@ -8,7 +8,6 @@ ob_start();
 if (isset($message) AND $message == 0) {
 	?> <div class="align alert alert-danger" role="alert">Article Effacé</div> <?php
 }
-
 ?>
 
 <h1 style="text-align: center;">Mon Administration</h1></br>
@@ -23,7 +22,6 @@ if (isset($message) AND $message == 0) {
 <div class="visible-xs visible-sm">
 	<br/><a class="btn btn-primary" href="index.php?p=post.add">Ajouter</a>
 </div>
-
 
 <div class="hidden-xs hidden-sm">
 <a href="index.php?p=destroy" style="float: right; position: relative; bottom: 25px; right: 25px;">Deconnexion</a></br>
@@ -43,9 +41,7 @@ if (isset($message) AND $message == 0) {
 	<tbody>
 		<?php
 
-
-
-		  foreach($posts as $post): ?>
+		foreach($posts as $post): ?>
 		<tr>
 			<td><?= $post -> idPosts(); ?></td>
 			<td><?= $post -> title(); ?></td>
@@ -54,11 +50,9 @@ if (isset($message) AND $message == 0) {
 			<td><?= $post -> users() -> username(); ?></td>
 			<td><a class="btn btn-primary" href="index.php?p=post.edit&id=<?= $post -> idPosts(); ?>">Editer</a></td>
 			<td><a class="btn btn-danger" style="position: relative; right: 20px" href="index.php?p=post.delete&id=<?= $post -> idPosts(); ?>">Supprimer</a></td>
-
-
-
 		</tr>
-	<?php endforeach; ?>
+		<?php
+        endforeach; ?>
 	</tbody>
 </table>
 <a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
@@ -67,8 +61,8 @@ if (isset($message) AND $message == 0) {
 
 <div class="visible-xs visible-sm">
 	<br/><br/>
-
-<?php  foreach($posts as $post): ?>
+	<?php
+    foreach($posts as $post): ?>
 	<div>
 			<p><?= '<strong style="color:black;">ID: </strong>' .$post -> idPosts(); ?></p>
 			<p><?= '<strong style="color:black;">Titre: </strong>' .$post -> title(); ?></p>
@@ -80,17 +74,13 @@ if (isset($message) AND $message == 0) {
 			<a class="btn btn-danger" style="position: relative; left: 5%;" href="index.php?p=post.delete&id=<?= $post -> idPosts(); ?>">Supprimer</a>
 	</div>
 			<br/><br/>
-	
-<?php endforeach; ?>
+	<?php
+    endforeach; ?>
 <br/><br/>
 
 <a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
 <br/><br/><h3 style="text-align: center"><a href="index.php?p=home">Page d'Accueil</a></h3>
 </div>
-
-
-
-
 
 <?php
 

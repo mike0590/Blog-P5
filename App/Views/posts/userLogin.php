@@ -8,12 +8,10 @@ ob_start();
 if (isset($message) AND $message == 0) {
 	?> <div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div> <?php
 }
-
 ?>
 
 <div class="row">
 	<div class="col-sm-12 col-md-offset-2 col-md-8">
-
 		<form method="post">
 
 		<?php
@@ -21,9 +19,7 @@ if (isset($message) AND $message == 0) {
 		echo $form -> input('username', 'Pseudo');
 		echo $form -> input('password', 'Password', ['type' => 'password']). '</br>';
 		echo $form -> submit('VALIDER');
-
 		?>
-
 
 		</form>
 	</div>

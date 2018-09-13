@@ -14,23 +14,18 @@ elseif ((isset($message) AND $message == 1)) {
 elseif (((isset($message) AND $message == 2))) {
 	?> <div class=" lol alert alert-success align" role="alert">Compte Validé</div> <?php
 }
-
-
 ?>
 
 <div class="row">
 	<div class="col-sm-12 col-md-offset-2 col-md-8">
-
 		<form method="post">
-
+		
 		<?php
 		echo '</br>';
 		echo $form -> input('username', 'Pseudo');
 		echo $form -> input('password', 'Password', ['type' => 'password']). '</br>';
 		echo $form -> submit('VALIDER');
-
 		?>
-
 
 		</form>
 	</div>

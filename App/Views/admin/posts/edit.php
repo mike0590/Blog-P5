@@ -12,8 +12,6 @@ if (isset($message) AND $message == 0) {
 <form method="post">
 <?php
 
-
-
 echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);

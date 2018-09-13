@@ -7,18 +7,17 @@ ob_start();
 
 $i = 0;
 
-	foreach ($posts as $post) {
-		if ($i < 3) {
-			echo "<h3>" .$post -> title(). "</h3>";
-			echo "<p>" .$post -> chapo(). "<p/>";
-			echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br>';
-			$i++;
-		}
-		else{
-			break;
-		}
-
+foreach ($posts as $post) {
+	if ($i < 3) {
+		echo "<h3>" .$post -> title(). "</h3>";
+		echo "<p>" .$post -> chapo(). "<p/>";
+		echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br>';
+		$i++;
 	}
+	else{
+		break;
+	}
+}
 
 echo "</br><a href='index.php?p=posts'>Tous les articles</a>";
 
@@ -46,10 +45,9 @@ if (isset($message) AND $message == 0) { ?>
        <?php }
        elseif (isset($message) AND $message == 1) { ?>
          <div class=" lol alert alert-danger align" role="alert">Message non envoyé - Veuillez remplir les champs obligatoirs</div>
-       <?php }
+<?php 
+}
 ?>
-
-
 
 <?php
 $formulaire = ob_get_clean();

@@ -26,9 +26,6 @@ ob_start();
 			<td><a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> idComments(); ?>">Voir</a></td>
 			<td><a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a></td>
 			<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a></td>
-
-
-
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

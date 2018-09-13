@@ -57,19 +57,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<?php
 								$user = new App\Auth\DbAuthManager();
 								if (isset($_SESSION['nameVisitor'])) { ?>
-								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
-								} ?>
+									<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
+									} 
+								?>
 								<li><a href="index.php" class="active">Accueil</a></li>
 								<li><a href="index.php?p=posts">Articles</a></li>
-								<?php if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
+								<?php 
+								if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
 									<li><a href="index.php?p=inscription">Inscription</a></li> <?php
 								} 
 								if ($user -> logged()) { ?>
 									<li style="position: relative;left: 100px;"><a href="index.php?p=destroy">Deconnexion</a></li> <?php
 								}
-								else{ ?>
-								<li style="position: relative;left: 100px;"><a href="index.php?p=userLogin">Connexion</a></li> <?php
-								} ?>
+								else{ 
+								?>
+								<li style="position: relative;left: 100px;"><a href="index.php?p=userLogin">Connexion</a></li><?php
+								} 
+								?>
 							
 							</ul>
 						</div>

@@ -131,23 +131,21 @@ echo $post -> content(). '</br></br>';
   </div>
 
 
-      <?php 
+  <?php 
  
-          foreach ($comment as $comment) { ?>
-            
-              <h5 class="mt-0"><?php echo $comment -> users() -> username(); ?></h5>
-              <div class="row">
-                <div class="col-sm-6">
-                  <p><?php echo $comment -> content(); ?></p>
-                </div>
-                <div class="col-sm-6">
-                  <p><?php echo $comment -> dateT(); ?></p>
-                </div>
-              </div></br></br>
-           
-          <?php
-        }
-    ?>
+    foreach ($comment as $comment) { ?>
+      <h5 class="mt-0"><?php echo $comment -> users() -> username(); ?></h5>
+        <div class="row">
+          <div class="col-sm-6">
+            <p><?php echo $comment -> content(); ?></p>
+          </div>
+          <div class="col-sm-6">
+            <p><?php echo $comment -> dateT(); ?></p>
+          </div>
+        </div></br></br>
+      <?php
+      }
+  ?>
   
           
 <?php
