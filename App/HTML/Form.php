@@ -2,14 +2,11 @@
 
 namespace App\Html;
 
-
-
-
 class Form
 {
 	
-	
 	private $data;
+
 	private $surround = 'p';
 
 	public function __construct($data = array())
@@ -21,18 +18,15 @@ class Form
 	{
 		if (isset($options['type'])) {
 			$type = $options['type'];
-		}
-		else{
+		} else{
 			$type = 'text';
 		}
 		$label = "<h4>" .$label. "</h4></br>";
 		if ($type === 'textarea') {
 			$input = '<textarea  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
-		}
-		elseif ($type === 'textareaB') {
+		} elseif ($type === 'textareaB') {
 			$input = '<textarea style="height:300px;"  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
-		}
-		else{
+		} else{
 			$input = '<input type="' .$type. '" name="' .$name. '" class="form-control" value="' .$this -> getValue($name). '"</input></br>';
 		}
 		return $this -> surround($label . $input);
@@ -52,9 +46,7 @@ class Form
 		}
 		if (isset($this -> data[$index])) {
 			return $this -> data[$index];
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
@@ -72,8 +64,7 @@ class Form
 			foreach ($option as $key => $value) {
 				if($key == $categoryPostId){
 				$input.= "<option value='$categoryPostId' selected>" .$categoryPost. "</option>";
-			}
-			else{
+			} else{
 				$input.= "<option value='$key'>$value</option>";
 			}
 				
@@ -83,10 +74,6 @@ class Form
 		$input.= '</select></br>';
 		return $this -> surround($label . $input);
 	}
-
-
-	
-	
 }
 
 
