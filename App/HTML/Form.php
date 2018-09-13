@@ -33,7 +33,6 @@ class Form
 	}
 
 	
-
 	public function surround($html)
 	{
 		return "<{$this -> surround}> {$html} </{$this -> surround}>";
