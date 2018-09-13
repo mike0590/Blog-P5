@@ -45,7 +45,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="about-3" style="width: 60%; margin-left: auto;margin-right: auto;">
 		<?php 
 		echo $content;
-		
 		?>
 		<div class="container">
 			<div class="d-flex">
