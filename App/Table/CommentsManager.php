@@ -8,23 +8,23 @@ class CommentsManager
     private $table = 'comments';
 
   	public function getComments($id)
-  	{
-      $comments = [];
+  {
+    $comments = [];
 
-  		$datas = \App\App::getDb() -> prepare("SELECT comments.content, DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT, users.username 
-        FROM {$this -> table} 
-        JOIN users ON users.idUsers = comments.users_id
-        WHERE waiting = 0 AND posts_id = ?", $id, $one = false);
-  		
-      foreach($datas as $data)
-      {
-        $user = new \App\Auth\DbAuth($data);
-        $comment = new \App\Table\Comments($data);
-        $comment -> setUsers($user);
-        $comments[] = $comment;
-      }
-      return $comments;
-  	}
+    $datas = \App\App::getDb() -> prepare("SELECT comments.content, users.username,  DATE_FORMAT(dateT, '%d/%m/%Y - %Hh%i') AS dateT,  DATE_FORMAT(dateT, '%Y/%m/%d - %Hh%i') AS dateR
+      FROM {$this -> table} 
+      JOIN users ON users.idUsers = comments.users_id
+      WHERE waiting = 0 AND posts_id = ? ORDER BY dateR DESC", $id, $one = false);
+    
+    foreach($datas as $data)
+    {
+      $user = new \App\Auth\DbAuth($data);
+      $comment = new \App\Table\Comments($data);
+      $comment -> setUsers($user);
+      $comments[] = $comment;
+    }
+    return $comments;
+  }
 
 
     	public function addComment($options)

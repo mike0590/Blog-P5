@@ -11,7 +11,8 @@ protected $table = "posts";
 	public function getPosts()
 	{
 		$posts = [];
-		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT  FROM {$this -> table} ORDER BY dateT DESC", $one = false);
+		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateT, '%Y/%m/%d') AS dateR  
+			FROM {$this -> table} ORDER BY dateR DESC", $one = false);
 		foreach ($datas as $data) {
 			$posts[] = new \App\Table\Posts($data);
 		}
@@ -66,7 +67,7 @@ protected $table = "posts";
 
 	 public function categoryPost($postId)
     {
-    	$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.category_id, categories.name
+    	$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.category_id, categories.name, categories.idCategories
     		FROM {$this -> table} 
     		JOIN categories ON categories.idCategories = posts.category_id
     		WHERE posts.idPosts = ?", $postId, $one = true);
