@@ -59,14 +59,11 @@ class PostsController extends Controller
 			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 
 			 mail($destinataire, $nom, $message, $header);
-			   
 		}
-
 		$this -> template = 'default';
 
 		$posts =  \App\App::getInstance() -> getTable('postsManager') -> getPosts();
 		$form = new \App\HTML\Form();
-
 		if (!empty($_POST)) {
 			if (!empty($_POST['mail']) AND !empty($_POST['message'])) {
 			$message = 0;
@@ -75,23 +72,17 @@ class PostsController extends Controller
 			$message = 1;
 		}
 		}
-
 		$this -> page('posts/index', compact('posts', 'form', 'message'));
-
 	}
 
 	public function posts()
 	{
 		$this -> template = 'default_1';
-		
+
 		$posts = \App\App::getInstance() -> getTable('postsManager');
 		$posts = $posts -> getPosts();
-
 		$categories = \App\App::getInstance() -> getTable('categoriesManager');
-		
 		$categories = $categories -> getCategories();
-
-
 		$this -> page('posts/posts', compact('posts', 'categories'));
 	}
 
@@ -99,31 +90,26 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default_1';
 
-
 		$new = \App\App::getInstance() -> getTable('commentsManager');
 		$visitor = new \App\Auth\DbAuthManager();
 		$id = $_GET['id'];
-
-
 		if (!empty($_POST) AND isset($_POST['pseudo']) AND isset($_POST['pass'])) {
 		    if($visitor -> login(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass'])))
 		    {
 		      header('Location: index.php?p=single&id= '.$id.' ');
 		    }
-		    else
+		    else{
 		     	$message = 0;
-		      }
-
+		    }
+		}
 		elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],
 		    'users_id' => $_SESSION['visitor']
-		    
-		  ]);
-		  $message = 1;
+		   ]);
+		   $message = 1;
 		}
-
 		$comments = \App\App::getInstance() -> getTable('CommentsManager');
 		$posts = \App\App::getInstance() -> getTable('postsManager');
 		if ($posts -> postExist([$_GET['id']]) == false) {
@@ -131,7 +117,6 @@ class PostsController extends Controller
 		}
 		$post = $posts -> getPost([$_GET['id']]);
 		$comment = $comments -> getComments([$_GET['id']]);
-
 		$this -> page('posts/single', compact('post', 'visitor', 'comments', 'comment', 'message'));
 
 	}

@@ -9,15 +9,14 @@ class UsersController extends Controller
 		parent::__construct();
 	}
 
+
 	public function login()
 	{
 		$this -> template = 'default_2';
+		
 		$auth = new \App\Auth\DbAuthManager();
-
-		if (!empty($_POST))
-		{
-			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
-			{
+		if(!empty($_POST)){
+			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']))){
 				if ($auth -> verify($_POST['username']) == True) {
 					header('Location: index.php?p=admin');
 				}
@@ -25,15 +24,15 @@ class UsersController extends Controller
 					header('Location: index.php');
 				}
 			}
-			else
+			else{
 				$message = 0;
+			}
 		}
-
 		$form = new \App\HTML\Form();
 		$p = 'userLogin';
 		$this -> page('posts/userLogin', compact('form', 'p', 'message'));
-
 	}
+
 
 	public function destroy()
 	{
@@ -43,20 +42,16 @@ class UsersController extends Controller
 	}
 
 	
-	
 	public function inscription()
 	{
 		$this -> template = 'default_2';
+		
 		$auth = new \App\Auth\DbAuthManager();
-
-		if (!empty($_POST))
-		{
-			if($auth -> userExists(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password'])))
-			{
+		if (!empty($_POST)){
+			if($auth -> userExists(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']))){
 				$message = 0;
 			}
-			elseif($auth -> userNameExists(htmlspecialchars($_POST['username'])))
-			{
+			elseif($auth -> userNameExists(htmlspecialchars($_POST['username']))){
 				$message = 1;
 			}
 			else{
@@ -64,12 +59,8 @@ class UsersController extends Controller
 					$message = 2;
 			}
 		}
-
 		$form = new \App\HTML\Form();
 		$p = 'inscription';
 		$this -> page('posts/inscription', compact('form', 'p', 'message'));
 	}
-
-
-
 }

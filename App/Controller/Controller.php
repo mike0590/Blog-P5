@@ -20,8 +20,4 @@ class Controller
 		require ($this -> viewPath . $view . '.php');
 		require ($this -> viewPath . 'template/'. $this -> template. '.php');
 	}
-
-
-
-	
 }

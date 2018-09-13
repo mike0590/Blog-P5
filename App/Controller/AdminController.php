@@ -19,6 +19,7 @@ class AdminController extends Controller
 		header('Location: index.php?p=login');
 	}
 
+
 	public function dashbord()
 	{
 
@@ -28,16 +29,17 @@ class AdminController extends Controller
 		}
 	}
 
+
 	public function index()
 	{
 		if (isset($_GET['sup'])) { 
 			$message = 0;
 		 }
-
 		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
 		$p = 'admin';
 		$this -> page('admin/posts/index', compact('posts', 'p', 'message'));
 	}
+
 
 	public function edit()
 	{
@@ -54,18 +56,14 @@ class AdminController extends Controller
 				$message = 0;
 			}
 		}
-
 		$post = $posts -> getPost([$_GET['id']]);
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
-
 		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
-		
-
 		$form = new \App\HTML\Form($post);
-		
 		$p = 'post.edit';
 		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
 	}
+
 
 	public function add()
 	{
@@ -89,6 +87,7 @@ class AdminController extends Controller
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));
 	}
 
+
 	public function delete()
 	{
 		$post = \App\App::getInstance() -> getTable('postsManager');
@@ -98,14 +97,15 @@ class AdminController extends Controller
 		}
 	}
 
+
 	public function comments()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$commentsWait = $comments -> showComments();
 		$p = 'comments';
-
 		$this -> page('admin/posts/comments', compact('commentsWait', 'p'));
 	}
+
 
 	public function viewComment()
 	{
@@ -113,10 +113,9 @@ class AdminController extends Controller
 		$x = [$_GET['id']];
 		$comment = $comments -> showComment([$_GET['id']]);
 		$p = 'singleComment';
-
 		$this -> page('admin/posts/singleComment', compact('comment', 'p'));
-
 	}
+
 
 	public function accept()
 	{
@@ -125,14 +124,14 @@ class AdminController extends Controller
 		header('Location: index.php?p=comments');
 	}
 
+
 	public function denied()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$comment = $comments -> CommentDenied([$_GET['id']]);
 		header('Location: index.php?p=comments');
 	}
-
-	}
+}
 
 
 
