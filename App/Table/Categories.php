@@ -31,7 +31,6 @@ class Categories extends Entity
 	{
 		
 		$this -> idCategories = $data;
-	
 	}
 
 	public function setName($data)

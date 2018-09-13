@@ -17,7 +17,6 @@ protected $table = "posts";
 		}
 
 		return $posts;
-		
 	}
 
 
@@ -61,7 +60,6 @@ protected $table = "posts";
 		}
 		
 		return $posts;
-
 	}
 
 	
@@ -77,8 +75,7 @@ protected $table = "posts";
     	$post -> setcategories($categorie);
     	
     	return $post;
-
-    }
+	}
 
     
 	public function getAll()
@@ -103,8 +100,6 @@ protected $table = "posts";
 		}
 
 		return $posts;
-
-
 	}
 
 

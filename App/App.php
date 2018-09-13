@@ -23,7 +23,6 @@ class App
 			self::$instance = new App();
 		}
 		return self::$instance;
-
 	}
 
 	public function getTable($tableName)
@@ -39,8 +38,4 @@ class App
 		header('HTTP/1.0 403 Forbidden');
 		die('Acces Interdit');
 	}
-
-
-
-
 }
