@@ -49,6 +49,5 @@ class CategoriesManager
        return $datas;
 
     }
-
 }
 

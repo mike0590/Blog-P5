@@ -2,8 +2,6 @@
 
 namespace App\Table;
 
-
-
 class Categories extends Entity
 {
 
@@ -46,7 +44,4 @@ class Categories extends Entity
 	{
 		return 'index.php?p=categories&id=' .$this -> idCategories();
 	}
-
-
-
 }

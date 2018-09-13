@@ -2,8 +2,6 @@
 
 namespace App\Table;
 
-
-
 class Comments extends Entity
 {
   
@@ -107,11 +105,4 @@ class Comments extends Entity
   {
     $this -> posts = $data;
   }
-
-
-
-  
-
-
-
 }

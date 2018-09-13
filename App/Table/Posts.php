@@ -111,20 +111,5 @@ class Posts extends Entity
 	{
 		return 'index.php?p=single&id='. $this -> idPosts();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

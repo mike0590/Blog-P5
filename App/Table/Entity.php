@@ -2,6 +2,7 @@
 
 
 namespace App\Table;
+
 use App\App;
 
 class Entity
@@ -21,8 +22,4 @@ class Entity
 			}
 		}
 	}
-
-
-
-
 }

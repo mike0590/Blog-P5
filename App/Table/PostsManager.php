@@ -3,13 +3,12 @@
 namespace App\Table;
 
 class PostsManager 
-
 {
-	protected $table = "posts";
-
-
 	
-public function getPosts()
+protected $table = "posts";
+
+
+	public function getPosts()
 	{
 		$posts = [];
 		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT  FROM {$this -> table} ORDER BY dateT DESC", $one = false);
@@ -139,10 +138,6 @@ public function getPosts()
     		
     	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id);
 	}
-
-
-
-
 }
 
 
