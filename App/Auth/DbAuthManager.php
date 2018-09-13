@@ -2,7 +2,7 @@
 
 namespace App\Auth;
 
-class DbAuthMannager
+class DbAuthManager
 {
 
 

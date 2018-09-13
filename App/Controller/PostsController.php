@@ -64,7 +64,7 @@ class PostsController extends Controller
 
 		$this -> template = 'default';
 
-		$posts =  \App\App::getInstance() -> getTable('postsMannager') -> getPosts();
+		$posts =  \App\App::getInstance() -> getTable('postsManager') -> getPosts();
 		$form = new \App\HTML\Form();
 
 		if (!empty($_POST)) {
@@ -84,10 +84,10 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default_1';
 		
-		$posts = \App\App::getInstance() -> getTable('postsMannager');
+		$posts = \App\App::getInstance() -> getTable('postsManager');
 		$posts = $posts -> getPosts();
 
-		$categories = \App\App::getInstance() -> getTable('categoriesMannager');
+		$categories = \App\App::getInstance() -> getTable('categoriesManager');
 		
 		$categories = $categories -> getCategories();
 
@@ -100,8 +100,8 @@ class PostsController extends Controller
 		$this -> template = 'default_1';
 
 
-		$new = \App\App::getInstance() -> getTable('commentsMannager');
-		$visitor = new \App\Auth\DbAuthMannager();
+		$new = \App\App::getInstance() -> getTable('commentsManager');
+		$visitor = new \App\Auth\DbAuthManager();
 		$id = $_GET['id'];
 
 
@@ -124,8 +124,8 @@ class PostsController extends Controller
 		  $message = 1;
 		}
 
-		$comments = \App\App::getInstance() -> getTable('CommentsMannager');
-		$posts = \App\App::getInstance() -> getTable('postsMannager');
+		$comments = \App\App::getInstance() -> getTable('CommentsManager');
+		$posts = \App\App::getInstance() -> getTable('postsManager');
 		if ($posts -> postExist([$_GET['id']]) == false) {
 			$message = 2;
 		}
@@ -140,8 +140,8 @@ class PostsController extends Controller
 	{
 		$this -> template = 'default_1';
 
-		$postsPerCat = \App\App::getInstance() -> getTable('postsMannager');
-		$category = \App\App::getInstance() -> getTable('categoriesMannager');
+		$postsPerCat = \App\App::getInstance() -> getTable('postsManager');
+		$category = \App\App::getInstance() -> getTable('categoriesManager');
 		if ($category -> catExist([$_GET['id']]) == false) {
 			$message = 2;
 		}

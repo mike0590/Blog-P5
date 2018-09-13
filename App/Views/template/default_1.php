@@ -55,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								<?php
-								$user = new App\Auth\DbAuthMannager();
+								$user = new App\Auth\DbAuthManager();
 								if (isset($_SESSION['nameVisitor'])) { ?>
 								<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 								} ?>

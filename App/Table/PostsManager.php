@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-class PostsMannager 
+class PostsManager 
 
 {
 	protected $table = "posts";

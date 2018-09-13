@@ -12,7 +12,7 @@ class UsersController extends Controller
 	public function login()
 	{
 		$this -> template = 'default_2';
-		$auth = new \App\Auth\DbAuthMannager();
+		$auth = new \App\Auth\DbAuthManager();
 
 		if (!empty($_POST))
 		{
@@ -47,7 +47,7 @@ class UsersController extends Controller
 	public function inscription()
 	{
 		$this -> template = 'default_2';
-		$auth = new \App\Auth\DbAuthMannager();
+		$auth = new \App\Auth\DbAuthManager();
 
 		if (!empty($_POST))
 		{

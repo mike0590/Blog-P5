@@ -4,7 +4,7 @@ namespace App\Table;
 
 
 
-class CommentsMannager
+class CommentsManager
 {
 	
   private $table = 'comments';

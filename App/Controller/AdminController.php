@@ -22,7 +22,7 @@ class AdminController extends Controller
 	public function dashbord()
 	{
 
-		$auth = new \App\Auth\DbAuthMannager();
+		$auth = new \App\Auth\DbAuthManager();
 		if (!$auth -> logged()) {
 			header('Location: index.php?p=userLogin');
 		}
@@ -34,14 +34,14 @@ class AdminController extends Controller
 			$message = 0;
 		 }
 
-		$posts = \App\App::getInstance() -> getTable('postsMannager') -> getAll();
+		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
 		$p = 'admin';
 		$this -> page('admin/posts/index', compact('posts', 'p', 'message'));
 	}
 
 	public function edit()
 	{
-		$posts = \App\App::getInstance() -> getTable('postsMannager');
+		$posts = \App\App::getInstance() -> getTable('postsManager');
 		if (!empty($_POST)) {
 			$new = $posts -> update($_GET['id'],[
 				'title' => $_POST['title'],
@@ -58,7 +58,7 @@ class AdminController extends Controller
 		$post = $posts -> getPost([$_GET['id']]);
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
 
-		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
+		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		
 
 		$form = new \App\HTML\Form($post);
@@ -69,7 +69,7 @@ class AdminController extends Controller
 
 	public function add()
 	{
-		$post = \App\App::getInstance() -> getTable('postsMannager');
+		$post = \App\App::getInstance() -> getTable('postsManager');
 		if (!empty($_POST)) {
 		 	$new = $post -> create([
 				'title' => $_POST['title'],
@@ -84,14 +84,14 @@ class AdminController extends Controller
 		 	}
 		 } 
 		$form = new \App\HTML\Form();
-		$categories = \App\App::getInstance() -> getTable('categoriesMannager') -> selectCategories();
+		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		$p = 'post.add';
 		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));
 	}
 
 	public function delete()
 	{
-		$post = \App\App::getInstance() -> getTable('postsMannager');
+		$post = \App\App::getInstance() -> getTable('postsManager');
 		$delete = $post -> delete([$_GET['id']]);
 		if ($delete) {
 			header('Location: index.php?p=admin&sup=1');
@@ -100,7 +100,7 @@ class AdminController extends Controller
 
 	public function comments()
 	{
-		$comments = \App\App::getInstance() -> getTable('commentsMannager');
+		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$commentsWait = $comments -> showComments();
 		$p = 'comments';
 
@@ -109,7 +109,7 @@ class AdminController extends Controller
 
 	public function viewComment()
 	{
-		$comments = \App\App::getInstance() -> getTable('commentsMannager');
+		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$x = [$_GET['id']];
 		$comment = $comments -> showComment([$_GET['id']]);
 		$p = 'singleComment';
@@ -120,14 +120,14 @@ class AdminController extends Controller
 
 	public function accept()
 	{
-		$comments = \App\App::getInstance() -> getTable('commentsMannager');
+		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$comment = $comments -> CommentAccepted([$_GET['id']]);
 		header('Location: index.php?p=comments');
 	}
 
 	public function denied()
 	{
-		$comments = \App\App::getInstance() -> getTable('commentsMannager');
+		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$comment = $comments -> CommentDenied([$_GET['id']]);
 		header('Location: index.php?p=comments');
 	}

@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-class CategoriesMannager
+class CategoriesManager
 {
 
 	private $table = 'categories';
