@@ -22,7 +22,6 @@ class AdminController extends Controller
 
 	public function dashbord()
 	{
-
 		$auth = new \App\Auth\DbAuthManager();
 		if (!$auth -> logged()) {
 			header('Location: index.php?p=userLogin');
