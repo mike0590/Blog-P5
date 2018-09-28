@@ -26,20 +26,25 @@ class Database
 	}
 
 
-	public function query($statement, $one = true)
+	public function query($statement, $one = true, $className = null)
 	{
 		$res = $this -> getPdo() -> query($statement);
 		
+		if ($className == true) {
+			$res -> setFetchMode(PDO::FETCH_CLASS, $className);
+		} else {
+			$res -> setFetchMode(PDO::FETCH_OBJ);
+		}
 		if ($one) {
-			$data = $res -> fetch(PDO::FETCH_ASSOC);
+			$data = $res -> fetch();
 		}
 		else{
-			$data = $res -> fetchAll(PDO::FETCH_ASSOC);
+			$data = $res -> fetchAll();
 		}
 		return $data;
 	}
 
-	public function prepare($statement, $attributes, $one = true)
+	public function prepare($statement, $attributes, $one = true, $className = null)
 	{
 		$res = $this -> getPdo() -> prepare($statement);
 		$req = $res -> execute($attributes);
@@ -49,12 +54,18 @@ class Database
 		{
 			return $req;
 		}
+
+		if ($className == true) {
+			$res -> setFetchMode(PDO::FETCH_CLASS, $className);
+		} else {
+			$res -> setFetchMode(PDO::FETCH_OBJ);
+		}
 		
 		if ($one) {
-			$data = $res -> fetch(PDO::FETCH_ASSOC);
+			$data = $res -> fetch();
 		}
 		else{
-			$data = $res -> fetchAll(PDO::FETCH_ASSOC);
+			$data = $res -> fetchAll();
 		}
 		return $data;
 	}
