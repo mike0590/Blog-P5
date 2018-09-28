@@ -10,14 +10,11 @@ protected $table = "posts";
 
 	public function getPosts()
 	{
-		$posts = [];
-		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateT, '%Y/%m/%d') AS dateR  
-			FROM {$this -> table} ORDER BY dateR DESC", $one = false);
-		foreach ($datas as $data) {
-			$posts[] = new \App\Table\Posts($data);
-		}
+		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, 
+			DATE_FORMAT(dateT, '%Y/%m/%d') AS dateR  
+			FROM {$this -> table} ORDER BY dateT DESC", false, Posts::class);
 
-		return $posts;
+		return $datas;
 	}
 
 
@@ -31,76 +28,50 @@ protected $table = "posts";
 			return false;
 	}
 
+
 	public function getPost($id)
 	{
-		$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username
+		$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username 
 			FROM {$this -> table} 
 			JOIN users ON users.idUsers = posts.user_id 
-			WHERE posts.idPosts = ?", $id);
-		$user = new \App\Auth\DbAuth($data);
-		$post = new \App\Table\Posts($data);
-		$post -> setUsers($user);
+			WHERE posts.idPosts = ?", $id, true, Posts::class);
 
-		return $post;
+		return $data;
 	}
+
 
 	public function getPostsPerCat($id)
 	{
-		$posts = [];
 		$datas = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.title, posts.chapo, posts.content, categories.idCategories, categories.name
 			 FROM {$this -> table}
 			 JOIN categories ON categories.idCategories = posts.category_id
-			 WHERE posts.category_id = ?", $id, $one = false);
-
-		foreach($datas as $data)
-		{
-			$categories = new \App\Table\Categories($data);
-			$post = new \App\Table\Posts($data);
-			$post -> setCategories($categories);
-			$posts [] = $post;
-		}
+			 WHERE posts.category_id = ?", $id, false, Posts::class);
 		
-		return $posts;
+		return $datas;
 	}
 
 	
 
-	 public function categoryPost($postId)
+	public function categoryPost($postId)
     {
     	$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.category_id, categories.name, categories.idCategories
     		FROM {$this -> table} 
     		JOIN categories ON categories.idCategories = posts.category_id
-    		WHERE posts.idPosts = ?", $postId, $one = true);
-    	$categorie = new \App\Table\Categories($data);
-    	$post = new \App\Table\Posts($data);
-    	$post -> setcategories($categorie);
-    	
-    	return $post;
+    		WHERE posts.idPosts = ?", $postId, true, Posts::class);
+
+    	return $data;
 	}
 
     
 	public function getAll()
 	{
-		$posts = [];
 		$datas = \App\App::getDb() -> query("SELECT posts.idPosts, posts.title, posts.content, 
-									 posts.dateT, posts.category_id, categories.name, 
-									 users.username
-									 FROM {$this -> table}
-									 JOIN categories ON categories.idCategories = posts.category_id
-									 JOIN users ON users.idUsers = posts.user_id"
-									 , $one = false);
+			posts.dateT, posts.category_id, categories.name AS categoryName, users.username 
+			FROM {$this -> table}
+			JOIN categories ON categories.idCategories = posts.category_id
+			JOIN users ON users.idUsers = posts.user_id", false, Posts::class);
 
-		foreach($datas as $data)
-		{
-			$categorie = new \App\Table\Categories($data);
-			$user = new \App\Auth\DbAuth($data);
-			$post = new \App\Table\Posts($data);
-			$post -> setCategories($categorie);
-			$post -> setUsers($user);
-			$posts [] = $post;
-		}
-
-		return $posts;
+		return $datas;
 	}
 
 
@@ -125,14 +96,14 @@ protected $table = "posts";
     		$attributes [] = $value;
     	}
     		$sql_parts = (implode(', ', $parts));
-    	return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, null);
+    	return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, true);
 	}
 
 
 	public function delete($id)
     {
     		
-    	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id);
+    	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id, true);
 	}
 }
 

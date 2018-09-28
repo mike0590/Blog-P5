@@ -14,15 +14,15 @@ class DbAuthManager
 		 $user = $db -> prepare("SELECT * FROM {$this -> table} WHERE username = ?", [$username]);
 		
 		 if ($user) {
-		 	$pass = password_verify($password, $user['password']);
+		 	$pass = password_verify($password, $user -> password);
 		 	if ($pass){
 		 		session_start();
-		 		if ($user['is_admin'] == 0) {
-		 			$_SESSION['auth'] = $user['idUsers'];
+		 		if ($user -> is_admin == 0) {
+		 			$_SESSION['auth'] = $user -> idUsers;
 		 		}
-		 		elseif ($user['is_admin'] == 1) {
-		 			$_SESSION['visitor'] = $user['idUsers'];
-		 			$_SESSION['nameVisitor'] = $user['username'];
+		 		elseif ($user -> is_admin == 1) {
+		 			$_SESSION['visitor'] = $user -> idUsers;
+		 			$_SESSION['nameVisitor'] = $user -> username;
 		 		}
 		 		
 		 		return true;
@@ -36,10 +36,10 @@ class DbAuthManager
 	 {
 	 	$db = \App\App::getDb();
 		$user = $db -> prepare("SELECT * FROM {$this -> table} WHERE username = ?", [$username]);
-		if ($user['is_admin'] == 0) {
+		if ($user -> is_admin == 0) {
 			return True;
 		}
-		elseif ($user['is_admin'] == 1) {
+		elseif ($user -> is_admin == 1) {
 			return False;
 		}
 	 }

@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-class Posts extends Entity
+class Posts 
 {
 
 
@@ -12,15 +12,7 @@ class Posts extends Entity
 	private $content;
 	private $dateT;
 	private $dateUpdate;
-	private $categories;
-	private $users;
 	
-	
-
-	public function __construct(array $data)
-	{
-		parent::__construct($data);
-	}
 
 
 	public function idPosts()
@@ -53,60 +45,6 @@ class Posts extends Entity
 		return $this -> dateUpdate;
 	} 
 
-	public function categories()
-	{
-		return $this -> categories;
-	}
-
-	public function users()
-	{
-		return $this -> users;
-	}
-
-
-
-	public function setIdPosts($data)
-	{
-			$this -> idPosts = $data;
-	}
-
-	public function setTitle($data)
-	{
-		$this -> title = $data;
-	}
-
-	public function setChapo($data)
-	{
-		$this -> chapo = $data;
-	}
-
-	public function setContent($data)
-	{
-		$this -> content = $data;
-	}
-
-	public function setDateT($data)
-	{
-		$this -> dateT = $data;
-	}
-
-	public function setDateUpdate($data)
-	{
-		$this -> dateUpdate = $data;
-	}
-
-	public function setCategories($data)
-	{
-		$this -> categories = $data;
-	}
-
-	public function setUsers($data)
-	{
-		$this -> users = $data;
-	}
-
-
-	
 	public function getUrl()
 	{
 		return 'index.php?p=single&id='. $this -> idPosts();

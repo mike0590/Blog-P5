@@ -2,19 +2,12 @@
 
 namespace App\Table;
 
-class Categories extends Entity
+class Categories 
 {
-
 
 	private $idCategories;
 	private $name;
 	
-
-	public function __construct(array $data)
-	{
-		parent::__construct($data);
-	}
-
 
 	public function idCategories()
 	{
@@ -25,19 +18,6 @@ class Categories extends Entity
 	{
 		return $this -> name;
 	}
-
-
-	public function setIdCategories($data)
-	{
-		
-		$this -> idCategories = $data;
-	}
-
-	public function setName($data)
-	{
-		$this -> name = $data;
-	}
-
 
 	public function getUrl()
 	{

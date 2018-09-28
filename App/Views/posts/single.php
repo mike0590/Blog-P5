@@ -25,7 +25,7 @@ echo $post -> content(). '</br></br>';
   </div>
   <div class="hidden-xs hidden-sm col-md-6"> <?php
     echo '<p style="float: right;">' .$post -> dateT(). '</p></br>';
-    echo '<p style="float: right; position: relative; left: 80px;">' .$post -> users() -> username(). '</p></br></br></br>';
+    echo '<p style="float: right; position: relative; left: 80px;">' .$post -> username. '</p></br></br></br>';
     ?>
   </div>
 </div>
@@ -35,7 +35,7 @@ echo $post -> content(). '</br></br>';
      echo '<p style="float: left">Dernière Modification : ' .$post -> dateUpdate(). '</p></br></br></br>';
    }
     echo '<p style="float: right;">' .$post -> dateT(). '</p></br>';
-    echo '<p style="float: right; position: relative; left: 80px;">' .$post -> users() -> username(). '</p></br></br></br>';
+    echo '<p style="float: right; position: relative; left: 80px;">' .$post -> username. '</p></br></br></br>';
    ?>
 </div>
 
@@ -134,7 +134,7 @@ echo $post -> content(). '</br></br>';
   <?php 
  
     foreach ($comment as $comment) { ?>
-      <h5 class="mt-0"><?php echo $comment -> users() -> username(); ?></h5>
+      <h5 class="mt-0"><?php echo $comment -> username; ?></h5>
         <div class="row">
           <div class="col-sm-6">
             <p><?php echo $comment -> content(); ?></p>

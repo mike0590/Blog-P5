@@ -9,8 +9,8 @@ class CategoriesManager
 
 	public function getCategory($id)
 	{
-		$category = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE idCategories = ?", $id);
-		return new \App\Table\Categories($category);
+		$category = \App\App::getDb() -> prepare("SELECT * FROM {$this -> table} WHERE idCategories = ?", $id, true, Categories::class);
+		return $category;
 	}
 
 	public function catExist($id)
@@ -25,15 +25,8 @@ class CategoriesManager
 
 	public function getCategories()
 	{
-		$categories = [];
-		$datas = \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", $one = false);
-
-		foreach($datas as $data)
-		{
-			$categories[] = new \App\Table\Categories($data);
-		}
-
-		return $categories;
+		$datas = \App\App::getDb() -> query ("SELECT * FROM {$this -> table}", false, Categories::class);
+		return $datas;
 	}
 
 	
@@ -42,12 +35,10 @@ class CategoriesManager
     	$datas = [];
         $categories = $this -> getCategories();
       
-       
-        foreach($categories as $category){
+       foreach($categories as $category){
           $datas[] = array($category -> idCategories() => $category -> name());
         }
        return $datas;
-
-    }
+	}
 }
 
