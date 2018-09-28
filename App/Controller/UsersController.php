@@ -18,10 +18,10 @@ class UsersController extends Controller
 		if(!empty($_POST)){
 			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']))) {
 				if ($auth -> verify($_POST['username']) == True) {
-					header('Location: index.php?p=admin');
+					header('Location: http://www.passion-php.fr/administration');
 				}
 				elseif ($auth -> verify($_POST['username']) == False) {
-					header('Location: index.php');
+					header('Location: http://www.passion-php.fr/accueil');
 				}
 			}
 			else{
@@ -38,29 +38,29 @@ class UsersController extends Controller
 	{
 		session_start();
 		session_destroy();
-		header('Location: index.php');
+		header('Location: http://www.passion-php.fr/accueil');
 	}
 
 	
 	public function inscription()
 	{
 		$this -> template = 'default_2';
-		
 		$auth = new \App\Auth\DbAuthManager();
+
 		if (!empty($_POST)) {
-			if($auth -> userExists(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']))) {
-				$message = 0;
-			}
-			elseif($auth -> userNameExists(htmlspecialchars($_POST['username']))) {
-				$message = 1;
-			}
-			else {
-					$user = $auth -> inscription(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']));
-					$message = 2;
+			if (!empty($_POST['username']) AND !empty($_POST['password'])) {
+				$user = $auth -> inscription(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']));
+				if($user == true)
+				{
+					$message = 0;
+				} else{
+					$message = 1;
+				}
+			} else{
+				$message = 2;
 			}
 		}
 		$form = new \App\HTML\Form();
-		$p = 'inscription';
-		$this -> page('posts/inscription', compact('form', 'p', 'message'));
+		$this -> page('posts/inscription', compact('form', 'message'));
 	}
 }

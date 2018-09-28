@@ -18,7 +18,7 @@ class Form
 	{
 		if (isset($options['type'])) {
 			$type = $options['type'];
-		} else{
+		} else {
 			$type = 'text';
 		}
 		$label = "<h4>" .$label. "</h4></br>";
@@ -26,7 +26,7 @@ class Form
 			$input = '<textarea  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
 		} elseif ($type === 'textareaB') {
 			$input = '<textarea style="height:300px;"  name="' .$name.'" class="form-control">' .$this -> getValue($name).'</textarea></br>';
-		} else{
+		} else {
 			$input = '<input type="' .$type. '" name="' .$name. '" class="form-control" value="' .$this -> getValue($name). '"</input></br>';
 		}
 		return $this -> surround($label . $input);
@@ -57,7 +57,7 @@ class Form
 
 	public function select($name, $label = null, $options = [], $categoryPostId = null, $categoryPost = null)
 	{
-				$label = '<label>' .$label. '</label></br>';
+		$label = '<label>' .$label. '</label></br>';
 		$input = '<select class="form-control" name="' .$name. '">';
 		foreach ($options as $option) {
 			foreach ($option as $key => $value) {

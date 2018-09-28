@@ -21,6 +21,6 @@ class Categories
 
 	public function getUrl()
 	{
-		return 'index.php?p=categories&id=' .$this -> idCategories();
+		return 'http://www.passion-php.fr/categorie/' .$this -> idCategories();
 	}
 }

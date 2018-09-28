@@ -1,0 +1,15 @@
+
+ Options -MultiViews
+ RewriteEngine On
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteRule ^accueil$ /index.php [L]
+ RewriteRule ^articles$ /index.php?p=posts [L] 
+ RewriteRule ^article/([0-9]+)$ /index.php?p=single&id=$1 [L] 
+ RewriteRule ^categorie/([0-9]+)$ /index.php?p=categories&id=$1 [L] 
+ RewriteRule ^connexion$ /index.php?p=userLogin [L] 
+ RewriteRule ^deconnexion$ /index.php?p=destroy [L] 
+ RewriteRule ^administration$ /index.php?p=admin [L] 
+ RewriteRule ^commentaires$ /index.php?p=comments [L]
+ RewriteRule ^commentaire/([0-9]+)$ /index.php?p=singleComment&id=$1 [L] 
+ RewriteRule ^edition/([0-9]+)$ /index.php?p=post.edit&id=$1 [L]
+ RewriteRule ^article/nouveau$ /index.php?p=post.add [L]  

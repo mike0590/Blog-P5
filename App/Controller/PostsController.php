@@ -96,13 +96,11 @@ class PostsController extends Controller
 		if (!empty($_POST) AND isset($_POST['pseudo']) AND isset($_POST['pass'])) {
 		    if($visitor -> login(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass'])))
 		    {
-		      header('Location: index.php?p=single&id= '.$id.' ');
-		    }
-		    else{
+		      header('Location: http://www.passion-php.fr/article/'.$id);
+		    } else{
 		     	$message = 0;
 		    }
-		}
-		elseif (!empty($_POST) AND isset($_POST['content'])) {
+		} elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
 		    'posts_id' => $_GET['id'],

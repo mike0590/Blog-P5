@@ -6,9 +6,9 @@ ob_start();
 ?>
 
 
-<h3>Visiteur: <?= $comment -> users() -> username(); ?></h3></br></br>
+<h3>Visiteur: <?= $comment -> username; ?></h3></br></br>
 <h3>Article:</h3>
-<?= $comment -> posts() -> title(); ?></br></br></br>
+<?= $comment -> title; ?></br></br></br>
 
 <h3>Commentaire:</h3></br>
 	<?= $comment -> content(); ?>
@@ -20,7 +20,7 @@ ob_start();
 	<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a></td>
 			
 </tr>
-<a style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
+<a style="position: relative; bottom: 30px; left: 80%;" href="http://www.passion-php.fr/administration">Administration</a>
 
 <?php
 $content = ob_get_clean();

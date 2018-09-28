@@ -28,7 +28,7 @@ if (isset($message) AND $message == 0) {
 <h3 style="float: right;"><a href="index.php?p=home">Page d'Accueil</a></h3>
 </div>
 <div class="visible-xs visible-sm col-sm-10">
-<br/><br/><h3 style="float: right;"><a href="index.php?p=home">Page d'Accueil</a></h3>
+<br/><br/><h3 style="float: right;"><a href="http://www.passion-php.fr/accueil">Page d'Accueil</a></h3>
 </div>
 
 <?php

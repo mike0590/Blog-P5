@@ -16,7 +16,7 @@ class AdminController extends Controller
 	{
 		session_start();
 		session_destroy();
-		header('Location: index.php?p=login');
+		header('Location: http://www.passion-php.fr/accueil');
 	}
 
 
@@ -35,15 +35,14 @@ class AdminController extends Controller
 			$message = 0;
 		 }
 		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
-		$p = 'admin';
-		$this -> page('admin/posts/index', compact('posts', 'p', 'message'));
+		$this -> page('admin/posts/index', compact('posts', 'message'));
 	}
 
 
 	public function edit()
 	{
 		$posts = \App\App::getInstance() -> getTable('postsManager');
-		if (!empty($_POST)) {
+		if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content'])) {
 			$new = $posts -> update($_GET['id'],[
 				'title' => $_POST['title'],
 				'chapo' => $_POST['chapo'],
@@ -57,10 +56,9 @@ class AdminController extends Controller
 		}
 		$post = $posts -> getPost([$_GET['id']]);
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
-		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
+		$categoriesList = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		$form = new \App\HTML\Form($post);
-		$p = 'post.edit';
-		$this -> page('admin/posts/edit', compact('form', 'categories', 'p', 'categoryPost', 'message'));
+		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost', 'message'));
 	}
 
 
@@ -68,6 +66,7 @@ class AdminController extends Controller
 	{
 		$post = \App\App::getInstance() -> getTable('postsManager');
 		if (!empty($_POST)) {
+			if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content'])) {
 		 	$new = $post -> create([
 				'title' => $_POST['title'],
 				'chapo' => $_POST['chapo'],
@@ -75,17 +74,16 @@ class AdminController extends Controller
 		 		'category_id' => $_POST['category_id'],
 		 		'user_id' => $_SESSION['auth']
 				]);
-
-		 	if ($new) { 
-		 		$message = 0;
-		 	}
-		 } 
+			$message = 0;
+		 	
+			 }  else{
+			 	$message = 1;
+			 }
+		}
 		$form = new \App\HTML\Form();
 		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
-		$p = 'post.add';
-		$this -> page('admin/posts/add', compact('form', 'categories', 'p', 'message'));
+		$this -> page('admin/posts/add', compact('form', 'categories', 'message'));
 	}
-
 
 	public function delete()
 	{
@@ -101,8 +99,7 @@ class AdminController extends Controller
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$commentsWait = $comments -> showComments();
-		$p = 'comments';
-		$this -> page('admin/posts/comments', compact('commentsWait', 'p'));
+		$this -> page('admin/posts/comments', compact('commentsWait'));
 	}
 
 
@@ -111,8 +108,7 @@ class AdminController extends Controller
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$x = [$_GET['id']];
 		$comment = $comments -> showComment([$_GET['id']]);
-		$p = 'singleComment';
-		$this -> page('admin/posts/singleComment', compact('comment', 'p'));
+		$this -> page('admin/posts/singleComment', compact('comment'));
 	}
 
 

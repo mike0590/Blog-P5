@@ -47,7 +47,7 @@ class Posts
 
 	public function getUrl()
 	{
-		return 'index.php?p=single&id='. $this -> idPosts();
+		return 'http://www.passion-php.fr/article/'. $this -> idPosts();
 	}
 }
 

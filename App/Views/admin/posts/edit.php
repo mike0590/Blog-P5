@@ -15,12 +15,12 @@ if (isset($message) AND $message == 0) {
 echo $form -> input('title', "Titre de l'article");
 echo $form -> input('chapo', 'Description', ['type' => 'textarea']);
 echo $form -> input('content', 'Contenu', ['type' => 'textareaB']);
-echo $form -> select('category_id', 'Catégorie', $categories, $categoryPost -> categories() -> idCategories(), $categoryPost -> categories() -> name());
+echo $form -> select('category_id', 'Catégorie', $categoriesList, $categoryPost -> idCategories, $categoryPost -> name);
 echo $form -> submit('Enregistrer');
 ?>
 
 </form>
-<a style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
+<a style="position: relative; bottom: 30px; left: 80%;" href="http://www.passion-php.fr/administration">Administration</a>
 
 
 <?php

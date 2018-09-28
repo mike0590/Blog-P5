@@ -18,12 +18,12 @@ ob_start();
 	<tbody>
 		<?php  foreach($commentsWait as $comment): ?>
 		<tr>
-			<td><?= $comment -> users() -> username(); ?></td>
+			<td><?= $comment -> username; ?></td>
 			<td><?= substr($comment -> content(), 0, 70). '..'; ?></td>
-			<td><?= $comment -> posts() -> title(); ?></td>
+			<td><?= $comment -> title; ?></td>
 		</tr>
 		<tr>
-			<td><a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> idComments(); ?>">Voir</a></td>
+			<td><a class="btn btn-primary" href="http://www.passion-php.fr/commentaire/<?= $comment -> idComments(); ?>">Voir</a></td>
 			<td><a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a></td>
 			<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a></td>
 		</tr>
@@ -40,11 +40,11 @@ ob_start();
 	}
 	foreach($commentsWait as $comment): ?>
 	<div>
-			<p><?= '<strong style="color:black;">Visiteur: </strong>' .$comment -> users() -> username(); ?></p>
+			<p><?= '<strong style="color:black;">Visiteur: </strong>' .$comment -> username; ?></p>
 			<p><?= '<strong style="color:black;">Commentaire: </strong>' .substr($comment -> content(), 0, 70). '..'; ?></p>
-			<p><?= '<strong style="color:black;">Article: </strong>' .$comment -> posts() -> title(); ?></p><br/>
+			<p><?= '<strong style="color:black;">Article: </strong>' .$comment -> title; ?></p><br/>
 		 	<div style="display: flex;">
-			  <a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> idComments(); ?>">Voir</a>
+			  <a class="btn btn-primary" href="http://www.passion-php.fr/commentaire/<?= $comment -> idComments(); ?>">Voir</a>
 			  <a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a>
 			  <a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a>
 			</div>
@@ -54,8 +54,8 @@ ob_start();
 <?php endforeach; ?>
 </div>
 
-<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
-<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="index.php?p=admin">Administration</a>
+<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="http://www.passion-php.fr/administration">Administration</a>
+<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="http://www.passion-php.fr/administration">Administration</a>
 
 
 <?php

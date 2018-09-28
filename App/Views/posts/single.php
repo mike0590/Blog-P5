@@ -6,7 +6,7 @@ ob_start();
 
 if (isset($message) AND $message == 2) { ?>
   <h2>Cet Article n'existe pas !</h2>
-  <h3><a href="index.php?p=home">Page d'Accueil</a></h3> <?php
+  <h3><a href="http://www.passion-php.fr/accueil">Page d'Accueil</a></h3> <?php
   die();
 }
 

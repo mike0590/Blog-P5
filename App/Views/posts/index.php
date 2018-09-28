@@ -19,7 +19,7 @@ foreach ($posts as $post) {
 	}
 }
 
-echo "</br><a href='index.php?p=posts'>Tous les articles</a>";
+echo "</br><a href='http://www.passion-php.fr/articles'>Tous les articles</a>";
 
 $content = ob_get_clean();
 
