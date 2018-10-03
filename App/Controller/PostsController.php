@@ -115,7 +115,7 @@ class PostsController extends Controller
 		}
 		$post = $posts -> getPost([$_GET['id']]);
 		$comment = $comments -> getComments([$_GET['id']]);
-		$this -> page('posts/single', compact('post', 'visitor', 'comments', 'comment', 'message'));
+		$this -> page('posts/single', compact('post', 'visitor', 'comment', 'message'));
 
 	}
 
