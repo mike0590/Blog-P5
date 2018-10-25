@@ -24,10 +24,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 	</script>
 	<!-- //for-mobile-apps -->
-	<link href="../public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="../public/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="../public/css/flexslider.css" type="text/css" media="screen" />
+	<link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="public/css/flexslider.css" type="text/css" media="screen" />
 	<!-- css files -->
 	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -61,18 +61,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 									} 
 								?>
-								<li><a href="http://www.passion-php.fr/accueil" class="active">Accueil</a></li>
-								<li><a href="http://www.passion-php.fr/articles">Articles</a></li>
+								<li><a href="index.php" class="active">Accueil</a></li>
+								<li><a href="index.php?p=posts">Articles</a></li>
 								<?php 
 								if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
-									<li><a href="http://www.passion-php.fr/inscription">Inscription</a></li> <?php
+									<li><a href="index.php?p=inscription">Inscription</a></li> <?php
 								} 
 								if ($user -> logged()) { ?>
-									<li style="position: relative;left: 100px;"><a href="http://www.passion-php.fr/deconnexion">Deconnexion</a></li> <?php
+									<li style="position: relative;left: 100px;"><a href="index.php?p=destroy">Deconnexion</a></li> <?php
 								}
 								else{ 
 								?>
-								<li style="position: relative;left: 100px;"><a href="http://www.passion-php.fr/connexion">Connexion</a></li><?php
+								<li style="position: relative;left: 100px;"><a href="index.php?p=userLogin">Connexion</a></li><?php
 								} 
 								?>
 							
@@ -133,6 +133,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="service-w3ls">
 			<div class="container">
 				<h3 class="w3l-titles">Contactez-moi</h3>
+
+				<?php
+				  if (isset($_SESSION['message'])){ 
+
+            	switch ($_SESSION['message']) {
+					case 'mail sent': 
+						?>
+						<div class=" lol alert alert-success align" role="alert">Message envoyé</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'mail not sent': 
+						?>
+						<div class=" lol alert alert-danger align" role="alert">Message non envoyé - Veuillez remplir les champs obligatoirs</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+				}
+			} ?>
 				<form method="post" style="width: 60%;margin-right: auto;margin-left: auto;">
 					<?php echo $formulaire; ?>
 				</form>
@@ -145,7 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="copyright">
 		<div class="container">
 			<?php if (isset($_SESSION['auth'])) { ?>
-				<p><a href="http://www.passion-php.fr/administration">Administration</a></p> <?php
+				<p><a href="index.php?p=admin">Administration</a></p> <?php
 			}  ?>
 			<ul class="social-icons3">
 				<li><a href="https://www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>

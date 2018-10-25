@@ -4,6 +4,13 @@ require "vendor/autoload.php";
 
 session_start();
 
+ $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
+ $url = substr($_SERVER['REQUEST_URI'], strlen($basepath));
+
+ $tab[] = "?p=";
+ $tab[] = "&id=";
+ $url = str_replace($tab, "/", $url);
+
 
 if (isset($_GET['p'])) {
 	$p = $_GET['p'];
@@ -11,8 +18,6 @@ if (isset($_GET['p'])) {
 else{
 	$p = 'home';
 }
-
-
 
 switch ($p) {
 	case 'home':
@@ -28,6 +33,11 @@ switch ($p) {
 	case 'userLogin':
 		$controller = new App\Controller\UsersController();
 		$controller -> login();
+	break;
+
+	case 'restart':
+		$controller = new App\Controller\UsersController();
+		$controller -> restartPass();
 	break;
 
 	case 'single':

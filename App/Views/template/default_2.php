@@ -23,10 +23,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 	</script>
 	<!-- //for-mobile-apps -->
-	<link href="../public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="../public/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="../public/css/flexslider.css" type="text/css" media="screen" />
+	<link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="public/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="public/css/flexslider.css" type="text/css" media="screen" />
 	<!-- css files -->
 	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -44,6 +44,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- About us -->
 	<div class="about-3" style="width: 60%; margin-left: auto;margin-right: auto;">
 		<?php 
+		if (isset($_SESSION['message'])){ 
+
+            	switch ($_SESSION['message']) {
+					case 'wrong id': 
+						?>
+						<div class=" lol alert alert-danger align" role="alert">Identifiants Incorrects</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'account create': 
+						?>
+						<div class=" lol alert alert-success align" role="alert">Compte Validé</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'unavailable id': 
+						?>
+						<div class=" lol alert alert-danger align" role="alert">Idantifiants indisponibles</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'obligatory': 
+						?>
+						<div class=" lol alert alert-danger align" role="alert">Champs Obligatoirs</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'post delete': 
+						?>
+						<div class="align alert alert-danger" role="alert">Article Effacé</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'update/add': 
+						?>
+						<div class="lol align alert alert-success" role="alert">Article Enregistré</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'every input': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'restart mail sent': 
+						?>
+						<div class="lol align alert alert-success" role="alert">Un email vous a été envoyé avec votre mot de passe</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'restart denied': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Cet username n'existe pas</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+				}
+			} 
 		echo $content;
 		?>
 		<div class="container">

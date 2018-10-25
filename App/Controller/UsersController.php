@@ -9,39 +9,56 @@ class UsersController extends Controller
 		parent::__construct();
 	}
 
-
+	/**
+	 * [methode login qui traite la connexion de l utilisateur en faisant le pont entre modele et vue)
+	 */
 	public function login()
 	{
 		$this -> template = 'default_2';
-		
 		$auth = new \App\Auth\DbAuthManager();
+
 		if(!empty($_POST)){
 			if($auth -> login(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']))) {
 				if ($auth -> verify($_POST['username']) == True) {
-					header('Location: http://www.passion-php.fr/administration');
+					header('Location: index.php?p=admin');
 				}
 				elseif ($auth -> verify($_POST['username']) == False) {
-					header('Location: http://www.passion-php.fr/accueil');
+					header('Location: index.php');
 				}
 			}
 			else{
-				$message = 0;
+				$_SESSION['message'] = 'wrong id';
 			}
 		}
 		$form = new \App\HTML\Form();
 		$p = 'userLogin';
-		$this -> page('posts/userLogin', compact('form', 'p', 'message'));
+		$this -> page('posts/userLogin', compact('form', 'p'));
 	}
 
-
-	public function destroy()
+	/**
+	 * [methode restartPass qui fait le pont entre modele et vue et qui envoie un mail avec le mot de passe oublié par un utilisateur)
+	 */
+	public function restartPass()
 	{
-		session_start();
-		session_destroy();
-		header('Location: http://www.passion-php.fr/accueil');
-	}
+		$this -> template = 'default_2';
+		$auth = new \App\Auth\DbAuthManager();
 
+		if (!empty($_POST['username'])) {
+			$user = $auth -> userExists(htmlspecialchars($_POST['username']));
+			if ($user) {
+				\App\Mail\Mail::sendRestartMail($_POST['username'], $user -> password());
+				$_SESSION['message'] = 'restart mail sent';
+			} else{
+				$_SESSION['message'] = 'restart denied';
+			}
+		}
+		$form = new \App\HTML\Form();
+		$this -> page('posts/restart', compact('form'));
+	}
 	
+	/**
+	 * [methode login qui traite l inscription d un nouvel utilisateur en faisant le pont entre modele et vue)
+	 */
 	public function inscription()
 	{
 		$this -> template = 'default_2';
@@ -50,17 +67,25 @@ class UsersController extends Controller
 		if (!empty($_POST)) {
 			if (!empty($_POST['username']) AND !empty($_POST['password'])) {
 				$user = $auth -> inscription(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['password']));
-				if($user == true)
-				{
-					$message = 0;
+				if($user) {
+					$_SESSION['message'] = 'account create';
 				} else{
-					$message = 1;
+					$_SESSION['message'] = 'unavailable id';
 				}
 			} else{
-				$message = 2;
+				$_SESSION['message'] = 'obligatory';
 			}
 		}
 		$form = new \App\HTML\Form();
-		$this -> page('posts/inscription', compact('form', 'message'));
+		$this -> page('posts/inscription', compact('form'));
+	}
+
+	/**
+	 * [methode destroy qui detruit une session)
+	 */
+	public function destroy()
+	{
+		session_destroy();
+		header('Location: index.php');
 	}
 }

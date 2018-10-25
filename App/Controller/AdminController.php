@@ -11,15 +11,9 @@ class AdminController extends Controller
 		$this -> template = 'default_2';
 	}
 
-
-	public function destroy()
-	{
-		session_start();
-		session_destroy();
-		header('Location: http://www.passion-php.fr/accueil');
-	}
-
-
+	/**
+	 * renvoie vers la page de connexion si un utilisateur tente d acceder a l administration sans etre connecte
+	 */
 	public function dashbord()
 	{
 		$auth = new \App\Auth\DbAuthManager();
@@ -28,17 +22,21 @@ class AdminController extends Controller
 		}
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de la homePage de l administration en faisant le pont entre modele et vue
+	 */
 	public function index()
 	{
 		if (isset($_GET['sup'])) { 
-			$message = 0;
+			$_SESSION['message'] = 'post delete';
 		 }
 		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
-		$this -> page('admin/posts/index', compact('posts', 'message'));
+		$this -> page('admin/posts/index', compact('posts'));
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de la page d edition d un article en faisant le pont entre modele et vue
+	 */
 	public function edit()
 	{
 		$posts = \App\App::getInstance() -> getTable('postsManager');
@@ -51,17 +49,19 @@ class AdminController extends Controller
 				]
 			);
 			if ($new) { 
-				$message = 0;
+				$_SESSION['message'] = 'update/add';
 			}
 		}
 		$post = $posts -> getPost([$_GET['id']]);
 		$categoryPost = $posts -> categoryPost([$_GET['id']]);
 		$categoriesList = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		$form = new \App\HTML\Form($post);
-		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost', 'message'));
+		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost'));
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de la page d addition d un article en faisant le pont entre modele et vue
+	 */
 	public function add()
 	{
 		$post = \App\App::getInstance() -> getTable('postsManager');
@@ -74,17 +74,20 @@ class AdminController extends Controller
 		 		'category_id' => $_POST['category_id'],
 		 		'user_id' => $_SESSION['auth']
 				]);
-			$message = 0;
+			$_SESSION['message'] = 'update/add';
 		 	
 			 }  else{
-			 	$message = 1;
+			 $_SESSION['message'] = 'every input';
 			 }
 		}
 		$form = new \App\HTML\Form();
 		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
-		$this -> page('admin/posts/add', compact('form', 'categories', 'message'));
+		$this -> page('admin/posts/add', compact('form', 'categories'));
 	}
 
+	/**
+	 * methode qui s ocuppe du traitement de suppression d un article en faisant appel au modele
+	 */
 	public function delete()
 	{
 		$post = \App\App::getInstance() -> getTable('postsManager');
@@ -94,7 +97,9 @@ class AdminController extends Controller
 		}
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de la page comments en faisant le pont entre modele et vue
+	 */
 	public function comments()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
@@ -102,16 +107,19 @@ class AdminController extends Controller
 		$this -> page('admin/posts/comments', compact('commentsWait'));
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de la page singleComment en faisant le pont entre modele et vue
+	 */
 	public function viewComment()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$x = [$_GET['id']];
 		$comment = $comments -> showComment([$_GET['id']]);
 		$this -> page('admin/posts/singleComment', compact('comment'));
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement d acceptation d un commentaire en faisant appel au modele
+	 */
 	public function accept()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
@@ -119,7 +127,9 @@ class AdminController extends Controller
 		header('Location: index.php?p=comments');
 	}
 
-
+	/**
+	 * methode qui s ocuppe du traitement de suppression d un commentaire en faisant appel au modele
+	 */
 	public function denied()
 	{
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
