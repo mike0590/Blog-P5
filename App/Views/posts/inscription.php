@@ -20,14 +20,14 @@ ob_start(); ?>
 	</div>
 </div>
 <div class="hidden-xs hidden-sm col-md-10">
-<h3 style="float: right;"><a href="index.php">Page d'Accueil</a></h3>
+<h3 style="float: right;"><a href="accueil">Page d'Accueil</a></h3>
 </div>
 <div class="visible-xs visible-sm col-sm-10">
-<br/><br/><h3 style="float: right;"><a href="index.php">Page d'Accueil</a></h3>
+<br/><br/><h3 style="float: right;"><a href="accueil">Page d'Accueil</a></h3>
 </div>
 
 <?php
-
+$type = 'css1';
 $content = ob_get_clean();
 
 

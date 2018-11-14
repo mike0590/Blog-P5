@@ -9,7 +9,7 @@ class Controller
 	 * variable representant le chemin vers les vues
 	 * @var [string]
 	 */
-	protected $viewPath;
+	private $viewPath;
 
 	/**
 	 * indique le template utilisé
@@ -20,6 +20,13 @@ class Controller
 	/**
 	 * chemin utilisé par toutes les vues
 	 */
+	
+	private $basepath;
+
+	/**
+	 * base - url
+	 */
+	
 	public function __construct()
 	{
 		$this -> viewPath = 'App/Views/';
@@ -35,5 +42,11 @@ class Controller
 		extract($variables);
 		require ($this -> viewPath . $view . '.php');
 		require ($this -> viewPath . 'template/'. $this -> template. '.php');
+	}
+
+	public function basepath()
+	{
+		$this -> basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
+		return $this -> basepath;
 	}
 }

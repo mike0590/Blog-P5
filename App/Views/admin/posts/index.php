@@ -11,17 +11,17 @@ ob_start(); ?>
 <h3 class="hidden-xs hidden-sm" style="text-align: center;">Articles</h3>
 <div class="hidden-md hidden-lg" style="display: flex;">
 	<h3 >Articles</h3>
-	<a style="position: relative; left: 20%;" href="index.php?p=destroy">Deconnexion</a>
+	<a style="position: relative; left: 20%;" href="<?= $url; ?>destroy">Deconnexion</a>
 </div>
 
 <div class="visible-xs visible-sm">
-	<br/><a class="btn btn-primary" href="index.php?p=post.add">Ajouter</a>
+	<br/><a class="btn btn-primary" href="<?= $url; ?>post.add">Ajouter</a>
 </div>
 
 <div class="hidden-xs hidden-sm">
-<a href="index.php?p=destroy" style="float: right; position: relative; bottom: 25px; right: 25px;">Deconnexion</a></br>
+<a href="<?= $url; ?>destroy" style="float: right; position: relative; bottom: 25px; right: 25px;">Deconnexion</a></br>
 
-<a style="position: relative; left: 20px;" class="btn btn-primary" href="index.php?p=post.add">Ajouter</a>
+<a style="position: relative; left: 20px;" class="btn btn-primary" href="<?= $url; ?>post.add">Ajouter</a>
 </br></br>
 <?php
 if ($posts) { ?>
@@ -46,8 +46,8 @@ if ($posts) { ?>
 				<td><?= $post -> getCategories() -> name(); ?></td>
 				<td><?= $post -> dateT(); ?></td>
 				<td><?= $post -> getUsers() -> username(); ?></td>
-				<td><a class="btn btn-primary" href="index.php?p=post.edit&id=<?= $post -> idPosts(); ?>">Editer</a></td>
-				<td><a class="btn btn-danger" style="position: relative; right: 20px" href="index.php?p=post.delete&id=<?= $post -> idPosts(); ?>">Supprimer</a></td>
+				<td><a class="btn btn-primary" href="<?= $url; ?>post.edit/<?= $post -> idPosts(); ?>">Editer</a></td>
+				<td><a class="btn btn-danger" style="position: relative; right: 20px" href="<?= $url ?>admin/<?= $post -> idPosts(); ?>/delete">Supprimer</a></td>
 			</tr>
 			<?php
 	        endforeach; ?>
@@ -57,8 +57,8 @@ if ($posts) { ?>
 	echo "Aucun article à administrer..";
 } ?>
 
-<a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
-<h3><a href="index.php">Page d'Accueil</a></h3>
+<a href="<?= $url; ?>commentaires"><h3 style="text-align: center;">Commentaires</h3></a>
+<h3><a href="<?= $url; ?>accueil">Page d'Accueil</a></h3>
 </div>
 
 <?php 
@@ -74,21 +74,20 @@ if ($posts) { ?>
 					<p><?= '<strong style="color:black;">Date: </strong>' .$post -> dateT(); ?></p>
 					<p><?= '<strong style="color:black;">Auteur: </strong>' .$post -> getUsers() -> username(); ?></p><br/><br/>
 				 	<div style="display: flex;">
-					<a class="btn btn-primary" href="index.php?p=post.edit&id=<?= $post -> idPosts(); ?>">Editer</a>
-					<a class="btn btn-danger" style="position: relative; left: 5%;" href="index.php?p=post.delete&id=<?= $post -> idPosts(); ?>">Supprimer</a>
+					<a class="btn btn-primary" href="<?= $url ?>post.edit/<?= $post -> idPosts(); ?>">Editer</a>
+					<a class="btn btn-danger" style="position: relative; left: 5%;" href="<?= $url ?>post.supp/<?= $post -> idPosts(); ?>">Supprimer</a>
 					</div>
 					<br/><br/>
 			<?php
 	    endforeach; ?>
 			<br/><br/>
 
-			<a href="index.php?p=comments"><h3 style="text-align: center;">Commentaires</h3></a>
-			<br/><br/><h3 style="text-align: center"><a href="index.php">Page d'Accueil</a></h3>
+			<a href="<?= $url; ?>commentaires"><h3 style="text-align: center;">Commentaires</h3></a>
+			<br/><br/><h3 style="text-align: center"><a href="<?= $url; ?>accueil">Page d'Accueil</a></h3>
 			</div>
 	</div> <?php 
 } else{
 	echo "Aucun article À administrer..";
 }
-
 
 $content = ob_get_clean(); 

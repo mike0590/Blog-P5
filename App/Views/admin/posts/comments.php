@@ -24,9 +24,9 @@ if ($commentsWait) {
 			<td><?= $comment -> getPosts() -> title(); ?></td>
 		</tr>
 		<tr>
-			<td><a class="btn btn-primary" href="index.php?p=singleComment&id=<?= $comment -> idComments(); ?>">Voir</a></td>
-			<td><a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a></td>
-			<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a></td>
+			<td><a class="btn btn-primary" href="<?= $url; ?>commentaire/<?= $comment -> idComments(); ?>">Voir</a></td>
+			<td><a class="btn btn-primary" href="<?= $url; ?>commentaireAccepte/<?= $comment -> idComments(); ?>">Accepter</a></td>
+			<td><a class="btn btn-danger" href="<?= $url; ?>commentaireRefuse/<?= $comment -> idComments(); ?>">Supprimer</a></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
@@ -46,9 +46,9 @@ if ($commentsWait) {
 			<p><?= '<strong style="color:black;">Commentaire: </strong>' .substr($comment -> content(), 0, 70). '..'; ?></p>
 			<p><?= '<strong style="color:black;">Article: </strong>' .$comment -> getPosts() -> title(); ?></p><br/>
 		 	<div style="display: flex;">
-			  <a class="btn btn-primary" href="index.php?p=singleCommentd&id=<?= $comment -> idComments(); ?>">Voir</a>
-			  <a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a>
-			  <a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a>
+			  <a class="btn btn-primary" href="commentaire/<?= $comment -> idComments(); ?>">Voir</a>
+			  <a class="btn btn-primary" href="<?= $url; ?>commentaireAccepte/<?= $comment -> idComments(); ?>">Accepter</a>
+			  <a class="btn btn-danger" href="<?= $url; ?>commentaireRefuse/<?= $comment -> idComments(); ?>">Supprimer</a>
 			</div>
 	</div>
 			<br/><br/>
@@ -59,8 +59,8 @@ if ($commentsWait) {
 	} ?>
 </div>
 
-<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
-<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="index.php?p=admin">Administration</a>
+<a class="visible-md visible-lg" style="position: relative; bottom: 30px; left: 80%;" href="<?= $url; ?>admin">Administration</a>
+<a class="visible-xs visible-sm" style="position: relative; top: 50px;" href="<?= $url; ?>admin">Administration</a>
 
 
 <?php

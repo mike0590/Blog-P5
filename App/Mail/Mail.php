@@ -4,7 +4,7 @@ namespace App\Mail;
 
 class Mail
 {
-	public static function sendMail($mail, $message, $nom = null, $prenom = null)
+	public static function sendMail($mail, $message, $nom, $prenom)
 	{
 		$destinataire = 'mike_gil@hotmail.fr'; // Déclaration de l'adresse de destination.
 			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire)) // On filtre les serveurs qui rencontrent des bogues.
@@ -16,14 +16,14 @@ class Mail
 			    $passage_ligne = "\n";
 			}
 
-			$message_html = '<div style="width: 100%; font-weight: bold">' .htmlspecialchars($message). '</div>';
+			$message_html = '<div style="width: 100%; font-weight: bold">' .$message. '</div>';
 			//==========
 			 
 			//=====Création de la boundary
 			$boundary = "-----=".md5(rand());
 			 
 			 
-			$expediteur = htmlspecialchars($mail);
+			$expediteur = $mail;
 			 
 			//=====Création du header de l'e-mail.
 			$header = "From:" .$expediteur .$passage_ligne;
@@ -42,12 +42,12 @@ class Mail
 			//==========
 			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 
-			 $data = mail($destinataire, $name, $message, $header);
+			 mail($destinataire, $name, $message, $header);
 	}
 
-	public static function sendRestartMail($username, $password)
+	public static function sendRestartMail($id, $mail, $token)
 	{
-		$destinataire = 'mike_gil@hotmail.fr'; // Déclaration de l'adresse de destination.
+		$destinataire = $mail; // Déclaration de l'adresse de destination.
 			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $destinataire)) // On filtre les serveurs qui rencontrent des bogues.
 			{
 			    $passage_ligne = "\r\n";
@@ -57,7 +57,9 @@ class Mail
 			    $passage_ligne = "\n";
 			}
 
-			$message_html = '<div style="width: 100%; font-weight: bold">Votre mot de Passe est le suivant :<br/>' .$password. '</div>';
+			$message_html = '<div style="width: 100%; font-weight: bold">Bonjour M./Mme. ' .$username. '<br/>
+							Cliquez sur le lien si-dessous pour réinitialiser votre mot de passe:<br/>
+							<a href="http://www.passion-php.fr/nouveau_password/' .$id. '/' .$token. '">Réinitialisation Mot de Passe</a></div>';
 			//==========
 			 
 			//=====Création de la boundary
@@ -65,7 +67,7 @@ class Mail
 			//==========
 			 
 			 
-			$expediteur = 'mike.gf0590@gmail.com';
+			$expediteur = 'Blog Passion-PHP';
 			 
 			//=====Création du header de l'e-mail.
 			$header = "From:" .$expediteur .$passage_ligne;

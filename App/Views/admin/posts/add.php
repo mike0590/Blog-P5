@@ -18,7 +18,8 @@ echo $form -> submit('Enregistrer');
 
 
 </form>
-<a style="position: relative; bottom: 50px; left: 80%;" href="index.php?p=admin">Administration</a>
+<a style="position: relative; bottom: 50px; left: 80%;" href="<?= $url; ?>admin">Administration</a>
 
 <?php
+$type = 'css1';
 $content = ob_get_clean();

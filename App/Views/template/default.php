@@ -61,18 +61,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li style="position: relative;right:400px;top:20px;"><h4> Bonjour <?php echo $_SESSION['nameVisitor']; ?></h4></li> <?php
 									} 
 								?>
-								<li><a href="index.php" class="active">Accueil</a></li>
-								<li><a href="index.php?p=posts">Articles</a></li>
+								<li><a href="<?= $url; ?>accueil" class="active">Accueil</a></li>
+								<li><a href="<?= $url; ?>articles">Articles</a></li>
 								<?php 
 								if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
-									<li><a href="index.php?p=inscription">Inscription</a></li> <?php
+									<li><a href="<?= $url; ?>inscription">Inscription</a></li> <?php
 								} 
 								if ($user -> logged()) { ?>
-									<li style="position: relative;left: 100px;"><a href="index.php?p=destroy">Deconnexion</a></li> <?php
+									<li style="position: relative;left: 100px;"><a href="<?= $url; ?>destroy">Deconnexion</a></li> <?php
 								}
 								else{ 
 								?>
-								<li style="position: relative;left: 100px;"><a href="index.php?p=userLogin">Connexion</a></li><?php
+								<li style="position: relative;left: 100px;"><a href="<?= $url; ?>connexion">Connexion</a></li><?php
 								} 
 								?>
 							
@@ -151,6 +151,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<?php
 						unset($_SESSION['message']);
 					break;
+
+					case 'mail invalid': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Votre E-Mail est Invalide</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
 				}
 			} ?>
 				<form method="post" style="width: 60%;margin-right: auto;margin-left: auto;">
@@ -165,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="copyright">
 		<div class="container">
 			<?php if (isset($_SESSION['auth'])) { ?>
-				<p><a href="index.php?p=admin">Administration</a></p> <?php
+				<p><a href="<?= $url; ?>admin">Administration</a></p> <?php
 			}  ?>
 			<ul class="social-icons3">
 				<li><a href="https://www.facebook.com" class="fa fa-facebook icon-border facebook"> </a></li>

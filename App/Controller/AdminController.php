@@ -7,8 +7,8 @@ class AdminController extends Controller
 
 	public function __construct()
 	{
-		parent::__construct();
 		$this -> template = 'default_2';
+		parent::__construct();
 	}
 
 	/**
@@ -18,7 +18,7 @@ class AdminController extends Controller
 	{
 		$auth = new \App\Auth\DbAuthManager();
 		if (!$auth -> logged()) {
-			header('Location: index.php?p=userLogin');
+			header('Location: connexion');
 		}
 	}
 
@@ -27,21 +27,23 @@ class AdminController extends Controller
 	 */
 	public function index()
 	{
+		$url = $this -> basepath();
 		if (isset($_GET['sup'])) { 
 			$_SESSION['message'] = 'post delete';
 		 }
 		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
-		$this -> page('admin/posts/index', compact('posts'));
+		$this -> page('admin/posts/index', compact('posts', 'url'));
 	}
 
 	/**
 	 * methode qui s ocuppe du traitement de la page d edition d un article en faisant le pont entre modele et vue
 	 */
-	public function edit()
+	public function edit($id)
 	{
+		$url = $this -> basepath();
 		$posts = \App\App::getInstance() -> getTable('postsManager');
 		if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content'])) {
-			$new = $posts -> update($_GET['id'],[
+			$new = $posts -> update($id[0],[
 				'title' => $_POST['title'],
 				'chapo' => $_POST['chapo'],
 				'content' => $_POST['content'],
@@ -52,11 +54,11 @@ class AdminController extends Controller
 				$_SESSION['message'] = 'update/add';
 			}
 		}
-		$post = $posts -> getPost([$_GET['id']]);
-		$categoryPost = $posts -> categoryPost([$_GET['id']]);
+		$post = $posts -> getPost($id);
+		$categoryPost = $posts -> categoryPost($id);
 		$categoriesList = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		$form = new \App\HTML\Form($post);
-		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost'));
+		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost', 'url'));
 	}
 
 	/**
@@ -64,6 +66,7 @@ class AdminController extends Controller
 	 */
 	public function add()
 	{
+		$url = $this -> basepath();
 		$post = \App\App::getInstance() -> getTable('postsManager');
 		if (!empty($_POST)) {
 			if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content'])) {
@@ -82,19 +85,19 @@ class AdminController extends Controller
 		}
 		$form = new \App\HTML\Form();
 		$categories = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
-		$this -> page('admin/posts/add', compact('form', 'categories'));
+		$this -> page('admin/posts/add', compact('form', 'categories', 'url'));
 	}
 
 	/**
 	 * methode qui s ocuppe du traitement de suppression d un article en faisant appel au modele
 	 */
-	public function delete()
+	public function delete($id)
 	{
 		$post = \App\App::getInstance() -> getTable('postsManager');
-		$delete = $post -> delete([$_GET['id']]);
+		$delete = $post -> delete($id);
 		if ($delete) {
-			header('Location: index.php?p=admin&sup=1');
-		}
+			$_SESSION['message'] = 'post delete';
+		} 
 	}
 
 	/**
@@ -102,39 +105,43 @@ class AdminController extends Controller
 	 */
 	public function comments()
 	{
+		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$commentsWait = $comments -> showComments();
-		$this -> page('admin/posts/comments', compact('commentsWait'));
+		$this -> page('admin/posts/comments', compact('commentsWait', 'url'));
 	}
 
 	/**
 	 * methode qui s ocuppe du traitement de la page singleComment en faisant le pont entre modele et vue
 	 */
-	public function viewComment()
+	public function viewComment($id)
 	{
+		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> showComment([$_GET['id']]);
-		$this -> page('admin/posts/singleComment', compact('comment'));
+		$comment = $comments -> showComment($id);
+		$this -> page('admin/posts/singleComment', compact('comment', 'url'));
 	}
 
 	/**
 	 * methode qui s ocuppe du traitement d acceptation d un commentaire en faisant appel au modele
 	 */
-	public function accept()
+	public function accept($id)
 	{
+		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> CommentAccepted([$_GET['id']]);
-		header('Location: index.php?p=comments');
+		$comment = $comments -> CommentAccepted($id);
+		header('Location: ' .$url. '/commentaires');
 	}
 
 	/**
 	 * methode qui s ocuppe du traitement de suppression d un commentaire en faisant appel au modele
 	 */
-	public function denied()
+	public function denied($id)
 	{
+		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> CommentDenied([$_GET['id']]);
-		header('Location: index.php?p=comments');
+		$comment = $comments -> CommentDenied($id);
+		header('Location: ' .$url. '/commentaires');
 	}
 }
 

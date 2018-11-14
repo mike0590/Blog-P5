@@ -15,15 +15,15 @@ if ($comment) {
 
 <tr>
 			
-	<td><a class="btn btn-primary" href="index.php?p=commentAccepted&id=<?= $comment -> idComments(); ?>">Accepter</a></td>
-	<td><a class="btn btn-danger" href="index.php?p=commentDenied&id=<?= $comment -> idComments(); ?>">Supprimer</a></td>
+	<td><a class="btn btn-primary" href="<?= $url; ?>commentaireAccepte/<?= $comment -> idComments(); ?>">Accepter</a></td>
+	<td><a class="btn btn-danger" href="<?= $url; ?>commentaireRefuse/<?= $comment -> idComments(); ?>">Supprimer</a></td>
 			
 </tr> <?php
 } else{
 	echo "Aucun Commentaire en attente";
 } ?>
 
-<a style="position: relative; bottom: 30px; left: 80%;" href="index.php?p=admin">Administration</a>
+<a style="position: relative; bottom: 30px; left: 80%;" href="<?= $url; ?>admin">Administration</a>
 
 <?php
 $content = ob_get_clean();

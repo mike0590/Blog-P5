@@ -18,24 +18,29 @@ class PostsController extends Controller
 	 */
 	public function home()
 	{
-	
-    if (!empty($_POST['mail']) AND !empty($_POST['message']))
-		{
-			\App\Mail\Mail::sendMail($_POST['mail'], $_POST['message'], $_POST['nom'], $_POST['prenom']);
-		}
 		$this -> template = 'default';
+		$url = $this -> basepath();
 
+		if (!empty($_POST)) {
+			if (!empty($_POST['mail']) AND !empty($_POST['message'])){
+				$mail = htmlspecialchars($_POST['mail']);
+				if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail)) {
+					$nom = htmlspecialchars($_POST['nom']);
+					$message = htmlspecialchars($_POST['message']);
+					$prenom = htmlspecialchars($_POST['prenom']);
+					\App\Mail\Mail::sendMail($mail, $message, $nom, $prenom);
+					$_SESSION['message'] = 'mail sent';
+				} else{
+					$_SESSION['message'] = 'mail invalid';
+				}
+			} else{
+				$_SESSION['message'] = 'mail not sent';
+			}
+		}
+    
 		$posts =  \App\App::getInstance() -> getTable('postsManager') -> getPosts();
 		$form = new \App\HTML\Form();
-		if (!empty($_POST)) {
-			if (!empty($_POST['mail']) AND !empty($_POST['message'])) {
-			$_SESSION['message'] = 'mail sent';
-		}
-		else {
-			$_SESSION['message'] = 'mail not sent';
-		}
-		}
-		$this -> page('posts/index', compact('posts', 'form'));
+		$this -> page('posts/index', compact('posts', 'form', 'url'));
 	}
 
 	/**
@@ -44,59 +49,62 @@ class PostsController extends Controller
 	public function posts()
 	{
 		$this -> template = 'default_1';
+		$url = $this -> basepath();
 
 		$posts = \App\App::getInstance() -> getTable('postsManager');
 		$posts = $posts -> getPosts();
 		$categories = \App\App::getInstance() -> getTable('categoriesManager');
 		$categories = $categories -> getCategories();
-		$this -> page('posts/posts', compact('posts', 'categories'));
+		$this -> page('posts/posts', compact('posts', 'categories', 'url'));
 	}
 
 	/**
 	 * methode qui s ocuupe du tratement de la page single en faisant le pont entre modele et vue
 	 */
-	public function single()
+	public function single($id)
 	{
 		$this -> template = 'default_1';
+		$url = $this -> basepath();
 
 		$new = \App\App::getInstance() -> getTable('commentsManager');
 		$visitor = new \App\Auth\DbAuthManager();
-		$id = $_GET['id'];
+		
 		if (!empty($_POST) AND isset($_POST['pseudo']) AND isset($_POST['pass'])) {
 		    if($visitor -> login(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass'])))
 		    {
-		      header('Location: index.php?p=single&id='.$id);
+		      header('Location: ' .$url. 'article/' .$id[0]);
 		    } else{
 		     	$_SESSION['message'] = 'wrong id';
 		    }
 		} elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
-		    'posts_id' => $_GET['id'],
+		    'posts_id' => $id[0],
 		    'users_id' => $_SESSION['visitor']
 		   ]);
 		   $_SESSION['message'] = 'comment sent';
 		}
 		$comments = \App\App::getInstance() -> getTable('CommentsManager');
 		$posts = \App\App::getInstance() -> getTable('postsManager');
-		$post = $posts -> getPost([$_GET['id']]);
-		$comment = $comments -> getComments([$_GET['id']]);
-		$this -> page('posts/single', compact('post', 'visitor', 'comment'));
+		$post = $posts -> getPost($id);
+		$comment = $comments -> getComments($id);
+		$this -> page('posts/single', compact('post', 'visitor', 'comment', 'url'));
 
 	}
 
 	/**
 	 * methode qui s ocuupe du tratement de la page categories en faisant le pont entre modele et vue
 	 */
-	public function categories()
+	public function categories($id)
 	{
 		$this -> template = 'default_1';
+		$url = $this -> basepath();
 
 		$postsPerCat = \App\App::getInstance() -> getTable('postsManager');
 		$category = \App\App::getInstance() -> getTable('categoriesManager');
-		$cat = $category -> getCategory([$_GET['id']]); 
-		$posts = $postsPerCat -> getPostsPerCat([$_GET['id']]);
-		$this -> page('posts/categories', compact('cat', 'posts'));
+		$cat = $category -> getCategory($id); 
+		$posts = $postsPerCat -> getPostsPerCat($id);
+		$this -> page('posts/categories', compact('cat', 'posts', 'url'));
 
 	}
 

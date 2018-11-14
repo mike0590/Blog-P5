@@ -13,7 +13,7 @@ if ($posts) {
 		foreach ($posts as $post) {
 		echo "<h3>".$post -> title(). "</h3>";
 		echo "<p>" .$post -> chapo(). "<p/>";
-		echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br>';
+		echo '<p><a href="'.$post -> getUrl($url).'">Voir la Suite</a></p></br>';
 	}
 } else{
 	echo "Aucun article pour cette catégorie";

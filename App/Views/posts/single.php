@@ -135,6 +135,7 @@ echo $post -> content(). '</br></br>';
     } else{
       echo "Sans Commentaires !";
     }
-    
+     
 $content = ob_get_clean();
+
 

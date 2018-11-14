@@ -20,16 +20,15 @@ class DbAuthManager
 	 public function login($username, $password)
 	{
 		 $db = \App\App::getDb();
-		 $user = $db -> prepare("SELECT * FROM {$this -> table} WHERE username = ?", [$username]);
+		 $user = $db -> prepare("SELECT * FROM {$this -> table} WHERE username = ?", [$username], true, DbAuth::class);
 		 if ($user) {
-		 	$pass = password_verify($password, $user -> password);
-		 	$passHash = $user -> password;
-		 	if ($pass || $passHash){
-		 		if ($user -> is_admin == 0) {
-		 			$_SESSION['auth'] = $user -> idUsers;
-		 		} elseif ($user -> is_admin == 1) {
-		 			$_SESSION['visitor'] = $user -> idUsers;
-		 			$_SESSION['nameVisitor'] = $user -> username;
+		 	$pass = password_verify($password, $user -> password());
+		 	if ($pass){
+		 		if ($user -> is_admin() == 0) {
+		 			$_SESSION['auth'] = $user -> idUsers();
+		 		} elseif ($user -> is_admin() == 1) {
+		 			$_SESSION['visitor'] = $user -> idUsers();
+		 			$_SESSION['nameVisitor'] = $user -> username();
 		 		}
 		 		return true;
 		 	}
@@ -37,11 +36,14 @@ class DbAuthManager
 		 return false;
 	}
 
-	public function userExists($username)
+	public function userExists($mail, $token = null)
 	{
 		$db = \App\App::getDb();
-		$user = $db -> prepare("SELECT * FROM {$this -> table} WHERE username = ?", [$username], true, DbAuth::class);
+		$user = $db -> prepare("SELECT * FROM {$this -> table} WHERE email = ?", [$mail], true, DbAuth::class);
 		if ($user) {
+			$attributes[] = $token;
+			$attributes[] = $mail;
+			$db -> prepare("UPDATE {$this -> table} SET reset_token = ? WHERE email = ? ", $attributes, true, DbAuth::class);
 			return $user;
 		} else{
 			return false;
@@ -95,5 +97,35 @@ class DbAuthManager
 	 	$attributes[] = password_hash($password, PASSWORD_DEFAULT);
 		$new = $db -> prepare("INSERT INTO {$this -> table} SET is_admin = 1, username =?, password=?", $attributes);
 		return true;
+	}
+
+	public function getUser($id)
+	{
+		$db = \App\App::getDb();
+
+		$user = $db -> prepare("SELECT * FROM {$this -> table} WHERE idUsers = ?", $id, true, DbAuth::class);
+		if ($user) {
+			return $user;
+		} else{
+			return false;
+		}
+	}
+
+	public function updateUser($id, $pass)
+	{
+		$db = \App\App::getDB();
+		$pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+		$ref = $id[0];
+		
+		$attributes[] = $pass_hash;
+		$attributes[] = $ref;
+		$updateUser = $db -> prepare("UPDATE {$this -> table} SET reset_token = NULL, password = ? WHERE idUsers = ? ", $attributes);
+		$updateUser = $this -> getUser($id);
+		if ($updateUser -> is_admin() == 0) {
+		 	$_SESSION['auth'] = $updateUser -> idUsers();
+		} elseif ($updateUser -> is_admin() == 1) {
+		 	$_SESSION['visitor'] = $updateUser -> idUsers();
+		 	$_SESSION['nameVisitor'] = $updateUser -> username();
+		}
 	}
 }

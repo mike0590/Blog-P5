@@ -28,6 +28,10 @@ class DbAuth
 	 * @var int
 	 */
 	 private $is_admin;
+
+	 private $email;
+
+	 private $reset_token;
 	 
 
 	 /**
@@ -63,7 +67,17 @@ class DbAuth
 	  */
 	 public function is_admin()
 	 {
-	 	return $this -> admin();
+	 	return $this -> is_admin;
+	 }
+
+	 public function email()
+	 {
+	 	return $this -> email;
+	 }
+
+	 public function reset_token()
+	 {
+	 	return $this -> reset_token;
 	 }
 
 	 /**

@@ -23,13 +23,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 	</script>
 	<!-- //for-mobile-apps -->
-	<link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="public/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="public/css/flexslider.css" type="text/css" media="screen" />
-	<!-- css files -->
-	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	
+			<link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="public/css/font-awesome.css" rel="stylesheet">
+			<link rel="stylesheet" href="../public/css/flexslider.css" type="text/css" media="screen" />
+			<!-- css files -->
+			<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+			<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	
+		<link href="../public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../public/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" href="../public/css/flexslider.css" type="text/css" media="screen" />
+		<!-- css files -->
+		<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+		<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+
+		<link href="../../public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../../public/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" href="../../public/css/flexslider.css" type="text/css" media="screen" />
+		<!-- css files -->
+		<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+		<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 	<!-- //css files -->
 </head>
 
@@ -96,16 +114,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						unset($_SESSION['message']);
 					break;
 
-					case 'restart mail sent': 
+					case 'mail restart': 
 						?>
-						<div class="lol align alert alert-success" role="alert">Un email vous a été envoyé avec votre mot de passe</div>
+						<div class="lol align alert alert-success" role="alert">Un email vous a été envoyé pour réinitialiser votre mot de passe</div>
 						<?php
 						unset($_SESSION['message']);
 					break;
 
-					case 'restart denied': 
+					case 'mail not found': 
 						?>
-						<div class="lol align alert alert-danger" role="alert">Cet username n'existe pas</div>
+						<div class="lol align alert alert-danger" role="alert">Votre E-Mail ne figure pas dans notre base de données</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'mail invalid': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Votre E-Mail est Invalide</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'not same pass': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Vos mots de passe ne sont pas identiques</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'wrong token': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Token Invalid pour Réinitialisation de Mot de Passe</div>
 						<?php
 						unset($_SESSION['message']);
 					break;

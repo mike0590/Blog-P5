@@ -142,9 +142,9 @@ class Posts
 	 * [retourne une url]
 	 * @return [url] 
 	 */
-	public function getUrl()
+	public function getUrl($url)
 	{
-		return 'index.php?p=single&id='. $this -> idPosts();
+		return $url. 'article/'. $this -> idPosts();
 	}
 }
 

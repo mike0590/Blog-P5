@@ -3,6 +3,8 @@
 $title = 'Articles';
 
 ob_start();
+
+
 ?>
 
 <h1 style="text-align: center;">Mes Articles</h1></br></br>
@@ -17,7 +19,7 @@ if ($posts) {
 			
 		<div class="row hidden-xs hidden-sm">
 			<div class="col-md-6">
-			  <?php	echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p></br></br>'; ?>
+			  <?php	echo '<p><a href="' .$post -> getUrl($url). '">Voir la Suite</a></p></br></br>'; ?>
 			</div>
 			<div class="clo-md-6" style="position: relative; left: 150px;">
 			  <?php	echo "<p>" .$post -> dateT(). "<p/>"; ?>
@@ -25,7 +27,7 @@ if ($posts) {
 		</div>
 		<div class="row visible-xs visible-sm">
 			  <?php	echo "<p>" .$post -> dateT(). "<p/>"; ?>
-			  <?php	echo '<p><a href="' .$post -> getUrl(). '">Voir la Suite</a></p><br/>'; ?>
+			  <?php	echo '<p><a href="' .$post -> getUrl($url). '">Voir la Suite</a></p><br/>'; ?>
 		</div>
 		<div class="visible-xs visible-sm">
 			<br/>
@@ -46,7 +48,7 @@ if ($posts) {
 		<?php
 		foreach ($categories as $category){
 		?>
-		<li><a href="<?= $category -> getUrl(); ?>"><?php echo $category -> name(); ?></li>
+		<li><a href="<?= $category -> getUrl($url); ?>"><?php echo $category -> name(); ?></li>
 		<?php	
 	}
 	?>
@@ -60,5 +62,6 @@ if ($posts) {
 </div>
 
 <?php
+$type = 'css1';
 $content = ob_get_clean();
 

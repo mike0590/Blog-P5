@@ -58,8 +58,8 @@ class Categories
 	/**
 	 * [retourne une URL avec l id de la categorie]
 	 */
-	public function getUrl()
+	public function getUrl($url)
 	{
-		return 'index.php?p=categories&id=' .$this -> idCategories();
+		return $url. 'categorie/' .$this -> idCategories();
 	}
 }
