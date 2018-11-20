@@ -65,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="<?= $url; ?>articles">Articles</a></li>
 								<?php 
 								if (!isset($_SESSION['visitor']) AND !isset($_SESSION['auth'])) { ?>
-									<li><a href="<?= $url; ?>inscription">Inscription</a></li> <?php
+									<li><a href="<?= $url; ?>nouvelle_inscription">Inscription</a></li> <?php
 								} 
 								if ($user -> logged()) { ?>
 									<li style="position: relative;left: 100px;"><a href="<?= $url; ?>destroy">Deconnexion</a></li> <?php

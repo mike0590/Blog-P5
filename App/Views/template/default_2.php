@@ -45,6 +45,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="../../public/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" href="../../public/css/flexslider.css" type="text/css" media="screen" />
+
+		<link href="../../../public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../../../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../../../public/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" href="../../../public/css/flexslider.css" type="text/css" media="screen" />
 		<!-- css files -->
 		<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
 		<link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
@@ -121,6 +126,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						unset($_SESSION['message']);
 					break;
 
+					case 'new inscription': 
+						?>
+						<div class="lol align alert alert-success" role="alert">Un email vous a été envoyé pour pouvoir vous inscrire</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+
 					case 'mail not found': 
 						?>
 						<div class="lol align alert alert-danger" role="alert">Votre E-Mail ne figure pas dans notre base de données</div>
@@ -148,13 +161,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<?php
 						unset($_SESSION['message']);
 					break;
+
+					case 'mail exists': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Cet e-mail existe déjà dans notre base de données</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
 				}
 			} 
-		echo $content;
+			echo $content;
 		?>
 		<div class="container">
 			<div class="d-flex">
-			
 			</div>
 			
 		</div>

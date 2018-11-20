@@ -72,22 +72,22 @@ class PostsController extends Controller
 		if (!empty($_POST) AND isset($_POST['pseudo']) AND isset($_POST['pass'])) {
 		    if($visitor -> login(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass'])))
 		    {
-		      header('Location: ' .$url. 'article/' .$id[0]);
+		      header('Location: ' .$url. 'article/' .$id);
 		    } else{
 		     	$_SESSION['message'] = 'wrong id';
 		    }
 		} elseif (!empty($_POST) AND isset($_POST['content'])) {
 		  $new -> addComment([
 		    'content' => htmlspecialchars($_POST['content']),
-		    'posts_id' => $id[0],
+		    'posts_id' => $id,
 		    'users_id' => $_SESSION['visitor']
 		   ]);
 		   $_SESSION['message'] = 'comment sent';
 		}
 		$comments = \App\App::getInstance() -> getTable('CommentsManager');
 		$posts = \App\App::getInstance() -> getTable('postsManager');
-		$post = $posts -> getPost($id);
-		$comment = $comments -> getComments($id);
+		$post = $posts -> getPost([$id]);
+		$comment = $comments -> getComments([$id]);
 		$this -> page('posts/single', compact('post', 'visitor', 'comment', 'url'));
 
 	}
@@ -102,11 +102,17 @@ class PostsController extends Controller
 
 		$postsPerCat = \App\App::getInstance() -> getTable('postsManager');
 		$category = \App\App::getInstance() -> getTable('categoriesManager');
-		$cat = $category -> getCategory($id); 
-		$posts = $postsPerCat -> getPostsPerCat($id);
+		$cat = $category -> getCategory([$id]); 
+		$posts = $postsPerCat -> getPostsPerCat([$id]);
 		$this -> page('posts/categories', compact('cat', 'posts', 'url'));
 
 	}
 
+
+	public function error()
+	{
+		$url = $this -> basepath();
+		$this -> page('directory/404', compact('url'));
+	}
 }
 

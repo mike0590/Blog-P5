@@ -31,6 +31,8 @@ class DbAuth
 
 	 private $email;
 
+	 private $token;
+
 	 private $reset_token;
 	 
 
@@ -73,6 +75,11 @@ class DbAuth
 	 public function email()
 	 {
 	 	return $this -> email;
+	 }
+
+	 public function token()
+	 {
+	 	return $this -> token;
 	 }
 
 	 public function reset_token()

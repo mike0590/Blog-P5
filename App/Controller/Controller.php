@@ -41,7 +41,9 @@ class Controller
 	{
 		extract($variables);
 		require ($this -> viewPath . $view . '.php');
-		require ($this -> viewPath . 'template/'. $this -> template. '.php');
+		if (isset($this -> template)) {
+			require ($this -> viewPath . 'template/'. $this -> template. '.php');
+		}
 	}
 
 	public function basepath()

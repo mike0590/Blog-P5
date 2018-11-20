@@ -6,7 +6,7 @@ $title = 'Nouveau Mot de Passe';
 ob_start(); 
 ?>
 
-<h4 style="text-align: center;">Veillez introduire un nouveau mot de passe</h4><br/>
+<h4 style="text-align: center;">Veuillez introduire un nouveau mot de passe</h4><br/>
 <div class="row">
 	<div class="col-sm-12 col-md-offset-2 col-md-8">
 		<form method="post">

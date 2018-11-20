@@ -11,14 +11,20 @@ class PostsManager
  */
 protected $table = "posts";
 
-	
+
+	public function db()
+	{
+		$db = \App\App::getDb();
+		return $db;
+	}
+
 	/**
 	 * [affichage des different posts]
 	 * @return [array] [tableau d'objets de la class Posts]
 	 */
 	public function getPosts()
 	{
-		$datas = \App\App::getDb() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, 
+		$datas = $this -> db() -> query ("SELECT *, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, 
 			DATE_FORMAT(dateT, '%Y/%m/%d') AS dateR  
 			FROM {$this -> table} ORDER BY dateT DESC", false, Posts::class);
 
@@ -37,7 +43,7 @@ protected $table = "posts";
 	 */
 	public function getPost($id)
 	{
-		$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username
+		$data = $this -> db() -> prepare("SELECT posts.idPosts, posts.title, posts.content, posts.chapo, DATE_FORMAT(dateT, '%d/%m/%Y') AS dateT, DATE_FORMAT(dateUpdate, '%d/%m/%Y - %Hh%i') AS dateUpdate, users.username
 			FROM {$this -> table} 
 			JOIN users ON users.idUsers = posts.user_id 
 			WHERE posts.idPosts = ?", $id, true, Posts::class);
@@ -57,7 +63,7 @@ protected $table = "posts";
 	 */
 	public function getPostsPerCat($id)
 	{
-		$datas = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.title, posts.chapo, posts.content, categories.idCategories, categories.name
+		$datas = $this -> db() -> prepare("SELECT posts.idPosts, posts.title, posts.chapo, posts.content, categories.idCategories, categories.name
 			 FROM {$this -> table}
 			 JOIN categories ON categories.idCategories = posts.category_id
 			 WHERE posts.category_id = ?", $id, false, Posts::class);
@@ -77,7 +83,7 @@ protected $table = "posts";
 	 */
 	public function categoryPost($postId)
     {
-    	$data = \App\App::getDb() -> prepare("SELECT posts.idPosts, posts.category_id, categories.name, 
+    	$data = $this -> db() -> prepare("SELECT posts.idPosts, posts.category_id, categories.name, 
     		categories.idCategories 
     		FROM {$this -> table} 
     		JOIN categories ON categories.idCategories = posts.category_id
@@ -97,7 +103,7 @@ protected $table = "posts";
      */
 	public function getAll()
 	{
-		$datas = \App\App::getDb() -> query("SELECT posts.idPosts, posts.title, posts.content, 
+		$datas = $this -> db() -> query("SELECT posts.idPosts, posts.title, posts.content, 
 			posts.dateT, posts.category_id, categories.name, users.username 
 			FROM {$this -> table}
 			JOIN categories ON categories.idCategories = posts.category_id
@@ -126,7 +132,7 @@ protected $table = "posts";
     	}
     		$attributes[] = $id;
     		$sql_parts = (implode(',', $parts));
-    	return \App\App::getDb() -> prepare("UPDATE {$this -> table} SET $sql_parts, dateUpdate = NOW() WHERE idPosts = ?", $attributes, null, true);
+    	return $this -> db() -> prepare("UPDATE {$this -> table} SET $sql_parts, dateUpdate = NOW() WHERE idPosts = ?", $attributes, null, true);
 	}
 
 
@@ -143,7 +149,7 @@ protected $table = "posts";
     		$attributes [] = $value;
     	}
     		$sql_parts = (implode(', ', $parts));
-    	return \App\App::getDb() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, true);
+    	return $this -> db() -> prepare("INSERT INTO {$this -> table} SET $sql_parts, dateT = NOW()", $attributes, true);
 	}
 
 
@@ -155,7 +161,7 @@ protected $table = "posts";
 	public function delete($id)
     {
     		
-    	return \App\App::getDb() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id, true);
+    	return $this -> db() -> prepare("DELETE FROM {$this -> table} WHERE idPosts = ?", $id, true);
 	}
 }
 

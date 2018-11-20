@@ -25,13 +25,17 @@ class AdminController extends Controller
 	/**
 	 * methode qui s ocuppe du traitement de la homePage de l administration en faisant le pont entre modele et vue
 	 */
-	public function index()
+	public function index($delete = null, $id = null)
 	{
 		$url = $this -> basepath();
-		if (isset($_GET['sup'])) { 
-			$_SESSION['message'] = 'post delete';
+		$post = \App\App::getInstance() -> getTable('postsManager');
+		if (isset($delete)) { 
+			$deletePost = $post -> delete([$id]);
+			if ($delete) {
+				$_SESSION['message'] = 'post delete';
+			} 
 		 }
-		$posts = \App\App::getInstance() -> getTable('postsManager') -> getAll();
+		$posts = $post -> getAll();
 		$this -> page('admin/posts/index', compact('posts', 'url'));
 	}
 
@@ -54,8 +58,8 @@ class AdminController extends Controller
 				$_SESSION['message'] = 'update/add';
 			}
 		}
-		$post = $posts -> getPost($id);
-		$categoryPost = $posts -> categoryPost($id);
+		$post = $posts -> getPost([$id]);
+		$categoryPost = $posts -> categoryPost([$id]);
 		$categoriesList = \App\App::getInstance() -> getTable('categoriesManager') -> selectCategories();
 		$form = new \App\HTML\Form($post);
 		$this -> page('admin/posts/edit', compact('form', 'categoriesList', 'categoryPost', 'url'));
@@ -118,7 +122,7 @@ class AdminController extends Controller
 	{
 		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> showComment($id);
+		$comment = $comments -> showComment([$id]);
 		$this -> page('admin/posts/singleComment', compact('comment', 'url'));
 	}
 
@@ -129,7 +133,7 @@ class AdminController extends Controller
 	{
 		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> CommentAccepted($id);
+		$comment = $comments -> CommentAccepted([$id]);
 		header('Location: ' .$url. '/commentaires');
 	}
 
@@ -140,7 +144,7 @@ class AdminController extends Controller
 	{
 		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
-		$comment = $comments -> CommentDenied($id);
+		$comment = $comments -> CommentDenied([$id]);
 		header('Location: ' .$url. '/commentaires');
 	}
 }

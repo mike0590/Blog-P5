@@ -6,17 +6,14 @@ session_start();
 
 if (isset($_GET['page'])) {
 	$url = new \App\Url\Url($_GET['page']);
-	$page = $url -> getPage();
-	$id[] = $url -> getId();
-	$delete = $url -> getDelete();
-	$token = $url -> getToken();
 } else {
-	$page = 'accueil';
+	$url = new \App\Url\Url();
+	$url -> setPage('accueil');
 }
 
 
 
-switch ($page) {
+switch ($url -> page()) {
 	case 'accueil':
 		$controller = new App\Controller\PostsController();
 		$controller -> home();
@@ -39,17 +36,17 @@ switch ($page) {
 
 	case 'nouveau_password':
 		$controller = new App\Controller\UsersController();
-		$controller -> newPass($id, $token);
+		$controller -> newPass($url -> id(), $url -> key());
 	break;
 
 	case 'article':
 		$controller = new App\Controller\PostsController();
-		$controller -> single($id);
+		$controller -> single($url -> id());
 	break;
 
 	case 'categorie':
 		$controller = new App\Controller\PostsController();
-		$controller -> categories($id);
+		$controller -> categories($url -> id());
 	break;
 
 	case 'destroy':
@@ -57,24 +54,30 @@ switch ($page) {
 		$controller -> destroy();
 	break;
 
+	case 'nouvelle_inscription':
+		$controller = new App\Controller\UsersController();
+		$controller -> newInscription();
+	break;
+
 	case 'inscription':
 		$controller = new App\Controller\UsersController();
-		$controller -> inscription();
+		$controller -> inscription($url -> id(), $url -> key());
 	break;
 
 	case 'admin':
 		$controller = new App\Controller\AdminController();
-		$controller -> dashbord();
-		if (isset($delete)) {
-			$controller -> delete($id);
-		}
-		$controller -> index();
+		$controller -> dashbord(); 
+		if(!empty($url -> delete())){
+			$controller -> index($url -> delete(), $url -> id());
+		} else{
+			$controller -> index();
+		}	
 	break;
 
 	case 'post.edit':
 		$controller = new App\Controller\AdminController();
 		$controller -> dashbord();
-		$controller -> edit($id);
+		$controller -> edit($url -> id());
 	break;
 
 	case 'post.add':
@@ -86,7 +89,7 @@ switch ($page) {
 	case 'post.supp':
 		$controller = new App\Controller\AdminController();
 		$controller -> dashbord();
-		$controller -> delete($id);
+		$controller -> delete($url -> id());
 	break;
 
 	case 'commentaires':
@@ -98,22 +101,25 @@ switch ($page) {
 	case 'commentaire':
 		$controller = new App\Controller\AdminController();
 		$controller -> dashbord();
-		$controller -> viewComment($id);
+		$controller -> viewComment($url -> id());
 	break;
 
 	case 'commentaireAccepte':
 		$controller = new App\Controller\AdminController();
 		$controller -> dashbord();
-		$controller -> accept($id);
+		$controller -> accept($url -> id());
 	break;
 
 	case 'commentaireRefuse':
 		$controller = new App\Controller\AdminController();
 		$controller -> dashbord();
-		$controller -> denied($id);
+		$controller -> denied($url -> id());
 	break;
 
-
+	default:
+		$controller = new App\Controller\PostsController;
+		$controller -> error();
+		die();
 }
 
 

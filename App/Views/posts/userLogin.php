@@ -5,7 +5,7 @@ $title = 'Connexion';
 
 ob_start(); ?>
 
-
+<h4 style="text-align: center;">Veuillez introduire vos identifiants</h4><br/>
 <div class="row">
 	<div class="col-sm-12 col-md-offset-2 col-md-8">
 		<form method="post">
