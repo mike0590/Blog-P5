@@ -46,7 +46,7 @@ class DbAuthManager
 		if ($user) {
 			$attributes[] = $key;
 			$attributes[] = $mail;
-			$db -> prepare("UPDATE {$this -> table} SET reset_token = ? WHERE email = ? ", $attributes, true, DbAuth::class);
+			$this -> db() -> prepare("UPDATE {$this -> table} SET reset_token = ? WHERE email = ? ", $attributes, true, DbAuth::class);
 			return $user;
 		} else{
 			return false;
