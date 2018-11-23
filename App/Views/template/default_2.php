@@ -168,6 +168,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<?php
 						unset($_SESSION['message']);
 					break;
+
+					case 'time s up': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Le temps de réinitialisation de mot de pass est écoulé</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
+
+					case 'time s up inscription': 
+						?>
+						<div class="lol align alert alert-danger" role="alert">Le temps pour une nouvelle inscription est écoulé</div>
+						<?php
+						unset($_SESSION['message']);
+					break;
 				}
 			} 
 			echo $content;

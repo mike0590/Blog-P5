@@ -29,11 +29,35 @@ class DbAuth
 	 */
 	 private $is_admin;
 
+	 /**
+	 * [propriete email de la table users en BDD]
+	 * @var string
+	 */
 	 private $email;
 
+	 /**
+	 * [propriete token de la table users en BDD]
+	 * @var string
+	 */
 	 private $token;
 
+	 /**
+	 * [propriete token_time de la table users en BDD]
+	 * @var date
+	 */
+	 private $token_time;
+
+	 /**
+	 * [propriete reset_token de la table users en BDD]
+	 * @var string
+	 */
 	 private $reset_token;
+
+	 /**
+	 * [propriete reset_time de la table users en BDD]
+	 * @var date
+	 */
+	 private $reset_time;
 	 
 
 	 /**
@@ -72,19 +96,49 @@ class DbAuth
 	 	return $this -> is_admin;
 	 }
 
+	  /**
+	  * [retourne l email]
+	  * @return [string] 
+	  */
 	 public function email()
 	 {
 	 	return $this -> email;
 	 }
 
+	  /**
+	  * [retourne le token]
+	  * @return [string] 
+	  */
 	 public function token()
 	 {
 	 	return $this -> token;
 	 }
 
+	  /**
+	  * [retourne le token_time]
+	  * @return [date] 
+	  */
+	 public function token_time()
+	 {
+	 	return $this -> token_time;
+	 }
+
+	  /**
+	  * [retourne le reset_token]
+	  * @return [string] 
+	  */
 	 public function reset_token()
 	 {
 	 	return $this -> reset_token;
+	 }
+
+	  /**
+	  * [retourne le reset_time]
+	  * @return [date] 
+	  */
+	 public function reset_time()
+	 {
+	 	return $this -> reset_time;
 	 }
 
 	 /**

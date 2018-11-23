@@ -116,6 +116,11 @@ switch ($url -> page()) {
 		$controller -> denied($url -> id());
 	break;
 
+	case 'deleteUser':
+		$controller = new App\Controller\UsersController();
+		$controller -> deleteUser($url -> id());
+	break;
+
 	default:
 		$controller = new App\Controller\PostsController;
 		$controller -> error();

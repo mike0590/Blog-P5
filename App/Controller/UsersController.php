@@ -10,7 +10,7 @@ class UsersController extends Controller
 	}
 
 	/**
-	 * [methode login qui traite la connexion de l utilisateur en faisant le pont entre modele et vue)
+	 * [methode login qui traite la connexion de l utilisateur)
 	 */
 	public function login()
 	{
@@ -42,7 +42,7 @@ class UsersController extends Controller
 	}
 
 	/**
-	 * [methode restartPass qui fait le pont entre modele et vue et qui envoie un mail avec le mot de passe oublié par un utilisateur)
+	 * [methode restartPass, controller qui envoie un lien vers l adresse mail (avec un token) de l utilisateur pour qu'il puisse reinitialiser son mot de pass)
 	 */
 	public function restartPass()
 	{
@@ -56,7 +56,7 @@ class UsersController extends Controller
 				$key = \App\Functions\Functions::str_aleatory('30');
 				$user = $auth -> userExists($mail, $key);
 				if ($user) {
-					$sendMail = \App\Mail\Mail::sendRestartMail($user->idUsers(), $mail, $key, $user -> username());
+					$sendMail = \App\Mail\Mail::sendNewDataMail($user->idUsers(), $mail, $key, $user -> username(), 'restart');
 					$_SESSION['message'] = 'mail restart';
 				} else{
 					$_SESSION['message'] = 'mail not found';
@@ -69,39 +69,45 @@ class UsersController extends Controller
 		$this -> page('posts/restart', compact('form', 'url'));
 	}
 
+	/**
+	 * [newPass, controller qui va mettre a jour le mot de pass de l utilisateur ]
+	 * @param  [int] $id  [id de l utilisateur]
+	 * @param  [varchar] $key [token]
+	 */
 	public function newPass($id, $key)
 	{
 		$this -> template = 'default_2';
 		$url = $this -> basepath();
 		$auth = new \App\Auth\DbAuthManager();
 		$form = new \App\HTML\Form();
-		$userPass = $auth -> getUser([$id]);
+		$userPass = $auth -> getUser($id, $key, 'reset');
+		$timeReset = $auth -> timeReset($id);
 
 		if (!empty($_POST)) {
 			if (!empty($_POST['pass']) && !empty($_POST['validate_pass'])) {
 				$pass = htmlspecialchars($_POST['pass']);
 				$validate_pass = htmlspecialchars($_POST['validate_pass']);
 				if ($pass == $validate_pass) {
-					$user = $auth -> updateUser($id, $pass);
-					header('Location: ' .$url. 'accueil');
-					exit();
+						$user = $auth -> updateUser($id, $pass);
+						header('Location: ' .$url. 'accueil');
+						exit();
 				} else{
 					$_SESSION['message'] = 'not same pass';
 				}
 			} else{
-				$_SESSION['message'] = 'obligatory';							
-			}
+				$_SESSION['message'] = 'obligatory';
+			} 
 		} 
-
-		if (!empty($key)) {
+		if (!empty($key) && !empty($id)) {
 			if ($userPass) {
-				if ($userPass -> reset_token() == $key) {
+				if ($timeReset) {
 					$this -> page('posts/newPass', compact('form', 'url'));
 				} else{
-					$_SESSION['message'] = 'wrong token';
+					$_SESSION['message'] = 'time s up';
+					header('Location: ' .$url. 'connexion');
 				}
 			} else{
-				$_SESSION['message'] = 'unavailable id';
+				header('Location: ' .$url. 'connexion');
 			}
 		} else{
 			header('Location: ' .$url. 'connexion');
@@ -109,7 +115,7 @@ class UsersController extends Controller
 	}
 	
 	/**
-	 * [methode login qui traite l inscription d un nouvel utilisateur en faisant le pont entre modele et vue)
+	 * [methode newInscription, controller qui envoie un lien vers l adresse mail (avec un token) du nouvel utilisateur pour qu'il puisse s inscrire )
 	 */
 	public function newInscription()
 	{
@@ -125,7 +131,8 @@ class UsersController extends Controller
 					$user = $auth -> newInscription($mail, $key);
 					if($user == false) {
 						$newUser = $auth -> getIdNewUser([$mail]);
-						$sendMail = \App\Mail\Mail::sendInscriptionMail($newUser -> idUsers(), $mail, $key, 'username');
+						$title = 'Cher Visiteur';
+						$sendMail = \App\Mail\Mail::sendNewDataMail($newUser -> idUsers(), $mail, $key, $title, 'inscription');
 						$_SESSION['message'] = 'new inscription';
 					} else{
 						$_SESSION['message'] = 'mail exists';
@@ -142,13 +149,19 @@ class UsersController extends Controller
 		$this -> page('posts/newInscription', compact('form', 'url'));
 	}
 
+	/**
+	 * [inscription, controller qui va introduire un nouvel utilisateur en BD ]
+	 * @param  [int] $id  [id de l utilisateur]
+	 * @param  [varchar] $key [token]
+	 */
 	public function inscription($id, $key)
 	{
 		$this -> template = 'default_2';
 		$url = $this -> basepath();
 		$auth = new \App\Auth\DbAuthManager();
 		$form = new \App\HTML\Form();
-		$newUser = $auth -> getUser([$id]);
+		$newUser = $auth -> getUser($id, $key, 'inscription');
+		$timeToken = $auth -> inscriptionTime([$id]);
 
 		if (!empty($_POST)) {
 			if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password_verify'])) {
@@ -156,7 +169,8 @@ class UsersController extends Controller
 				$password = htmlspecialchars($_POST['password']);
 				$password_verify = htmlspecialchars($_POST['password_verify']);
 				if ($password == $password_verify) {
-					if ($auth -> getUsername($username) == false) {
+					$usernameExist = $auth -> getUsername([$username]);
+					if ($usernameExist == false) {
 						$inscriptionUser = $auth -> inscription($id, $username, $password);
 						header('Location: ' .$url. 'accueil');
 						exit();
@@ -170,16 +184,17 @@ class UsersController extends Controller
 				$_SESSION['message'] = 'obligatory';
 			}
 		}
-
 		if (!empty($key)) {
 			if ($newUser) {
-				if ($newUser -> token() == $key) {
+				if ($timeToken) {
 					$this -> page('posts/inscription', compact('form', 'url'));
 				} else{
+					$delete = $auth -> deleteUser([$id]);
+					$_SESSION['message'] = 'time s up inscription';
 					header('Location: ' .$url. 'nouvelle_inscription');
 				}
 			} else{
-				$_SESSION['message'] = 'unavailable id';
+					header('Location: ' .$url. 'nouvelle_inscription');
 			}
 		} else{
 			header('Location: ' .$url. 'nouvelle_inscription');
@@ -191,7 +206,21 @@ class UsersController extends Controller
 	 */
 	public function destroy()
 	{
+		$url = $this -> basepath();
 		session_destroy();
-		header('Location: index.php');
+		header('Location: ' .$url. 'accueil');
+	}
+
+	/**
+	 * [deleteUser Supprime un utilisateur dans la BD]
+	 * @param  [int] $id [id de l utilisateur]
+	 */
+	public function deleteUser($id)
+	{	
+		$url = $this -> basepath();
+		$auth = new \App\Auth\DbAuthManager();
+
+		$delete = $auth -> deleteUser([$id]);
+		header('Location: ' .$url. 'listUsers');
 	}
 }
