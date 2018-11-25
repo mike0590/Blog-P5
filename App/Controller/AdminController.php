@@ -134,7 +134,7 @@ class AdminController extends Controller
 		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$comment = $comments -> CommentAccepted([$id]);
-		header('Location: ' .$url. '/commentaires');
+		header('Location: ' .$url. 'commentaires');
 	}
 
 	/**
@@ -145,7 +145,7 @@ class AdminController extends Controller
 		$url = $this -> basepath();
 		$comments = \App\App::getInstance() -> getTable('commentsManager');
 		$comment = $comments -> CommentDenied([$id]);
-		header('Location: ' .$url. '/commentaires');
+		header('Location: ' .$url. 'commentaires');
 	}
 }
 

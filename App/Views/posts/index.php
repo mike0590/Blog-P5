@@ -39,6 +39,9 @@ echo $form -> input('message', 'Votre Message*', ['type' => 'textarea']). '</br>
 	<div class="col-sm-6">
 		<?php echo $form -> submit('Envoyer'); ?>
 	</div>
+	<div class="col-sm-6" style="position: relative; left: 45%;">
+		<a href="public/cv.pdf">CV</a>
+	</div>
 	
 </div><br/>
 

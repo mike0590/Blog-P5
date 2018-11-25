@@ -25,6 +25,7 @@ class Mail
 			 
 			$expediteur = $mail;
 			 
+			 
 			//=====Création du header de l'e-mail.
 			$header = "From:" .$expediteur .$passage_ligne;
 			$header.= "Reply-to:" .$expediteur .$passage_ligne;
@@ -42,7 +43,7 @@ class Mail
 			//==========
 			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 
-			 mail($destinataire, $name, $message, $header);
+			 mail($destinataire, $nom, $message, $header);
 	}
 
 	public static function sendNewDataMail($id, $mail, $key, $username, $option)
